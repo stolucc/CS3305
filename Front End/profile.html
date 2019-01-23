@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <title>Profile</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css">
+    </head>  
+    <body>
+        <header>
+            <img src="sfi-logo.svg" alt="Logo">
+        </header>
+        <nav>
+                <a href="index.html">Home</a>
+                <a href="profile.html">Profile</a>
+                <a href="login.html">LogIn/Register</a>
+            </nav>
+        <main>
+            <div class="profile_info">
+                <div class="general">
+                        <label for="f_name"><b>First Name</b></label>
+                        <input type="text" placeholder="First Name" name="f_name" required>
+                        <label for="l_name"><b>Last Name</b></label>
+                        <input type="text" placeholder="Last Name" name="l_name" required>
+                        <label for="job_title"><b>Job Title</b></label>
+                        <input type="text" placeholder="Job Title" name="job_title" required>
+                        <b>Prefix</b>
+                        <select name="prefix" required>
+                            <option value = "mr">Mr</option>
+                            <option value = "ms">Ms</option>
+                            <option value = "mrs">Mrs</option>
+                            <option value = "prof">Prof</option>
+                            <option value = "dr">Dr</option>
+                        </select>
+                        <b>Suffix</b>
+                        <select name="suffix">
+                            <option value = "null" selected></option>
+                            <option value = "sr">Sr</option>
+                            <option value = "jr">Jr</option>
+                        </select>
+                        <label for="phone"><b>Phone Number</b></label>
+                        <input type="number" placeholder="Phone Number" name="phone">
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Email" name="email" required>
+                        <label for="orcid"><b>ORCID</b></label>
+                        <input type="text" placeholder="ORCID" name="orcid">
+            </div>
+        </main>
+    </body>
+</html>
