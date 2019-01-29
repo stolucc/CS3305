@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <title>Application</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style2.css">
+    </head>  
+    <body>
+        <header>
+            <img src="sfi-logo.svg" alt="Logo">
+        </header>
+        <nav>
+                <a href="index.html">Home</a>
+				<a href="calls.html">Proposal Calls</a>
+                <a href="profile.html">Profile</a>
+                <a href="login.html">LogIn/Register</a>
+            </nav>
+        <main>
+			<h2>Application</h2>
+			<label for="f_name"><b>Funding Name</b></label>
+            <input type="text" placeholder="Name" name="name" required>
+			<label for="f_name"><b>Title of Proposal</b></label>
+            <input type="text" placeholder="Proposal" name="proposal" required>
+			<label for="f_name"><b>Full Name of Lead Investigators</b></label>
+            <input type="text" placeholder="Name" name="lead_name" required>
+			<label for="f_name"><b>Full Name of Co-Investigator(s)</b></label>
+            <input type="text" placeholder="Name" name="co_name">
+			<label for="f_name"><b>Research Body</b></label>
+            <input type="text" placeholder="Research Body" name="body" required>
+			<label for="f_name"><b>% Co-Investigator Commitment</b></label>
+            <input type="text" placeholder="Co %" name="co_commit">
+			<label for="f_name"><b>% Lead Investigator Commitment</b></label>
+            <input type="text" placeholder="Lead %" name="lead_commit" required>
+			<label for="f_name"><b>Total Requested SFI Budget</b></label>
+            <input type="text" placeholder="Budget" name="budget" required>
+			<label for="f_name"><b>Requested Starting Date</b></label>
+            <input type="text" placeholder="Date" name="start_date" required>
+			<label for="f_name"><b>Proposed Duration</b></label>
+            <input type="text" placeholder="Duration" name="duration" required>
+			<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<button type="submit">Apply</button>
+        </main>
+    </body>
+</html>
