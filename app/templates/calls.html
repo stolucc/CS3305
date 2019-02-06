@@ -5,16 +5,16 @@
 <form action ="" method="post">
 	{{ form.hidden_tag() }}
 	<p>
-		{{ form.deadline.label }}<br>
-		{{ form.deadline }}<br>
-		{% for error in form.deadline.errors %}
+		{{ form.deadline_type.label }}<br>
+		{{ form.deadline_type }}<br>
+		{% for error in form.deadline_type.errors %}
 		<span style="color: red;">[{{ error }}]</span>
 		{% endfor %}
 	</p>
 	<p>
-		{{ form.deadline.label }}<br>
-		{{ form.deadline }}<br>
-		{% for error in form.deadline.errors %}
+		{{ form.call_type.label }}<br>
+		{{ form.call_type }}<br>
+		{% for error in form.call_type.errors %}
 		<span style="color: red;">[{{ error }}]</span>
 		{% endfor %}
 	</p>
