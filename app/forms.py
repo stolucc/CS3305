@@ -195,3 +195,16 @@ class CallsForProposalFilter(FlaskForm):
     ('infrastructure', 'Infrastructure'), ('policy', 'Policy'), ('recruitment', 'Recruitment Only'),
     ('partnerships', 'SFI Partnerships'), ('centres', 'SFI Research Centres'), ('other', 'Other')])
     submit = SubmitField("Filter")         
+
+class ApplicationForm(FlaskForm):
+    fname = StringField("Funding Name", validators=[DataRequire()])
+    proposal = StringField("Title of Proposal", validators=[DataRequired()])
+    lead_name = StringField("Full Name of Lead Investigators", validators=[DataRequired()])
+    co_name = StringField("Full Name of Co-Investigator(s)", validators=[DataRequired()])
+	research = StringField("Research Body", validators=[DataRequire()])
+    co_commit = StringField("Percentage Co-Investigator Commitment", validators=[DataRequire()])
+	lead_commit = StringField("Percentage Lead Investigator Commitment", validators=[DataRequire()])
+	budget = StringField("Total Requested SFI Budget", validators=[DataRequire()])
+	start_date = StringField("Requested Starting Date", validators=[DataRequire()])
+	duration = StringField("Proposed Duration", validators=[DataRequire()])
+    submit = SubmitField("Apply")
