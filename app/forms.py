@@ -183,4 +183,15 @@ class PublicEngagementForm(FlaskForm):
     primary_attribution = StringField("Primary Attribution", validators=[DataRequired()])
     submit = SubmitField("Save")
 
-         
+class CallsForProposalFilter(FlaskForm):	
+	deadline_type = SelectField('Deadline',
+    choices=[('deadline', 'Deadline'),('open', 'Open'),
+    ('closed', 'Closed'),('other', 'Other')])
+	call_type = SelectField('Call Type',
+    choices=[('funding', 'Funding Oppurtunities'),('conference', 'Conference/Workshop'),
+    ('early', 'Early/Mid Career Investigator Led'),('education', 'Education and Public management'),
+	('entrepreneur', 'Entrepreneurship'), ('established', 'Established Investigator Led'),
+	('european', 'European Oppurtunities'), ('industry', 'Industry Facing'),
+	('infrastructure', 'Infrastructure'), ('policy', 'Policy'), ('recruitment', 'Recruitment Only'),
+	('partnerships', 'SFI Partnerships'), ('centres', 'SFI Research Centres'), ('other', 'Other')])
+	submit = SubmitField("Filter")         
