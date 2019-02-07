@@ -1,0 +1,70 @@
+body {font-family: Arial, Helvetica, sans-serif;}
+
+a {
+    float:right;
+    background-color: #00A79A;
+    color: white;
+    padding: 2em 3em;
+    margin: 8px 0;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+
+a:hover{
+    background-color: white;
+    color: #00A79A;
+}
+
+header {
+    float:left;
+}
+
+input[type=text], input[type=password],input[type=number],select {
+  width: 25%;
+  padding:.5em;
+  text-align:center;
+  margin:.5em 0em .5em 0em;
+  display:block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #00A79A;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+main {
+    display: block;
+    padding-top:5em;
+}
+
+ul {
+	margin-left: auto;
+	margin-right: auto;
+	list-style: none;
+}
+
+form {
+	margin: 1em;
+	padding: 1em;
+}
+
+form select {
+	width: 20%;
+	cursor: pointer;
+}
+
+form button {
+	width: 10%;
+}
