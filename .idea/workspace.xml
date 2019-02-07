@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f1530753-ff5c-408e-89b1-f26b049c8d06" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.html" beforeDir="false" />
-    </list>
+    <list default="true" id="f1530753-ff5c-408e-89b1-f26b049c8d06" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,35 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/microblog/app/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#68#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microblog/app/templates/calls.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microblog/app/templates/application.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microblog/app/templates/style.css">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes.py">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
@@ -165,7 +133,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1549563812024</updated>
-      <workItem from="1549563814134" duration="4773000" />
+      <workItem from="1549563814134" duration="5023000" />
     </task>
     <task id="LOCAL-00001" summary="Adding all my updated files">
       <created>1549564006043</created>
@@ -237,11 +205,25 @@
       <option name="project" value="LOCAL" />
       <updated>1549568429246</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Cleaning Up GitHub">
+      <created>1549568655536</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1549568655536</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Cleaning Up GitHub">
+      <created>1549568863938</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1549568863938</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4773000" />
+    <option name="totallyTimeSpent" value="5023000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -256,13 +238,13 @@
     <frame x="51" y="25" width="1315" height="743" extended-state="6" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24980299" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24980299" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" sideWeight="0.49960598" weight="0.32899022" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32899022" />
+      <window_info anchor="bottom" id="Terminal" weight="0.32899022" />
       <window_info anchor="bottom" id="Event Log" sideWeight="0.500394" side_tool="true" weight="0.32899022" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32899022" />
@@ -359,8 +341,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/microblog/app/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        <state relative-caret-position="120">
+          <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
