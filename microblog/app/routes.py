@@ -6,7 +6,7 @@ from werkzeug.urls import url_parse
 
 from app.models import User
 
-#This is a test again.
+#This is a test again. and again
 @app.route('/')
 @app.route("/index")
 def index():
