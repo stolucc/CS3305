@@ -6,10 +6,11 @@ from werkzeug.urls import url_parse
 
 from app.models import User
 
-#This is a test again. and again and again
+
 @app.route('/')
 @app.route("/index")
 def index():
+    img = './static/sfi-logo.svg'
     user = {"username": "User"}
     posts = [
         {
@@ -21,7 +22,7 @@ def index():
             "body": "Activity: I went and did a talk"
         }
     ]
-    return render_template("index.html", title="Home", user=user, posts=posts)
+    return render_template("index.html", title="Home", user=user, posts=posts, img=img)
 
 
 @app.route("/register", methods=["GET", "POST"])
