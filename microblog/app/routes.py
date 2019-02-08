@@ -6,6 +6,8 @@ from werkzeug.urls import url_parse
 
 from app.models import User
 
+#Creates a URL route to each html page and connects them with their corresponding form from forms.py
+
 #This is a test again. and again and again
 @app.route('/')
 @app.route("/index")
