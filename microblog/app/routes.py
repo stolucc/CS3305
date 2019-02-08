@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, RegisterForm
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from app.models import User
@@ -14,7 +14,7 @@ def index():
     user = {"username": "User"}
     posts = [
         {
-            "author": {"username": "Researcher1"},
+            "author": {"username": "Researcher1000"},
             "body": "Activity: I employed x y z"
         },
         {
@@ -66,6 +66,17 @@ def login():
             next_page = url_for("index")
         return redirect(next_page)
     return render_template("login.html", title="Sign In", form=form)
+
+
+@app.route('/profile/<username>')
+@login_required
+def profile(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('profile.html', user=user, posts=posts)
 
 
 @app.route("/logout")

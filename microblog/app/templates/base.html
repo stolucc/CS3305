@@ -5,6 +5,7 @@
         {% else %}
         <title>Welcome to Sesame</title>
         {% endif %}
+        <link rel="stylesheet" href="{{  url_for('static', filename='css/style.css') }}">
     </head>
     <body>
         <div>
@@ -15,6 +16,7 @@
             <a href="{{ url_for('login') }}">Login</a>
             <a href="{{ url_for('register') }}">Register</a>
             {% else %}
+            <a href="{{  url_for('profile', username=current_user.username) }}">Profile</a>
             <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
         </div>
