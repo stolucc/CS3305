@@ -12,10 +12,10 @@ from app.models import User
 @app.route('/')
 @app.route("/index")
 def index():
-    user = {"username": "User"}
+    user = {"username": "User100"}
     posts = [
         {
-            "author": {"username": "Researcher1"},
+            "author": {"username": "Researcher1000"},
             "body": "Activity: I employed x y z"
         },
         {
@@ -67,6 +67,15 @@ def login():
             next_page = url_for("index")
         return redirect(next_page)
     return render_template("login.html", title="Sign In", form=form)
+
+
+@app.route('/call', methods=["GET", "POST"])
+def call():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+    form = CallForm()
+    if form.validate_on_submit():
+
 
 
 @app.route("/logout")
