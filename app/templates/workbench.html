@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="workbench">
+        <a href="">Application Pending Action: 0</a>
+        <a href="">Scientific Reports Pending Action: 0</a>
+        <a href="">Financial Reports Pending Action: 0</a>
+        <a href="">Budgets Pending Action: 0</a>
+        <a href="">Pre Award Applicant<br> Response Pending Action: 0</a>
+        <a href="">Other Items Pending Action: 0</a>
+    </div>
+    <ul>
+        {% for call in calls %}
+        <li class="calls">
+            <p>{{ call.heading }}</p>
+            <p>{{ call.info }}</p>
+            <p>{{ call.deadline }}</p>
+            <p>{{call.duration}}</p>
+            <p>{{call.document}}</p>
+            <button class="apply">Apply</button>                            
+        </li>
+        {% endfor %}
+     </ul>
+{% endblock %}

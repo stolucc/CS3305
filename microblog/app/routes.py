@@ -6,11 +6,12 @@ from werkzeug.urls import url_parse
 
 from app.models import User
 
+#Creates a URL route to each html page and connects them with their corresponding form from forms.py
 
+#This is a test again. and again and again
 @app.route('/')
 @app.route("/index")
 def index():
-    img = './static/sfi-logo.svg'
     user = {"username": "User"}
     posts = [
         {
@@ -22,7 +23,7 @@ def index():
             "body": "Activity: I went and did a talk"
         }
     ]
-    return render_template("index.html", title="Home", user=user, posts=posts, img=img)
+    return render_template("index.html", title="Home", user=user, posts=posts)
 
 
 @app.route("/register", methods=["GET", "POST"])

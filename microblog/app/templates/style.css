@@ -12,7 +12,7 @@ a {
     box-sizing: border-box;
     cursor: pointer;
     text-decoration: none;
-    
+
 }
 
 a:hover{
@@ -67,4 +67,46 @@ form select {
 
 form button {
 	width: 10%;
+}
+
+.workbench {
+    margin:1em;
+    width:25%;
+    height:100%;
+    background-color: #e5e5e5;
+    float:left;
+
+}
+.workbench a {
+    display: block;
+    border-bottom: 1em white solid;
+    border-radius: .1em;
+    color:#00A79A;
+    padding:1em;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.workbench a:hover {
+    background-color: #00A79A;
+    color:#e5e5e5;
+}
+
+ul {
+    display:inline-block;
+    background-color: #e5e5e5;
+    list-style-type: none;
+    width:70%;
+    padding-top:2em;
+}
+.calls p  {
+    text-align:center;
+    display:inline;
+}
+.apply{
+    font-size:120%;
+    border-radius: 2em;
+    display: inline;
+    background-color: #00A79A;
+    color: white;
 }

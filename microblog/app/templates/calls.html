@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Proposal Calls</h1>
+<h1>Calls For Proposal</h1>
 <form action ="" method="post">
 	{{ form.hidden_tag() }}
 	<p>
@@ -21,6 +21,22 @@
 	<p>{{form.submit()}}</p>
 </form>
 <ul>
+	<li>
+		<div class = "summary">
+			<h2>sample proposal</h2>
+			<p>
+				sample info....
+			</p>
+			<a href="application.html">Apply</a>
+		</div>
+		<div class = "details">
+			<p>
+				Deadline:<br />
+				Award Amount:<br />
+				Duration:<br />
+			</p>
+		</div>
+	</li>
     {% for call in calls %}
     <li>
 		<div class = "summary">
@@ -28,7 +44,7 @@
 			<p>
 				{{ call.info }}
 			</p>
-			<a href="application.html">Read More</a>
+			<a href="application">Apply</a>
 		</div>
 		<div class = "details">
 			<p>
