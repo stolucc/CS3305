@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1530753-ff5c-408e-89b1-f26b049c8d06" name="Default Changelist" comment="">
-      <change beforePath="$USER_HOME$/Documents/3rd_Year/CS3305_Team_Software/microblog/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/Documents/3rd_Year/CS3305_Team_Software/microblog/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/3rd_Year/CS3305_Team_Software/microblog/microblog.py" beforeDir="false" afterPath="$USER_HOME$/Documents/3rd_Year/CS3305_Team_Software/microblog/microblog.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microblog/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/microblog/app.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microblog/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/microblog/app/templates/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,11 +35,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/microblog/app/templates/style.css">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microblog/app/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="70" selection-start-line="70" selection-end-line="70" />
+            <state relative-caret-position="322">
+              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/microblog/app/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -76,6 +85,7 @@
         <option value="$PROJECT_DIR$/app/forms.py" />
         <option value="$PROJECT_DIR$/microblog/app/routes.py" />
         <option value="$PROJECT_DIR$/microblog/app/templates/style.css" />
+        <option value="$PROJECT_DIR$/microblog/app/templates/base.html" />
       </list>
     </option>
   </component>
@@ -114,6 +124,13 @@
               <item name="CS3305" type="462c0819:PsiDirectoryNode" />
               <item name="microblog" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CS3305" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CS3305" type="462c0819:PsiDirectoryNode" />
+              <item name="microblog" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -131,6 +148,9 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/microblog/app/static/css" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/microblog/app/templates" />
     </key>
@@ -155,7 +175,7 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -176,7 +196,7 @@
       <updated>1549563812024</updated>
       <workItem from="1549563814134" duration="5695000" />
       <workItem from="1549584058913" duration="1147000" />
-      <workItem from="1549620618847" duration="401000" />
+      <workItem from="1549620618847" duration="1908000" />
     </task>
     <task id="LOCAL-00001" summary="Adding all my updated files">
       <created>1549564006043</created>
@@ -269,11 +289,25 @@
       <option name="project" value="LOCAL" />
       <updated>1549568955643</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Cleaning Up GitHub">
+      <created>1549621033025</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1549621033025</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Cleaning Up GitHub">
+      <created>1549621883363</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1549621883363</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7243000" />
+    <option name="totallyTimeSpent" value="8750000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -408,10 +442,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microblog/app/templates/style.css">
+    <entry file="file://$PROJECT_DIR$/microblog/app/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
+        <state relative-caret-position="322">
+          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microblog/app/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
         </state>
       </provider>
     </entry>
