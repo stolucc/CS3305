@@ -43,8 +43,6 @@ class EducationInfo(db.Model):
     location = db.Column(db.String(120))
     year_of_degree = db.Column(db.Integer)
 
-class Employment(db.Model):
-
 
 
 @login.user_loader
