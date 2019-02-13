@@ -37,7 +37,7 @@ class Post(db.Model):
 
 class EducationInfo(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    id = db.column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     degree = db.Column(db.String(40))
     field_of_study = db.Column(db.String(120))
     institution = db.Column(db.String(120))
