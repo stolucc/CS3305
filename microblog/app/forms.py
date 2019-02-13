@@ -1,16 +1,23 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
-from wtforms.validators import DataRequired, ValidationError, Email
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, TextAreaField
+from wtforms.validators import DataRequired, ValidationError, Email, Length
 
 from app.models import User
 
-#Create the fields for every form, with validation methods for the register form.
+
+# Create the fields for every form, with validation methods for the register form.
 
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     remember_me = BooleanField("Remember Me")
     submit = SubmitField("Sign In")
+
+
+class EditProfileForm(FlaskForm):
+    username = StringField("Username", validators=[DataRequired()])
+    about_me = TextAreaField("About me", validators=[Length(min=0, max=140)])
+    submit = SubmitField("Submit")
 
 
 class RegisterForm(FlaskForm):
@@ -20,14 +27,12 @@ class RegisterForm(FlaskForm):
     confirmpass = PasswordField("Confirm_Password", validators=[DataRequired()])
     submit = SubmitField("Register")
 
-
     def validate_passwordmatch(self, password, confirmpass):
         pass1 = password.data
         pass2 = confirmpass.data
         if pass1 != pass2:
             return False
         return True
-
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()

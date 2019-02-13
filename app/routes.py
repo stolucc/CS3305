@@ -3,6 +3,7 @@ from app import app
 from app.forms import LoginForm, RegisterForm
 from flask_login import current_user, login_user, logout_user
 from werkzeug.urls import url_parse
+from datetime import datetime
 
 from app.models import User
 
@@ -26,17 +27,17 @@ def index():
 
 @app.route("/register", methods=["GET","POST"])
 def register():
-if current_user.is_authenticated:
-            return redirect(url_for("index"))
-        form = RegistrationForm()
-        if form.validate_on_submit():
-            user = User(username=form.username.data, email=form.email.data)
-            user.set_password(form.password.data)
-            db.session.add(user)
-            db.session.commit()
-            flash("Succesfully Registered")
+    if current_user.is_authenticated:
         return redirect(url_for("index"))
-return render_template("register.html", title="Register", form = form)
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash("Succesfully Registered")
+    return render_template("register.html", title="Register", form=form)
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
@@ -61,3 +62,7 @@ def logout():
     return redirect(url_for("index"))
 
 # how to start venv: "source venv/bin/activate"
+
+@app.before_request
+def before_request():
+    if current_
