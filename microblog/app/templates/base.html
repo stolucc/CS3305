@@ -9,8 +9,7 @@
     </head>
     <body>
         <div>
-            <img src="{{  img }}" >
-            Links:
+            <img src="{{ img }}">
             <a href="{{ url_for('index') }}">Home</a>
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>

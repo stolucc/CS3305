@@ -34,6 +34,7 @@ class Post(db.Model):
     def __repr__(self):
         return "<Post {}>".format(self.body)
 
+
 class EducationInfo(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.column(db.Integer, primary_key=True)
@@ -42,9 +43,6 @@ class EducationInfo(db.Model):
     institution = db.Column(db.String(120))
     location = db.Column(db.String(120))
     year_of_degree = db.Column(db.Integer)
-
-class Employment(db.Model):
-
 
 
 @login.user_loader
