@@ -42,6 +42,12 @@ class Post(db.Model):
         return "<Post {}>".format(self.body)
 
 
+class Application(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user_id"))
+    id = db.Column(db.Integer, primary_key=True)
+    status = db.Column(db.String(15))
+
+
 class EducationInfo(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -50,6 +56,9 @@ class EducationInfo(db.Model):
     institution = db.Column(db.String(120))
     location = db.Column(db.String(120))
     year_of_degree = db.Column(db.Integer)
+
+    def __repr__(self):
+        return "Degree: {}".format(self.degree)
 
 
 class Employment(db.Model):

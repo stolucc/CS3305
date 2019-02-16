@@ -7,9 +7,9 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 
-from app.models import User
+from app.models import *
 
-#Creates a URL route to each html page and connects them with their corresponding form from forms.py
+# Creates a URL route to each html page and connects them with their corresponding form from forms.py
 
 svg = "/static/sfi-logo.svg"
 
@@ -87,11 +87,19 @@ def profile(username):
 
     return render_template('profile.html', user=user, posts=posts, img=svg)
 
+@app.route("/workbench")
+@login_required
+def workbench():
+    education_info = current_user.education_info.all()
+    education_length = len(education_info)
+    return render_template("workbench.html", user=current_user, img=svg, education_info=education_info, edu_len = education_length)
+
 
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
 
 # how to start venv: "source venv/bin/activate"
 
