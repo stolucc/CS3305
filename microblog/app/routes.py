@@ -1,30 +1,23 @@
 from flask import render_template, flash, redirect, url_for, request
+from markupsafe import Markup
+
 from app import app, db
 from app.forms import LoginForm, RegisterForm, EditProfileForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 
-from app.models import User
+from app.models import *
 
-#Creates a URL route to each html page and connects them with their corresponding form from forms.py
+# Creates a URL route to each html page and connects them with their corresponding form from forms.py
+
+svg = "/static/sfi-logo.svg"
 
 
 @app.route('/')
 @app.route("/index")
 def index():
-    user = {"username": "User"}
-    posts = [
-        {
-            "author": {"username": "Researcher1000"},
-            "body": "Activity: I employed x y z"
-        },
-        {
-            "author": {"username": "Researcher2"},
-            "body": "Activity: I went and did a talk"
-        }
-    ]
-    return render_template("index.html", title="Home", user=user, posts=posts)
+    return render_template("index.html", title="Home", img=svg)
 
 
 @app.route("/edit_profile", methods=["GET", "POST"])
@@ -40,7 +33,7 @@ def edit_profile():
     elif request.method == "GET":
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template("edit_profile.html", title="Edit Profile", form=form)
+    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -65,7 +58,7 @@ def register():
         db.session.commit()
         flash("Succesfully Registered")
         return redirect(url_for("index"))
-    return render_template("register.html", title="Register", form=form)
+    return render_template("register.html", title="Register", form=form, img=svg)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -83,24 +76,30 @@ def login():
         if not next_page or url_parse(next_page).netloc != "":
             next_page = url_for("index")
         return redirect(next_page)
-    return render_template("login.html", title="Sign In", form=form)
+    return render_template("login.html", title="Sign In", form=form, img=svg)
 
 
 @app.route('/profile/<username>')
 @login_required
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('profile.html', user=user, posts=posts)
+    posts = user.posts
+
+    return render_template('profile.html', user=user, posts=posts, img=svg)
+
+@app.route("/workbench")
+@login_required
+def workbench():
+    education_info = current_user.education_info.all()
+    education_length = len(education_info)
+    return render_template("workbench.html", user=current_user, img=svg, education_info=education_info, edu_len = education_length)
 
 
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
 
 # how to start venv: "source venv/bin/activate"
 
