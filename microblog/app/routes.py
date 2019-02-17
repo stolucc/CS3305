@@ -101,6 +101,11 @@ def logout():
     return redirect(url_for("index"))
 
 
+@app.route("/calls", methods=["GET", "POST"])
+def calls():
+	return render_template("calls.html", title="Calls for Proposals", img=svg)
+
+
 # how to start venv: "source venv/bin/activate"
 
 
