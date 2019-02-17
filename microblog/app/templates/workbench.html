@@ -1,11 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <title>Profile</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css">
+    </head>  
+    <body>
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Workbench</h1>
-    <h2> User: {{ user.username }}</h2>
-    {% for info in education_info %}
-    <p>{{ info }}</p>
-    {%  endfor %}
-    <p>Education Info: ({{ edu_len }})</p>
+<h1> Workbench</h1>
 
+<div class="workbench">
+    <ul>
+        <li><a href="">Application Pending Action: 0</a></li>
+        <li><a href="">Scientific Reports Pending Action: 0</a></li>
+        <li><a href="">Financial Reports Pending Action: 0</a></li>
+        <li>    <a href="">Budgets Pending Action: 0</a></li>
+        <li><a href="">Pre Award Applicant<br> Response Pending Action: 0</a></li>
+        <li><a href="">Other Items Pending Action: 0</a></li>
+    </ul>
+</div>
 {% endblock %}
