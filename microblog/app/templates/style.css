@@ -63,6 +63,9 @@ form {
 form select {
 	width: 20%;
 	cursor: pointer;
+	float: left;
+	margin: 0.5em;
+	padding: 14px 20px;
 }
 
 form button {
@@ -143,4 +146,25 @@ form button {
 #profile {
     text-align: center;
     margin:auto;
+}
+
+.container {
+    width: 70%;
+    height: 200px;
+    border-top: 1px solid #00A79A;
+    margin: 1em;
+    padding: 10px;
+    float: left;
+}
+
+.summary {
+    width: 55%;
+    height: 200px;
+    float: left;
+}
+
+.details {
+    margin-left: 10%;
+    height: 200px;
+    float: left;
 }
