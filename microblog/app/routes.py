@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request
 from markupsafe import Markup
 
 from app import app, db
-from app.forms import LoginForm, RegisterForm, EditProfileForm
+from app.forms import LoginForm, RegisterForm, EditProfileForm, CallsForProposalFilter
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
@@ -92,7 +92,8 @@ def profile(username):
 def workbench():
     education_info = current_user.education_info.all()
     education_length = len(education_info)
-    return render_template("workbench.html", user=current_user, img=svg, education_info=education_info, edu_len = education_length)
+    form = CallsForProposalFilter()
+    return render_template("workbench.html", user=current_user, img=svg, education_info=education_info,form=form edu_len = education_length)
 
 
 @app.route("/logout")
@@ -103,7 +104,8 @@ def logout():
 
 @app.route("/calls", methods=["GET", "POST"])
 def calls():
-	return render_template("calls.html", title="Calls for Proposals", img=svg)
+	form = CallsForProposalFilter()
+	return render_template("calls.html", title="Calls for Proposals", form=formimg=svg)
 
 
 # how to start venv: "source venv/bin/activate"
