@@ -23,4 +23,58 @@
         <li><a href="">Other Items Pending Action: 0</a></li>
     </ul>
 </div>
+<form action ="" method="post">
+	{{ form.hidden_tag() }}
+	<p>
+		{{ form.deadline_type.label }}<br>
+		{{ form.deadline_type }}<br>
+		{% for error in form.deadline_type.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.call_type.label }}<br>
+		{{ form.call_type }}<br>
+		{% for error in form.call_type.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>{{form.submit()}}</p>
+</form>
+<ul>
+	<li class = "container">
+		<div class = "summary">
+			<h2>sample proposal</h2>
+			<p>
+				sample info....
+			</p>
+			<a href="application.html">Apply</a>
+		</div>
+		<div class = "details">
+			<p>
+				Deadline:<br />
+				Award Amount:<br />
+				Duration:<br />
+			</p>
+		</div>
+	</li>
+    {% for call in calls %}
+    <li class = "container">
+		<div class = "summary">
+			<h2>{{ call.heading }}</h2>
+			<p>
+				{{ call.info }}
+			</p>
+			<a href="application">Apply</a>
+		</div>
+		<div class = "details">
+			<p>
+				Deadline: {{ call.deadline }}<br />
+				Award Amount: {{ call.award }}<br />
+				Duration: {{ call.duration }}<br />
+			</p>
+		</div>
+	</li>
+	{% endfor %}
+</ul>
 {% endblock %}
