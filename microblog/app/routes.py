@@ -93,7 +93,7 @@ def workbench():
     education_info = current_user.education_info.all()
     education_length = len(education_info)
     form = CallsForProposalFilter()
-    return render_template("workbench.html", user=current_user, img=svg, education_info=education_info,form=form edu_len = education_length)
+    return render_template("workbench.html", user=current_user, img=svg, education_info=education_info,form=form)
 
 
 @app.route("/logout")
@@ -105,7 +105,7 @@ def logout():
 @app.route("/calls", methods=["GET", "POST"])
 def calls():
 	form = CallsForProposalFilter()
-	return render_template("calls.html", title="Calls for Proposals", form=formimg=svg)
+	return render_template("calls.html", title="Calls for Proposals", form=form, img=svg)
 
 
 # how to start venv: "source venv/bin/activate"
