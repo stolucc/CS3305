@@ -105,6 +105,106 @@ class TeamMembers(db.Model):
     start_date = db.Column(db.DATE())
     end_date = db.Column(db.DATE())
     names = db.Column(db.String(120))
+	
+class Impacts(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    impact_title = db.Column(db.String(60))
+    impact_category = db.Column(db.String(40))
+    primary_beneficiary = db.Column(db.String(40))
+    primary_attribution = db.Column(db.String(40))
+	
+class Innovation_Comm(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    year = db.Column(db.Integer)
+    type = db.Column(db.String(40))
+    title = db.Column(db.String(60))
+    primary_attribution = db.Column(db.String(40))
+	
+class Publications(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    year = db.Column(db.Integer)
+    type = db.Column(db.String(40))
+    title = db.Column(db.String(60))
+    primary_attribution = db.Column(db.String(40))
+    journal_conf_name = db.Column(db.String(50))
+    status = db.Column(db.String(20))
+    doi = db.Column(db.String(50))
+	
+class Presentation(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    year = db.Column(db.Integer)
+    type = db.Column(db.String(40))
+    title = db.Column(db.String(60))
+    primary_attribution = db.Column(db.String(40))
+    organising_body = db.Column(db.String(40))
+    location = db.Column(db.String(30))
+	
+class Academic_Collabs(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    start_date = db.Column(db.DATE())
+    end_date = db.Column(db.DATE())
+    name = db.Column(db.String(50))
+    department = db.Column(db.String(40))
+    location = db.Column(db.String(30))
+    collaborator = db.Column(db.String(40))
+    goal = db.Column(db.String(50))
+    interaction_freq = db.Column(db.String(20))
+    primary_attribution = db.Column(db.String(40))
+
+class Non_Academic_Collabs(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    start_date = db.Column(db.DATE())
+    end_date = db.Column(db.DATE())
+    name = db.Column(db.String(50))
+    department = db.Column(db.String(40))
+    location = db.Column(db.String(30))
+    collaborator = db.Column(db.String(40))
+    goal = db.Column(db.String(50))
+    interaction_freq = db.Column(db.String(20))
+    primary_attribution = db.Column(db.String(40))
+	
+class Conf_Works_Sems(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    start_date = db.Column(db.DATE())
+    end_date = db.Column(db.DATE())
+    title = db.Column(db.String(50))
+    type = db.Column(db.String(40))
+    role = db.Column(db.String(40))
+    location = db.Column(db.String(30))
+    primary_attribution = db.Column(db.String(40))
+	
+class Comms_Overview(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    year = db.Column(db.Integer)
+    num_of_lecs_demos = db.Column(db.Integer)
+    num_of_visits = db.Column(db.Integer)
+    num_of_interactions = db.Column(db.Integer)
+	
+class SFI_Fund_Ratio(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    year = db.Column(db.Integer)
+    percentage = db.Column (db.Integer)
+	
+class Education_Public_Engagement(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    start_date = db.Column(db.DATE())
+    end_date = db.Column(db.DATE())
+    topic = db.Column(db.String(50))
+    type = db.Column(db.String(40))
+    target_area = db.Column(db.String(20))
+    primary_attribution = db.Column(db.String(40))
+	
+	
 
 
 
