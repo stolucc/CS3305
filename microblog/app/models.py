@@ -6,12 +6,20 @@ from flask_login import UserMixin
 
 # Loads posts and users from the database
 
+ACCESS = {
+    "guest" : 0,
+    "user" : 1,
+    "admin" : 2
+}
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    access = db.Column(db.Integer)
+    proposals = db.relationship('Proposal', backref='author', lazy='dynamic')
     education_info = db.relationship("EducationInfo", backref="author", lazy="dynamic")
     employment = db.relationship("Employment", backref="author", lazy="dynamic")
     professional_studies = db.relationship("ProfessionalStudies", backref="author", lazy="dynamic")
@@ -31,19 +39,32 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def is_admin(self):
+        return self.access == 2
 
-class Post(db.Model):
+    def allowed(self, access_level):
+        return self.access >= access_level
+
+
+class Proposal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
+    name = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    deadline = db.Column(db.DATE)
+    text_of_call = db.Column(db.String(500))
+    target_audience = db.Column(db.String(50))
+    eligibility_criteria = db.Column(db.String(100))
+    # award duration by calculating difference between start date and end date'
+    reporting_guidelines = db.Column(db.String(150))
+    start_date = db.Column(db.DATE)
 
     def __repr__(self):
-        return "<Post {}>".format(self.body)
+        return "<Proposal {}>".format(self.name)
 
 
 class Application(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey("user_id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.String(15))
 
@@ -105,7 +126,8 @@ class TeamMembers(db.Model):
     start_date = db.Column(db.DATE())
     end_date = db.Column(db.DATE())
     names = db.Column(db.String(120))
-	
+
+
 class Impacts(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -113,7 +135,8 @@ class Impacts(db.Model):
     impact_category = db.Column(db.String(40))
     primary_beneficiary = db.Column(db.String(40))
     primary_attribution = db.Column(db.String(40))
-	
+
+
 class Innovation_Comm(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -121,7 +144,8 @@ class Innovation_Comm(db.Model):
     type = db.Column(db.String(40))
     title = db.Column(db.String(60))
     primary_attribution = db.Column(db.String(40))
-	
+
+
 class Publications(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -132,7 +156,8 @@ class Publications(db.Model):
     journal_conf_name = db.Column(db.String(50))
     status = db.Column(db.String(20))
     doi = db.Column(db.String(50))
-	
+
+
 class Presentation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -142,7 +167,8 @@ class Presentation(db.Model):
     primary_attribution = db.Column(db.String(40))
     organising_body = db.Column(db.String(40))
     location = db.Column(db.String(30))
-	
+
+
 class Academic_Collabs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -156,6 +182,7 @@ class Academic_Collabs(db.Model):
     interaction_freq = db.Column(db.String(20))
     primary_attribution = db.Column(db.String(40))
 
+
 class Non_Academic_Collabs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -168,7 +195,8 @@ class Non_Academic_Collabs(db.Model):
     goal = db.Column(db.String(50))
     interaction_freq = db.Column(db.String(20))
     primary_attribution = db.Column(db.String(40))
-	
+
+
 class Conf_Works_Sems(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -179,7 +207,8 @@ class Conf_Works_Sems(db.Model):
     role = db.Column(db.String(40))
     location = db.Column(db.String(30))
     primary_attribution = db.Column(db.String(40))
-	
+
+
 class Comms_Overview(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -187,13 +216,15 @@ class Comms_Overview(db.Model):
     num_of_lecs_demos = db.Column(db.Integer)
     num_of_visits = db.Column(db.Integer)
     num_of_interactions = db.Column(db.Integer)
-	
+
+
 class SFI_Fund_Ratio(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
-    percentage = db.Column (db.Integer)
-	
+    percentage = db.Column(db.Integer)
+
+
 class Education_Public_Engagement(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
@@ -203,9 +234,6 @@ class Education_Public_Engagement(db.Model):
     type = db.Column(db.String(40))
     target_area = db.Column(db.String(20))
     primary_attribution = db.Column(db.String(40))
-	
-	
-
 
 
 @login.user_loader

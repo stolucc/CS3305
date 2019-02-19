@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, TextAreaField, DateField
 from wtforms.validators import DataRequired, ValidationError, Email, Length
 
 from app.models import User
@@ -242,6 +242,16 @@ class CallsForProposalFilter(FlaskForm):
                                      ('other', 'Other')])
     submit = SubmitField("Filter")
 
+
+class CallsForProposalForm(FlaskForm):
+    deadline = DateField("Deadline", format("%Y-%m-%d"))
+    text_of_call = StringField("Text of call", validators=[DataRequired()])
+    target_audience = StringField("Target Audience", validators=[DataRequired()])
+    eligibility_criteria = StringField("Eligibility Criteria", validators=[DataRequired()])
+    # duration of award can be acquired through calculating difference between deadline and current date
+    reporting_guidelines = StringField("Reporting Guidelines", validators = [DataRequired()])
+    start_date = DateField("Start Date", format("%Y-%m-$d"))
+    submit = SubmitField("Submit Proposal")
 
 class ApplicationForm(FlaskForm):
     fname = StringField("Funding Name", validators=[DataRequired()])

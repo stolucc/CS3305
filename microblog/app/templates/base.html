@@ -13,12 +13,15 @@
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('calls') }}">Calls</a>
             {% if current_user.is_anonymous %}
-            <a href="{{ url_for('login') }}">Login</a>
-            <a href="{{ url_for('register') }}">Register</a>
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Register</a>
             {% else %}
-            <a href="{{  url_for('profile', username=current_user.username) }}">Profile</a>
-            <a href="{{ url_for('workbench') }}">Workbench</a>
-            <a href="{{ url_for('logout') }}">Logout</a>
+                {% if current_user.is_admin() %}
+                    <a href="{{ url_for('makecall') }}">Make Call for Proposal</a>
+                {% endif %}
+                <a href="{{  url_for('profile', username=current_user.username) }}">Profile</a>
+                <a href="{{ url_for('workbench') }}">Workbench</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
         </div>
         <hr>
