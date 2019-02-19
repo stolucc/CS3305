@@ -1,12 +1,17 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Email, Length
-
+import re
 from app.models import User
 
 
 # Create the fields for every form, with validation methods for the register form.
-
+class CallCreationForm(FlaskForm):
+    callname = StringField("CallName", validators=[DataRequired()])
+    start_date = StringField("Start Date", validators=[DataRequired()])
+    end_date = StringField("End Date", validators=[DataRequired()])
+    amount = IntegerField("Amount", [validators.optional(), validators.default("Unknown")])
+    callfield = StringField("Fields", validators=[DataRequired()])
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
@@ -26,7 +31,11 @@ class RegisterForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     confirmpass = PasswordField("Confirm_Password", validators=[DataRequired()])
     submit = SubmitField("Register")
-
+    def validate_password(self,password):
+        password = str(password)
+        if re.findall("[A-Z]", password) and re.findall("[a-z]",password) and re.findall("0-9", password) and len(password) > 8:
+            return True
+        return False
     def validate_passwordmatch(self, password, confirmpass):
         pass1 = password.data
         pass2 = confirmpass.data
