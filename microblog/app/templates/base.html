@@ -11,6 +11,7 @@
         <div>
             <img src="{{ img }}">
             <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('calls') }}">Calls</a>
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
             <a href="{{ url_for('register') }}">Register</a>
