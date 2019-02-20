@@ -61,52 +61,134 @@ form {
 }
 
 form select {
-	width: 20%;
+    width: 100%;
 	cursor: pointer;
+	float: left;
+	margin: 0.5em;
+	padding: 14px 20px;
+}
+
+#submit {
+	float: left;
+    background-color: #00A79A;
+    color: white;
+    margin: 1.85em 0.5em;
+    padding: 14px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#submit:hover{
+    background-color: white;
+    color: #00A79A;
+}
+
+form p {
+    width: 20%;
+    float: left;
+    margin: 0.5em;
 }
 
 form button {
 	width: 10%;
 }
 
-.workbench {
-    margin:1em;
-    width:25%;
-    height:100%;
-    background-color: #e5e5e5;
+.workbench li {
     float:left;
-
-}
-.workbench a {
     display: block;
-    border-bottom: 1em white solid;
-    border-radius: .1em;
-    color:#00A79A;
+    color:white;
     padding:1em;
     font-size: 1.5em;
-    text-decoration: none;
+    margin: 8px 0;
+    padding: 12px 20px;
 }
 
-.workbench a:hover {
-    background-color: #00A79A;
-    color:#e5e5e5;
-}
 
-ul {
-    display:inline-block;
+.workbench ul {
+    float: left;
     background-color: #e5e5e5;
     list-style-type: none;
-    width:70%;
+    width:20%;
     padding-top:2em;
 }
-.calls p  {
-    text-align:center;
-    display:inline;
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 25%;
+    top: 0;
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+  }
+
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16 {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16:hover,
+  .close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+#myBtn1,#myBtn2,#myBtn3,#myBtn4,#myBtn5,#myBtn6,#myBtn7,#myBtn8,#myBtn9,#myBtn10,#myBtn11,#myBtn12,#myBtn13,#myBtn14,#myBtn15,#myBtn16 {
+  background-color: #00A79A;
+  color: white;
+  display: inline;
+  padding: 2em 2em;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+
 }
-.apply{
-    font-size:120%;
-    border-radius: 2em;
-    display: inline;
-    background-color: #00A79A;
-    color: white;
+#myBtn1:hover,#myBtn2:hover,#myBtn3:hover,#myBtn4:hover,#myBtn5:hover,#myBtn6:hover,#myBtn7:hover,#myBtn8:hover,#myBtn9:hover,#myBtn10:hover,#myBtn11:hover,#myBtn12:hover,#myBtn13:hover,#myBtn14:hover,#myBtn15:hover,#myBtn16:hover {
+    background-color: #e5e5e5;
+    color: #00A79A;
+}
+
+#profile {
+    text-align: center;
+    margin:auto;
+}
+
+.container {
+    width: 70%;
+    height: 200px;
+    border-top: 1px solid #00A79A;
+    margin: 1em;
+    padding: 10px;
+    float: left;
+}
+
+.summary {
+    width: 55%;
+    height: 200px;
+    float: left;
+}
+
+.details {
+    margin-left: 10%;
+    height: 200px;
+    float: left;
 }
