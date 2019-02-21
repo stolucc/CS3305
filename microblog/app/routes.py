@@ -27,11 +27,14 @@ def edit_profile():
     emp_form = EmploymentForm()
     if edu_form.validate_on_submit():
         user_edu_info = EducationInfo.query.filter_by(user_id=current_user.id).first()
+        if user_edu_info is None:
+            user_edu_info = EducationInfo(user_id = current_user.id)
         user_edu_info.degree = edu_form.degree.data
         user_edu_info.field_of_study = edu_form.field_of_study.data
         user_edu_info.institution = edu_form.institution.data
         user_edu_info.location = edu_form.location.data
         user_edu_info.year_of_degree = edu_form.year_awarded.data
+        db.session.add(user_edu_info)
         db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved")
@@ -39,9 +42,12 @@ def edit_profile():
 
     if emp_form.validate_on_submit():
         emp_info = Employment.query.filter_by(user_id=current_user.id).first()
+        if emp_info is None:
+            emp_info = Employment(user_id = current_user.id)
         emp_info.institution = emp_form.institution.data
         emp_info.location = emp_form.location.data
         emp_info.years = emp_form.years
+        db.session.add(emp_info)
         db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved.")
@@ -350,14 +356,10 @@ def register():
         funding = FundingDiversification(user_id = user.id)
         team = TeamMembers(user_id=user.id)
         db.session.add(user, edu)
-        db.session.commit()
         db.session.add(emp, prof)
-        db.session.commit()
         db.session.add(dist, funding)
-        db.session.commit()
         db.session.add(team)
         db.session.commit()
-        mail.send(msg)
         flash("Succesfully Registered")
         return redirect(url_for("index"))
     return render_template("register.html", title="Register", form=form, img=svg)
