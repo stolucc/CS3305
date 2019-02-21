@@ -1,8 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
-from markupsafe import Markup
-
 from app import app, db
-from app.forms import LoginForm, RegisterForm, EditProfileForm, CallsForProposalFilter
+from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
@@ -37,8 +35,9 @@ def edit_profile():
 
 
 @app.route("/register", methods=["GET", "POST"])
+@login_required
 def register():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated or not current_user.is_admin():
         return redirect(url_for("index"))
     form = RegisterForm()
     if form.validate_on_submit():
@@ -52,13 +51,27 @@ def register():
             flash("Username not valid")
             return redirect(url_for("register"))
 
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, email=form.email.data, access=1)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash("Succesfully Registered")
         return redirect(url_for("index"))
     return render_template("register.html", title="Register", form=form, img=svg)
+
+
+@app.route("/makecall", methods=["GET", "POST"])
+@login_required
+def makecall():
+    user = User.query.filter_by(username=current_user.username).first_or_404()
+
+    if not user.is_admin():
+        flash("No Permission for this area")
+        return redirect(url_for("index"))
+
+    form = CallsForProposalForm()
+
+    return render_template("makecall.html", form=form, img=svg, title="Make Call Proposal")
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -83,9 +96,8 @@ def login():
 @login_required
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = user.posts
+    return render_template('profile.html', user=user, img=svg)
 
-    return render_template('profile.html', user=user, posts=posts, img=svg)
 
 @app.route("/workbench")
 @login_required
@@ -93,7 +105,8 @@ def workbench():
     education_info = current_user.education_info.all()
     education_length = len(education_info)
     form = CallsForProposalFilter()
-    return render_template("workbench.html", user=current_user, img=svg, education_info=education_info,form=form)
+    return render_template("workbench.html", user=current_user, img=svg, education_info=education_info, form=form,
+                           edu_len=education_length)
 
 
 @app.route("/logout")

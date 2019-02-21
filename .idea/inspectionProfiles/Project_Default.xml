@@ -5,6 +5,8 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="app.forms.EditProfileForm" />
+          <option value="microblog.app.routes.EditProfileForm" />
+          <option value="microblog.app.routes.CallsForProposalForm" />
         </list>
       </option>
     </inspection_tool>

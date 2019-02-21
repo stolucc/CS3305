@@ -83,4 +83,11 @@
 	</li>
 	{% endfor %}
 </ul>
+    <h1>Workbench</h1>
+    <h2> User: {{ user.username }}</h2>
+    {% for info in education_info %}
+    <p>{{ info }}</p>
+    {%  endfor %}
+    <p>Education Info: ({{ edu_len }})</p>
+
 {% endblock %}
