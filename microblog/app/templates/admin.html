@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Admin</h1>
+<div class="navbar">
+    <a href="#calls">Pending Calls</a>
+    <a href="#register">Register User</a>
+    <a href="#reports">Review Reports</a>
+    <a href="#call">Create Call</a>
+    <a href="#application">Review Proposal Application</a>
+    <div class="dropdown">
+        <button class="dropbtn">Notify Researcher
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="#">Application Accpeted</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

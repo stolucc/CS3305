@@ -6,12 +6,6 @@ from app.models import User
 
 
 # Create the fields for every form, with validation methods for the register form.
-class CallCreationForm(FlaskForm):
-    callname = StringField("CallName", validators=[DataRequired()])
-    start_date = StringField("Start Date", validators=[DataRequired()])
-    end_date = StringField("End Date", validators=[DataRequired()])
-    amount = IntegerField("Amount", [validators.optional(), validators.default("Unknown")])
-    callfield = StringField("Fields", validators=[DataRequired()])
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])

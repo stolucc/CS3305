@@ -107,6 +107,10 @@ def calls():
 	form = CallsForProposalFilter()
 	return render_template("calls.html", title="Calls for Proposals", form=form, img=svg)
 
+@app.route("/admin")
+def admin():
+    return render_template("admin.html", title="Admin", img=svg)
+
 
 # how to start venv: "source venv/bin/activate"
 
