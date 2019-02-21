@@ -424,8 +424,40 @@ def calls():
 	return render_template("calls.html", title="Calls for Proposals", form=form, img=svg)
 
 @app.route("/admin")
+@login_required
 def admin():
     return render_template("admin.html", title="Admin", img=svg)
+
+@app.route("/review_proposal", methods=["GET", "POST"])
+@login_required
+def review_proposal():
+    user = User.query.filter_by(username=current_user.username).first_or_404()
+
+    if not user.is_admin():
+        flash("No Permission for this area")
+        return redirect(url_for("index"))
+
+    form = ApplicationForm()
+
+    return render_template("review_proposal.html", title="Proposal Application", form=form, img=svg)
+
+@app.route("/accepted")
+@login_required
+def accepted():
+
+    return redirect(url_for("admin"))
+
+@app.route("/rejected")
+@login_required
+def rejected():
+
+    return redirect(url_for("admin"))
+
+@app.route("/modify")
+@login_required
+def modify():
+
+    return redirect(url_for("admin"))
 
 
 # how to start venv: "source venv/bin/activate"

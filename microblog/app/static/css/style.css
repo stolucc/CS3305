@@ -286,3 +286,26 @@ form button {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.admin {
+    margin:1em;
+
+}
+.admin li {
+    float: left;
+    color:white;
+    font-size: 1.5em;
+    margin: 8px 0;
+    padding: 12px 20px;
+    width: 25%;
+}
+
+.admin a {
+    width: 100%;
+    text-align: center;
+}
+
+.admin ul {
+    list-style-type: none;
+    width: 60%;
+}

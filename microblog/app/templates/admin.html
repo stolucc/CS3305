@@ -2,21 +2,14 @@
 
 {% block content %}
 <h1>Admin</h1>
-<div class="navbar">
-    <a href="#calls">Pending Calls</a>
-    <a href="#register">Register User</a>
-    <a href="#reports">Review Reports</a>
-    <a href="#call">Create Call</a>
-    <a href="#application">Review Proposal Application</a>
-    <div class="dropdown">
-        <button class="dropbtn">Notify Researcher
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-            <a href="#">Application Accpeted</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-        </div>
-    </div>
+<div class="admin">
+    <ul>
+        <li><a href="makecall">Publish Call<br>for Proposal</a></li>
+        <li><a href="register">Register<br>User</a></li>
+        <li><a href="">Review<br>Reports</a></li>
+        <li><a href="review_proposal">Proposal<br>Applications</a></li>
+        <li><a href="">View User<br>Activity</a></li>
+        <li><a href="">Assign Admin<br>Privileges</a></li>
+    </ul>
 </div>
 {% endblock %}
