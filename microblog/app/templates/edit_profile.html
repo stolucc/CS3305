@@ -3,21 +3,67 @@
 {%  block content %}
 <h1>Edit Profile</h1>
 <form action="" method="post">
-    {{ form.hidden_tag() }}
+    {{ edu_form.hidden_tag() }}
     <p>
-        {{ form.username.label }}<br>
-        {{  form.username(size=32) }}<br>
-        {% for error in form.username.errors %}
+        {{ edu_form.degree.label }}<br>
+        {{  edu_form.degree(size=32) }}<br>
+        {% for error in edu_form.degree.errors %}
         <span style="color: red;">[{{  error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ form.about_me.label }}<br>
-        {{ form.about_me(cols=50, rows=4) }}<br>
-        {% for error in form.about_me.errors %}
+        {{ edu_form.field_of_study.label }}<br>
+        {{ edu_form.field_of_study }}<br>
+        {% for error in edu_form.field_of_study.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
-    <p>{{ form.submit() }}</p>
+    <p>
+        {{ edu_form.institution.label }}<br>
+        {{ edu_form.institution }}<br>
+        {% for error in edu_form.institution.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ edu_form.location.label }}<br>
+        {{ edu_form.location }}<br>
+        {% for error in edu_form.location.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ edu_form.year_awarded.label }}<br>
+        {{ edu_form.year_awarded }}<br>
+        {% for error in edu_form.year_awarded.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ edu_form.submit() }}</p><br>
+</form>
+<form>
+    {{ emp_form.hidden_tag() }}
+    <p>
+        {{ emp_form.institution.label }}<br>
+        {{ emp_form.institution }}<br>
+        {% for error in emp_form.institution.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ emp_form.location.label }}<br>
+        {{ emp_form.location }}<br>
+        {% for error in emp_form.location.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ emp_form.years.label }}<br>
+        {{ emp_form.years }}<br>
+        {% for error in emp_form.years.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ emp_form.submit() }}</p>
 </form>
 {% endblock %}

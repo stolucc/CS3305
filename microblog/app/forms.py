@@ -54,14 +54,14 @@ class RegisterForm(FlaskForm):
 
 class EducationForm(FlaskForm):
     degree = StringField("Degree", validators=[DataRequired()])
-    field_of_study = PasswordField("Field of Study", validators=[DataRequired()])
+    field_of_study = StringField("Field of Study", validators=[DataRequired()])
     institution = StringField("Institution", validators=[DataRequired()])
     location = StringField("Location", validators=[DataRequired()])
-    year_awarded = StringField("Year of Degree Awarded", validators=[DataRequired()])
+    year_awarded = StringField("Year of Degree Awarded")
     submit = SubmitField("Save")
 
 
-class Employment(FlaskForm):
+class EmploymentForm(FlaskForm):
     institution = StringField("Institution/Company", validators=[DataRequired()])
     location = StringField("Location", validators=[DataRequired()])
     years = StringField("Years", validators=[DataRequired()])

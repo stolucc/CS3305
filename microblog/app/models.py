@@ -76,7 +76,7 @@ class EducationInfo(db.Model):
     field_of_study = db.Column(db.String(120))
     institution = db.Column(db.String(120))
     location = db.Column(db.String(120))
-    year_of_degree = db.Column(db.Integer)
+    year_of_degree = db.Column(db.String(20))
 
     def __repr__(self):
         return "Degree: {}".format(self.degree)

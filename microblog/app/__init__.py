@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import mimetypes
+from flask_mail import Mail
 
 #Makes Python treat the directories as cotaining python packages
 

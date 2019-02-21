@@ -21,51 +21,32 @@ def index():
 @app.route("/edit_profile", methods=["GET", "POST"])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.about_me = form.about_me.data
+
+    edu_form = EducationForm()
+    emp_form = EmploymentForm()
+    if edu_form.validate_on_submit():
+        user_edu_info = EducationInfo.query.filter_by(user_id=current_user.id).first()
+        user_edu_info.degree = edu_form.degree.data
+        user_edu_info.field_of_study = edu_form.field_of_study.data
+        user_edu_info.institution = edu_form.institution.data
+        user_edu_info.location = edu_form.location.data
+        user_edu_info.year_of_degree = edu_form.year_awarded.data
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+
+    if emp_form.validate_on_submit():
+        emp_info = Employment.query.filter_by(user_id=current_user.id).first()
+        emp_info.institution = emp_form.institution.data
+        emp_info.location = emp_form.location.data
+        emp_info.years = emp_form.years
+        db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved.")
         return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.username.data = current_user.username
-        form.about_me.data = current_user.about_me
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form = EducatioForm()
-    if form.validate_on_submit():
-        current_user.degree = form.degree.data
-        current_user.field_of_study = form.field_of_study.data
-        current_user.institution = form.institution.data
-        current_user.location = form.location.data
-        current_user.year_awarded = form.year_awarded.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.degree.data = current_user.
-        form.field_of_study.data = current_user.field_of_study
-        form.institution.data = current_user.institution
-        form.location.data = current_user.location
-        form.year_awarded.data = current_user.year_awarded
-        
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =Employment()
-    if form.validate_on_submit():
-        current_user.institution = form.institution.data
-        current_user.location = form.location.data
-        current_user.years = form.years.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.institution.data = current_user.institution
-        form.location.data = current_user.location
-        form.years.data = current_user.years
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
+    return render_template("edit_profile.html", title="Edit Profile", edu_form=edu_form, emp_form=emp_form, img=svg)
+'''
     form =ProfessionalSocietiesForm()
     if form.validate_on_submit():
         current_user.start_date = form.start_date.data
@@ -150,9 +131,9 @@ def edit_profile():
         flash("Your changes have been saved.")
         return redirect(url_for("edit_profile"))
     elif request.method == "GET":
-        form.title .data = current_user.title 
+        form.title .data = current_user.title
         form.category.data = current_user.category
-        form.primary_beneficiary .data = current_user.primary_beneficiary 
+        form.primary_beneficiary .data = current_user.primary_beneficiary
         form.primary_attribution.data = current_user.primary_attribution
     return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
 
@@ -168,8 +149,8 @@ def edit_profile():
     elif request.method == "GET":
         form.year.data = current_user.year
         form.innovation_type.data = current_user.innovation_type
-        form.title .data = current_user.title 
-        form.primary_attribution .data = current_user.primary_attribution 
+        form.title .data = current_user.title
+        form.primary_attribution .data = current_user.primary_attribution
     return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
 
     form =PublicationsForm()
@@ -185,8 +166,8 @@ def edit_profile():
         flash("Your changes have been saved.")
         return redirect(url_for("edit_profile"))
     elif request.method == "GET":
-        form.year .data = current_user.year 
-        form.publication_type .data = current_user.publication_type 
+        form.year .data = current_user.year
+        form.publication_type .data = current_user.publication_type
         form.title.data = current_user.title
         form.journal_name.data = current_user.journal_name
         form.status.data = current_user.status
@@ -337,12 +318,12 @@ def edit_profile():
         form.target_area.data = current_user.target_area
         form.primary_attribution.data = current_user.primary_attribution
     return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
+'''
 
 @app.route("/register", methods=["GET", "POST"])
 @login_required
 def register():
-    if current_user.is_authenticated or not current_user.is_admin():
+    if not current_user.is_admin():
         return redirect(url_for("index"))
     form = RegisterForm()
     if form.validate_on_submit():
@@ -358,7 +339,19 @@ def register():
 
         user = User(username=form.username.data, email=form.email.data, access=1)
         user.set_password(form.password.data)
-        db.session.add(user)
+        edu = EducationInfo(user_id=user.id)
+        emp = Employment(user_id=user.id)
+        prof = ProfessionalStudies(user_id=user.id)
+        dist = DistinctionsAndAwards(user_id=user.id)
+        funding = FundingDiversification(user_id = user.id)
+        team = TeamMembers(user_id=user.id)
+        db.session.add(user, edu)
+        db.session.commit()
+        db.session.add(emp, prof)
+        db.session.commit()
+        db.session.add(dist, funding)
+        db.session.commit()
+        db.session.add(team)
         db.session.commit()
         flash("Succesfully Registered")
         return redirect(url_for("index"))
