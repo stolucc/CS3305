@@ -4,6 +4,7 @@ from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
+from flask_mail import Message
 
 from app.models import *
 
@@ -325,6 +326,9 @@ def edit_profile():
 def register():
     if not current_user.is_admin():
         return redirect(url_for("index"))
+    msg = Message("Thank you for registering",
+                  sender="jacobmckeon23@gmail.com",
+                  recipients=["115336756@umail.ucc.ie"])
     form = RegisterForm()
     if form.validate_on_submit():
         if not form.validate_email(form.email):
@@ -353,6 +357,7 @@ def register():
         db.session.commit()
         db.session.add(team)
         db.session.commit()
+        mail.send(msg)
         flash("Succesfully Registered")
         return redirect(url_for("index"))
     return render_template("register.html", title="Register", form=form, img=svg)
