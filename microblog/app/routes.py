@@ -4,6 +4,7 @@ from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
+from flask_mail import Message
 
 from app.models import *
 
@@ -49,7 +50,7 @@ def edit_profile():
         form.institution.data = current_user.institution
         form.location.data = current_user.location
         form.year_awarded.data = current_user.year_awarded
-        
+
     return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
 
     form =Employment()
@@ -150,9 +151,9 @@ def edit_profile():
         flash("Your changes have been saved.")
         return redirect(url_for("edit_profile"))
     elif request.method == "GET":
-        form.title .data = current_user.title 
+        form.title .data = current_user.title
         form.category.data = current_user.category
-        form.primary_beneficiary .data = current_user.primary_beneficiary 
+        form.primary_beneficiary .data = current_user.primary_beneficiary
         form.primary_attribution.data = current_user.primary_attribution
     return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
 
@@ -168,8 +169,8 @@ def edit_profile():
     elif request.method == "GET":
         form.year.data = current_user.year
         form.innovation_type.data = current_user.innovation_type
-        form.title .data = current_user.title 
-        form.primary_attribution .data = current_user.primary_attribution 
+        form.title .data = current_user.title
+        form.primary_attribution .data = current_user.primary_attribution
     return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
 
     form =PublicationsForm()
@@ -185,8 +186,8 @@ def edit_profile():
         flash("Your changes have been saved.")
         return redirect(url_for("edit_profile"))
     elif request.method == "GET":
-        form.year .data = current_user.year 
-        form.publication_type .data = current_user.publication_type 
+        form.year .data = current_user.year
+        form.publication_type .data = current_user.publication_type
         form.title.data = current_user.title
         form.journal_name.data = current_user.journal_name
         form.status.data = current_user.status
@@ -342,6 +343,9 @@ def edit_profile():
 @app.route("/register", methods=["GET", "POST"])
 @login_required
 def register():
+    msg = Message("Thank you for registering",
+    sender="jacobmckeon23@gmail.com"
+    recipients=["115336756@umail.ucc.ie"])
     if current_user.is_authenticated or not current_user.is_admin():
         return redirect(url_for("index"))
     form = RegisterForm()
@@ -360,6 +364,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
+        mail.send(msg)
         flash("Succesfully Registered")
         return redirect(url_for("index"))
     return render_template("register.html", title="Register", form=form, img=svg)
