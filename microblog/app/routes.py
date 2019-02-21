@@ -344,7 +344,7 @@ def edit_profile():
 @login_required
 def register():
     msg = Message("Thank you for registering",
-    sender="jacobmckeon23@gmail.com"
+    sender="jacobmckeon23@gmail.com",
     recipients=["115336756@umail.ucc.ie"])
     if current_user.is_authenticated or not current_user.is_admin():
         return redirect(url_for("index"))
