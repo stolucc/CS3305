@@ -1,6 +1,4 @@
 from flask import render_template, flash, redirect, url_for, request
-from markupsafe import Markup
-
 from app import app, db
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
@@ -37,8 +35,9 @@ def edit_profile():
 
 
 @app.route("/register", methods=["GET", "POST"])
+@login_required
 def register():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated or not current_user.is_admin():
         return redirect(url_for("index"))
     form = RegisterForm()
     if form.validate_on_submit():
@@ -97,9 +96,7 @@ def login():
 @login_required
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = user.posts
-
-    return render_template('profile.html', user=user, posts=posts, img=svg)
+    return render_template('profile.html', user=user, img=svg)
 
 
 @app.route("/workbench")
