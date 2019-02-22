@@ -22,106 +22,106 @@ def index():
 @app.route("/edit_profile", methods=["GET", "POST"])
 @login_required
 def edit_profile():
-
     edu_form = EducationForm()
     emp_form = EmploymentForm()
+    prof_form = ProfessionalStudiesForm()
+    dist_form = DistinctionsAndAwardsForm()
+    fund_form = FundingDiversificationForm()
+    team_form = TeamMembersForm()
+
     if edu_form.validate_on_submit():
         user_edu_info = EducationInfo.query.filter_by(user_id=current_user.id).first()
+        if user_edu_info is None:
+            user_edu_info = EducationInfo(user_id=current_user.id)
         user_edu_info.degree = edu_form.degree.data
         user_edu_info.field_of_study = edu_form.field_of_study.data
         user_edu_info.institution = edu_form.institution.data
         user_edu_info.location = edu_form.location.data
         user_edu_info.year_of_degree = edu_form.year_awarded.data
+        db.session.add(user_edu_info)
         db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
 
-    if emp_form.validate_on_submit():
+    elif emp_form.validate_on_submit():
         emp_info = Employment.query.filter_by(user_id=current_user.id).first()
+        if emp_info is None:
+            emp_info = Employment(user_id=current_user.id)
         emp_info.institution = emp_form.institution.data
         emp_info.location = emp_form.location.data
-        emp_info.years = emp_form.years
+        emp_info.years = emp_form.years.data
+        db.session.add(emp_info)
         db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved.")
+        return redirect(url_for("index"))
+
+    elif prof_form.validate_on_submit():
+        user_prof_info = ProfessionalStudies.query.filter_by(user_id=current_user.id).first()
+        if user_prof_info is None:
+            user_prof_info = ProfessionalStudies(user_id=current_user.id)
+        user_prof_info.start_date = prof_form.start_date.data
+        user_prof_info.end_date = prof_form.end_date.data
+        user_prof_info.society_name = prof_form.society.data
+        user_prof_info.member_type = prof_form.membership.data
+        user_prof_info.status = prof_form.status.data
+        db.session.add(user_prof_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
-    return render_template("edit_profile.html", title="Edit Profile", edu_form=edu_form, emp_form=emp_form, img=svg)
+
+    elif dist_form.validate_on_submit():
+        user_dist_info = DistinctionsAndAwards.query.filter_by(user_id=current_user.id).first()
+        if user_dist_info is None:
+            user_dist_info = DistinctionsAndAwards(user_id=current_user.id)
+        user_dist_info.year = dist_form.year.data
+        user_dist_info.awarding_body = dist_form.awarding_body.data
+        user_dist_info.award_details = dist_form.award_details.data
+        user_dist_info.member_name = dist_form.member_name.data
+        db.session.add(user_dist_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+
+    elif fund_form.validate_on_submit():
+        user_fund_info = FundingDiversification.query.filter_by(user_id=current_user.id).first()
+        if user_fund_info is None:
+            user_fund_info = FundingDiversification(user_id=current_user.id)
+        user_fund_info.start_date = fund_form.start_date.data
+        user_fund_info.end_date = fund_form.end_date.data
+        user_fund_info.funding_amt = fund_form.funding_amount.data
+        user_fund_info.funding_body = fund_form.funding_body.data
+        user_fund_info.funding_program = fund_form.funding_program.data
+        db.session.add(user_fund_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+
+    elif team_form.validate_on_submit():
+        user_team_info = TeamMembers.query.filter_by(user_id=current_user.id).first()
+        if user_team_info is None:
+            user_team_info = TeamMembers(user_id=current_user.id)
+        user_team_info.name = team_form.name.data
+        user_team_info.position_in_team = team_form.position_in_team.data
+        user_team_info.start_date = team_form.start_date.data
+        user_team_info.end_date = team_form.departure_date.data
+        user_team_info.other_users = team_form.other_users.data
+        db.session.add(user_team_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+
+    return render_template("edit_profile.html", title="Edit Profile", edu_form=edu_form, emp_form=emp_form,
+                           prof_form=prof_form, img=svg, dist_form=dist_form, fund_form=fund_form,
+                           team_form=team_form)
+
+
 '''
-    form =ProfessionalSocietiesForm()
-    if form.validate_on_submit():
-        current_user.start_date = form.start_date.data
-        current_user.end_date = form.end_date.data
-        current_user.society = form.society.data
-        current_user.membership = form.membership.data
-        current_user.status = form.status.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.start_date.data = current_user.start_date
-        form.end_date.data = current_user.end_date
-        form.society.data = current_user.society
-        form.membership.data = current_user.membership
-        form.status.data = current_user.status
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =DistinctionsAwardsForm()
-    if form.validate_on_submit():
-        current_user.year = form.year.data
-        current_user.awarding_body = form.awarding_body.data
-        current_user.award_details = form.award_details.data
-        current_user.member_name = form.member_name.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.year.data = current_user.year
-        form.awarding_body.data = current_user.awarding_body
-        form.award_details.data = current_user.award_details
-        form.member_name.data = current_user.member_name
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =FundingForm()
-    if form.validate_on_submit():
-        current_user.start_date = form.start_date.data
-        current_user.end_date = form.end_date.data
-        current_user.funding_amount = form.funding_amount.data
-        current_user.funding_body = form.funding_body.data
-        current_user.fudning_programme = form.fudning_programme.data
-        current_user.status = form.status.data
-        current_user.primary_attribution = form.primary_attribution.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.start_date.data = current_user.start_date
-        form.end_date.data = current_user.end_date
-        form.funding_amount.data = current_user.funding_amount
-        form.funding_body.data = current_user.funding_body
-        form.fudning_programme.data = current_user.fudning_programme
-        form.status.data = current_user.status
-        form.primary_attribution.data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =TeamMembersForm()
-    if form.validate_on_submit():
-        current_user.start_date = form.start_date.data
-        current_user.departure_date = form.departure_date.data
-        current_user.name = form.name.data
-        current_user.position_in_team = form.position_in_team.data
-        current_user.primary_attribution = form.primary_attribution.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.start_date.data = current_user.start_date
-        form.departure_date.data = current_user.departure_date
-        form.name.data = current_user.name
-        form.position_in_team.data = current_user.position_in_team
-        form.primary_attribution.data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
     form =ImpactsForm()
     if form.validate_on_submit():
         current_user.title  = form.title .data
@@ -321,6 +321,7 @@ def edit_profile():
     return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
 '''
 
+
 @app.route("/register", methods=["GET", "POST"])
 @login_required
 def register():
@@ -343,21 +344,8 @@ def register():
 
         user = User(username=form.username.data, email=form.email.data, access=1)
         user.set_password(form.password.data)
-        edu = EducationInfo(user_id=user.id)
-        emp = Employment(user_id=user.id)
-        prof = ProfessionalStudies(user_id=user.id)
-        dist = DistinctionsAndAwards(user_id=user.id)
-        funding = FundingDiversification(user_id = user.id)
-        team = TeamMembers(user_id=user.id)
-        db.session.add(user, edu)
+        db.session.add(user)
         db.session.commit()
-        db.session.add(emp, prof)
-        db.session.commit()
-        db.session.add(dist, funding)
-        db.session.commit()
-        db.session.add(team)
-        db.session.commit()
-        mail.send(msg)
         flash("Succesfully Registered")
         return redirect(url_for("index"))
     return render_template("register.html", title="Register", form=form, img=svg)
@@ -407,9 +395,29 @@ def profile(username):
 def workbench():
     education_info = current_user.education_info.all()
     education_length = len(education_info)
+
+    employment_info = current_user.employment.all()
+    employment_length = len(employment_info)
+
+    professional_studies = current_user.professional_studies.all()
+    professional_studies_length = len(professional_studies)
+
+    distinctions_and_awards = current_user.distinctions_and_awards.all()
+    distinctions_and_awards_length = len(distinctions_and_awards)
+
+    funding_diversification = current_user.funding_diversification.all()
+    funding_diversification_length = len(funding_diversification)
+
+    team_members = current_user.team_members.all()
+    team_members_length = len(team_members)
+
     form = CallsForProposalFilter()
-    return render_template("workbench.html", user=current_user, img=svg, education_info=education_info, form=form,
-                           edu_len=education_length)
+    return render_template("workbench.html", user=current_user, img=svg, edu_info=education_info, form=form,
+                           edu_len=education_length, emp_info=employment_info, emp_len=employment_length,
+                           prof_info=professional_studies, prof_len=professional_studies_length,
+                           dist_info=distinctions_and_awards, dist_len=distinctions_and_awards_length,
+                           fund_info=funding_diversification, fund_len=funding_diversification_length,
+                           team_info=team_members, team_len=team_members_length)
 
 
 @app.route("/logout")
@@ -420,8 +428,9 @@ def logout():
 
 @app.route("/calls", methods=["GET", "POST"])
 def calls():
-	form = CallsForProposalFilter()
-	return render_template("calls.html", title="Calls for Proposals", form=form, img=svg)
+    form = CallsForProposalFilter()
+    return render_template("calls.html", title="Calls for Proposals", form=form, img=svg)
+
 
 @app.route("/admin")
 @login_required

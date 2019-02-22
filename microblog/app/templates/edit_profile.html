@@ -4,6 +4,7 @@
 <h1>Edit Profile</h1>
 <form action="" method="post">
     {{ edu_form.hidden_tag() }}
+    <h2>Education Info Form</h2>
     <p>
         {{ edu_form.degree.label }}<br>
         {{  edu_form.degree(size=32) }}<br>
@@ -39,9 +40,10 @@
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
-    <p>{{ edu_form.submit() }}</p><br>
-</form>
-<form>
+    <p>{{ edu_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Employment Information Form</h2>
     {{ emp_form.hidden_tag() }}
     <p>
         {{ emp_form.institution.label }}<br>
@@ -65,5 +67,158 @@
         {%  endfor %}
     </p>
     <p>{{ emp_form.submit() }}</p>
-</form>
+</form><br>
+<form action="" method="post">
+    <h2>Professional Studies Form</h2>
+    {{ prof_form.hidden_tag() }}
+    <p>
+        {{ prof_form.start_date.label }}<br>
+        {{ prof_form.start_date }}<br>
+        {% for error in prof_form.start_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ prof_form.end_date.label }}<br>
+        {{ prof_form.end_date }}<br>
+        {% for error in prof_form.end_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ prof_form.society.label }}<br>
+        {{ prof_form.society }}<br>
+        {% for error in prof_form.society.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ prof_form.membership.label }}<br>
+        {{ prof_form.membership }}<br>
+        {% for error in prof_form.membership.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ prof_form.status.label }}<br>
+        {{ prof_form.status }}<br>
+        {% for error in prof_form.status.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ prof_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Distinctions And Awards Form</h2>
+    {{ dist_form.hidden_tag() }}
+    <p>
+        {{ dist_form.year.label }}<br>
+        {{ dist_form.year }}<br>
+        {% for error in dist_form.year.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ dist_form.awarding_body.label }}<br>
+        {{ dist_form.awarding_body }}<br>
+        {% for error in dist_form.awarding_body.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ dist_form.award_details.label }}<br>
+        {{ dist_form.award_details }}<br>
+        {% for error in dist_form.award_details.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ dist_form.member_name.label }}<br>
+        {{ dist_form.member_name }}<br>
+        {% for error in dist_form.member_name.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ dist_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Funding Form</h2>
+    {{ fund_form.hidden_tag() }}
+    <p>
+        {{ fund_form.start_date.label }}<br>
+        {{ fund_form.start_date }}<br>
+        {% for error in fund_form.start_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ fund_form.end_date.label }}<br>
+        {{ fund_form.end_date }}<br>
+        {% for error in fund_form.end_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ fund_form.funding_amount.label }}<br>
+        {{ fund_form.funding_amount }}<br>
+        {% for error in fund_form.funding_amount.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ fund_form.funding_body.label }}<br>
+        {{ fund_form.funding_body }}<br>
+        {% for error in fund_form.funding_body.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ fund_form.funding_program.label }}<br>
+        {{ fund_form.funding_program }}<br>
+        {% for error in fund_form.funding_program.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ fund_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Team Members Form</h2>
+    {{ team_form.hidden_tag() }}
+    <p>
+        {{ team_form.name.label }}<br>
+        {{ team_form.name }}<br>
+        {% for error in team_form.name.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ team_form.position_in_team.label }}<br>
+        {{ team_form.position_in_team }}<br>
+        {% for error in team_form.position_in_team.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ team_form.start_date.label }}<br>
+        {{ team_form.start_date }}<br>
+        {% for error in team_form.start_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ team_form.departure_date.label }}<br>
+        {{ team_form.departure_date }}<br>
+        {% for error in team_form.departure_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ team_form.other_users.label }}<br>
+        {{ team_form.other_users }}<br>
+        {% for error in team_form.other_users.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ team_form.submit() }}</p>
+</form><br>
 {% endblock %}

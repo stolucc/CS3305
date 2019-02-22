@@ -57,52 +57,50 @@ class EducationForm(FlaskForm):
     field_of_study = StringField("Field of Study", validators=[DataRequired()])
     institution = StringField("Institution", validators=[DataRequired()])
     location = StringField("Location", validators=[DataRequired()])
-    year_awarded = StringField("Year of Degree Awarded")
-    submit = SubmitField("Save")
+    year_awarded = StringField("Year of Degree Awarded", validators=[DataRequired()])
+    submit = SubmitField("Save Education Info")
 
 
 class EmploymentForm(FlaskForm):
     institution = StringField("Institution/Company", validators=[DataRequired()])
     location = StringField("Location", validators=[DataRequired()])
     years = StringField("Years", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    submit = SubmitField("Save Employment Info")
 
 
-class ProfessionalSocietiesForm(FlaskForm):
+class ProfessionalStudiesForm(FlaskForm):
     start_date = StringField("Start Date", validators=[DataRequired()])
     end_date = StringField("End Date", validators=[DataRequired()])
     society = StringField("Name of Society", validators=[DataRequired()])
     membership = StringField("Type of Membership", validators=[DataRequired()])
     status = StringField("Status (e.g active)", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    submit = SubmitField("Save Professional Studies Info")
 
 
-class DistinctionsAwardsForm(FlaskForm):
+class DistinctionsAndAwardsForm(FlaskForm):
     year = StringField("Year", validators=[DataRequired()])
     awarding_body = StringField("Awarding Body", validators=[DataRequired()])
     award_details = StringField("Details of Award", validators=[DataRequired()])
     member_name = StringField("Team Member Name", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    submit = SubmitField("Save Distinctions And Awards Info")
 
 
-class FundingForm(FlaskForm):
+class FundingDiversificationForm(FlaskForm):
     start_date = StringField("Start Date", validators=[DataRequired()])
     end_date = StringField("End Date", validators=[DataRequired()])
     funding_amount = StringField("Amount of Funding", validators=[DataRequired()])
     funding_body = StringField("Funding Body", validators=[DataRequired()])
-    fudning_programme = StringField("Funding Programme", validators=[DataRequired()])
-    status = StringField("Status (e.g Active)", validators=[DataRequired()])
-    primary_attribution = StringField("Primary Attribution", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    funding_program = StringField("Funding Programme", validators=[DataRequired()])
+    submit = SubmitField("Save Funding Info")
 
 
 class TeamMembersForm(FlaskForm):
-    start_date = StringField("Start Date with Team", validators=[DataRequired()])
-    departure_date = StringField("Departure Date", validators=[DataRequired()])
     name = StringField("Name", validators=[DataRequired()])
     position_in_team = StringField("Position within the Team", validators=[DataRequired()])
-    primary_attribution = StringField("Primary Attribution", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    start_date = StringField("Start Date with Team", validators=[DataRequired()])
+    departure_date = StringField("Departure Date", validators=[DataRequired()])
+    other_users = StringField("Other Users on Team", validators=[DataRequired()])
+    submit = SubmitField("Save Team Members Info")
 
 
 class ImpactsForm(FlaskForm):

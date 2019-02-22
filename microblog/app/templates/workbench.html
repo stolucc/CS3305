@@ -5,14 +5,57 @@
 <div class="workbench">
     <h1>Workbench</h1>
     <h2> User: {{ user.username }}</h2>
-    {% for entry in education_info %}
+    <h2>Education Info</h2>
+    {% for entry in edu_info %}
         <p>{{ entry.degree }}</p>
         <p>{{ entry.field_of_study }}</p>
         <p>{{ entry.institution }}</p>
         <p>{{ entry.location }}</p>
         <p>{{ entry.year_of_degree }}</p>
     {%  endfor %}
+    <h2>Employment Info</h2>
+    {% for entry in emp_info %}
+        <p>{{ entry.institution }}</p>
+        <p>{{ entry.location }}</p>
+        <p>{{ entry.years }}</p>
+    {% endfor %}
+    <h2>Professional Studies</h2>
+    {% for entry in prof_info %}
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.society_name }}</p>
+        <p>{{ entry.member_type }}</p>
+        <p>{{ entry.status }}</p>
+    {% endfor %}
+    <h2>Distinctions and Awards</h2>
+    {% for entry in dist_info %}
+        <p>{{ entry.year }}</p>
+        <p>{{ entry.awarding_body }}</p>
+        <p>{{ entry.award_details }}</p>
+        <p>{{ entry.member_name }}</p>
+    {% endfor %}
+    <h2>Funding Diversification</h2>
+    {% for entry in fund_info %}
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.funding_amt }}</p>
+        <p>{{ entry.funding_body }}</p>
+        <p>{{ entry.funding_program }}</p>
+    {% endfor %}
+    <h2>Team Members</h2>
+    {% for entry in team_info %}
+        <p>{{ entry.name }}</p>
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.position_in_team }}</p>
+        <p>{{ entry.other_users }}</p>
+    {% endfor %}
 
-    <p>Education Info: ({{ edu_len }})</p>
+    <p><b>Education Info: ({{ edu_len }})</b></p>
+    <p><b>Employment Info: ({{ emp_len }})</b></p>
+    <p><b>Professional Studies Info: ({{ prof_len }})</b></p>
+    <p><b>Distinctions and Awards Info: ({{ dist_len }})</b></p>
+    <p><b>FundingDiversification Info: ({{ fund_len }})</b></p>
+    <p><b>Team Members Info: ({{ team_len }})</b></p>
 </div>
 {% endblock %}
