@@ -87,14 +87,14 @@ class Employment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     institution = db.Column(db.String(60))
     location = db.Column(db.String(120))
-    years = db.Column(db.String(3))
+    years = db.Column(db.String(10))
 
 
 class ProfessionalStudies(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
-    start_date = db.Column(db.DATE())
-    end_date = db.Column(db.DATE())
+    start_date = db.Column(db.String(12))
+    end_date = db.Column(db.String(12))
     society_name = db.Column(db.String(40))
     member_type = db.Column(db.String(40))
     status = db.Column(db.String(10))
@@ -103,7 +103,7 @@ class ProfessionalStudies(db.Model):
 class DistinctionsAndAwards(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
-    year = db.Column(db.Integer)
+    year = db.Column(db.String(4))
     awarding_body = db.Column(db.String(60))
     award_details = db.Column(db.String(120))
     member_name = db.Column(db.String(40))
@@ -112,8 +112,8 @@ class DistinctionsAndAwards(db.Model):
 class FundingDiversification(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
-    start_date = db.Column(db.DATE())
-    end_date = db.Column(db.DATE())
+    start_date = db.Column(db.String(12))
+    end_date = db.Column(db.String(12))
     funding_amt = db.Column(db.Integer)
     funding_body = db.Column(db.String(60))
     funding_program = db.Column(db.String(60))
@@ -122,10 +122,11 @@ class FundingDiversification(db.Model):
 class TeamMembers(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40))
+    position_in_team = db.Column(db.String(120))
     other_users = db.Column(db.String(120))
-    start_date = db.Column(db.DATE())
-    end_date = db.Column(db.DATE())
-    names = db.Column(db.String(120))
+    start_date = db.Column(db.String(12))
+    end_date = db.Column(db.String(12))
 
 
 class Impacts(db.Model):
