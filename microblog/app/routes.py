@@ -28,6 +28,16 @@ def edit_profile():
     dist_form = DistinctionsAndAwardsForm()
     fund_form = FundingDiversificationForm()
     team_form = TeamMembersForm()
+    impact_form = ImpactsForm()
+    inov_form = InovationForm()
+    publi_form = PublicationsForm()
+    pres_form = PresentationsForm()
+    non_ac_form = NonAcademicColabForm()
+    ac_form = AcademicColabForm()
+    conf_form = ConferencesForm()
+    commun_form = CommunicationsForm()
+    fund_ratio_form = FundingRatioForm()
+    public_eng_form = PublicEngagementForm()
 
     if edu_form.validate_on_submit():
         user_edu_info = EducationInfo.query.filter_by(user_id=current_user.id).first()
@@ -116,13 +126,40 @@ def edit_profile():
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
 
+
+    elif impact_form.validate_on_submit():
+        user_impact_info = Impacts.query.filter_by(user_id=current_user.id).first()
+        if user_impact_info is None:
+            user_impact_info = Impacts(user_id=current_user.id)
+        user_impact_info.impact_title = impact_form.title.data
+        user_impact_info.impact_category = impact_form.category.data
+        user_impact_info.impact_beneficiary = impact_form.primary_beneficiary.data
+        user_impact_info.impact_attribution = impact_form.primary_attribution.data
+        db.session.add(user_impact_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+    elif inov_form.validate_on_submit():
+        user_innovations_info = Innovations.query.filter_by(user_id=current_user.id).first()
+        if user_innovations_info is None:
+            user_innovations_info = Innovations(user_id=current_user.id)
+        user_innovations_info.impact_title = inov_form.title.data
+        user_innovations_info.impact_category = impact_form.category.data
+        user_innovations_info.impact_beneficiary = impact_form.primary_beneficiary.data
+        user_innovations_infopact_info.impact_attribution = impact_form.primary_attribution.data
+        db.session.add(user_innovations_infopact_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+
     return render_template("edit_profile.html", title="Edit Profile", edu_form=edu_form, emp_form=emp_form,
                            prof_form=prof_form, img=svg, dist_form=dist_form, fund_form=fund_form,
-                           team_form=team_form)
+                           team_form=team_form, impact_form=impact_form)
 
 
-'''
-    form =ImpactsForm()
+''' form =ImpactsForm()
     if form.validate_on_submit():
         current_user.title  = form.title .data
         current_user.category = form.category.data
@@ -329,7 +366,7 @@ def register():
         return redirect(url_for("index"))
     msg = Message("Thank you for registering",
                   sender="jacobmckeon23@gmail.com",
-                  recipients=["115336756@umail.ucc.ie"])
+                  recipients=["jacobmckeon23@gmail.com"])
     form = RegisterForm()
     if form.validate_on_submit():
         if not form.validate_email(form.email):
@@ -410,6 +447,36 @@ def workbench():
 
     team_members = current_user.team_members.all()
     team_members_length = len(team_members)
+
+    impacts = current_user.impacts.all()
+    impacts_length = len(impacts)
+
+    innovations = current_user.innovations.all()
+    innovation_length = len(innovations)
+
+    publications = current_user.publications.all()
+    publications_length = len(publications)
+
+    presentations = current_user.presentations.all()
+    presentations_length = len(presentations)
+
+    academiccollabs = current_user.academiccollabs.all()
+    academiccollabs_length = len(academiccollabs)
+
+    nonacademiccollabs = current_user.nonacademiccollabs.all()
+    nonacademiccollabs_length = len(nonacademiccollabs)
+
+    conferences = current_user.conferences.all()
+    conferences_length = len(conferences)
+
+    communications = current_user.communications.all()
+    communications_length = len(communications)
+
+    funding_ratio = current_user.funding_ratio.all()
+    funding_ratio_length = len(funding_ratio)
+
+    public_engagement = current_user.public_engagement.all()
+    public_engagement_length = len(public_engagement)
 
     form = CallsForProposalFilter()
     return render_template("workbench.html", user=current_user, img=svg, edu_info=education_info, form=form,

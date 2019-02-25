@@ -17,5 +17,7 @@ def make_shell_context():
         "ProfessionalStudies": ProfessionalStudies,
         "DistinctionsAndAwards": DistinctionsAndAwards,
         "FundingDiversification": FundingDiversification,
-        "TeamMembers": TeamMembers
+        "TeamMembers": TeamMembers,
+        "Impacts": Impacts,
+
     }

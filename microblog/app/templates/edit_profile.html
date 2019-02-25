@@ -221,4 +221,37 @@
     </p>
     <p>{{ team_form.submit() }}</p>
 </form><br>
+<form action="" method="post">
+    <h2>Impacts Form</h2>
+    {{ impact_form.hidden_tag() }}
+    <p>
+        {{ impact_form.title.label }}<br>
+        {{ impact_form.title }}<br>
+        {% for error in impact_form.title.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ impact_form.category.label }}<br>
+        {{ impact_form.category }}<br>
+        {% for error in impact_form.category.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ impact_form.primary_beneficiary.label }}<br>
+        {{ impact_form.primary_beneficiary }}<br>
+        {% for error in impact_form.primary_beneficiary.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ impact_form.primary_attribution.label }}<br>
+        {{ impact_form.primary_attribution }}<br>
+        {% for error in impact_form.primary_attribution.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ impact_form.submit() }}</p>
+</form><br>
 {% endblock %}
