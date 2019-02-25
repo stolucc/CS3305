@@ -254,4 +254,395 @@
     </p>
     <p>{{ impact_form.submit() }}</p>
 </form><br>
+<form action="" method="post">
+    <h2>Publications Form</h2>
+    {{ publi_form.hidden_tag() }}
+    <p>
+        {{ publi_form.year.label }}<br>
+        {{ publi_form.year }}<br>
+        {% for error in publi_form.year.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ publi_form.type.label }}<br>
+        {{ publi_form.type }}<br>
+        {% for error in publi_form.type %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ publi_form.title.label }}<br>
+        {{ publi_form.title }}<br>
+        {% for error in publi_form.title.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ publi_form.primary_attribution.label }}<br>
+        {{ publi_form.primary_attribution }}<br>
+        {% for error in publi_form.primary_attribution.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ publi_form.journal_conf_name.label }}<br>
+        {{ publi_form.journal_conf_name }}<br>
+        {% for error in publi_form.journal_conf_name.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ publi_form.status.label }}<br>
+        {{ publi_form.status }}<br>
+        {% for error in publi_form.status.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ publi_form.doi.label }}<br>
+        {{ publi_form.doi }}<br>
+        {% for error in publi_form.doi.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ publi_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Presentation Form</h2>
+    {{ pres_form.hidden_tag() }}
+    <p>
+        {{ pres_form.year.label }}<br>
+        {{ pres_form.year }}<br>
+        {% for error in pres_form.year.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ pres_form.type.label }}<br>
+        {{ pres_form.type }}<br>
+        {% for error in pres_form.type.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ pres_form.title.label }}<br>
+        {{ pres_form.title }}<br>
+        {% for error in pres_form.title.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ pres_form.primary_attribution.label }}<br>
+        {{ pres_form.primary_attribution }}<br>
+        {% for error in pres_form.primary_attribution.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ pres_form.organising_body.label }}<br>
+        {{ pres_form.organising_body }}<br>
+        {% for error in pres_form.organising_body.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ pres_form.location.label }}<br>
+        {{ pres_form.location }}<br>
+        {% for error in pres_form.location.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ pres_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Academic Collabs Form</h2>
+    {{ ac_form.hidden_tag() }}
+    <p>
+        {{ ac_form.start_date.label }}<br>
+        {{ ac_form.start_date }}<br>
+        {% for error in ac_form.start_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ ac_form.end_date.label }}<br>
+        {{ ac_form.end_date }}<br>
+        {% for error in ac_form.end_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ ac_form.name.label }}<br>
+        {{ ac_form.name }}<br>
+        {% for error in ac_form.name.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ ac_form.department.label }}<br>
+        {{ ac_form.department }}<br>
+        {% for error in ac_form.department.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ ac_form.location.label }}<br>
+        {{ ac_form.location }}<br>
+        {% for error in ac_form.location.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ ac_form.collaborator.label }}<br>
+        {{ ac_form.collaborator }}<br>
+        {% for error in ac_form.collaborator %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ ac_form.goal.label }}<br>
+        {{ ac_form.goal }}<br>
+        {% for error in ac_form.goal.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ ac_form.interaction_freq.label }}<br>
+        {{ ac_form.interaction_freq }}<br>
+        {% for error in ac_form.interaction_freq.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ ac_form.primary_attribution.label }}<br>
+        {{ ac_form.primary_attribution }}<br>
+        {% for error in ac_form.primary_attribution.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ ac_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Non Academic Collabs Form</h2>
+    {{ non_form.hidden_tag() }}
+    <p>
+        {{ non_ac_form.start_date.label }}<br>
+        {{ non_ac_form.start_date }}<br>
+        {% for error in non_ac_form.start_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ non_ac_form.end_date.label }}<br>
+        {{ non_ac_form.end_date }}<br>
+        {% for error in non_ac_form.end_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ non_ac_form.name.label }}<br>
+        {{ non_ac_form.name }}<br>
+        {% for error in non_ac_form.name.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ non_ac_form.department.label }}<br>
+        {{ non_ac_form.department }}<br>
+        {% for error in non_ac_form.department.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ non_ac_form.location.label }}<br>
+        {{ non_ac_form.location }}<br>
+        {% for error in non_ac_form.location.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ non_ac_form.collaborator.label }}<br>
+        {{ non_ac_form.collaborator }}<br>
+        {% for error in non_ac_form.collaborator %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ non_ac_form.goal.label }}<br>
+        {{ non_ac_form.goal }}<br>
+        {% for error in non_ac_form.goal.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ non_ac_form.interaction_freq.label }}<br>
+        {{ non_ac_form.interaction_freq }}<br>
+        {% for error in non_ac_form.interaction_freq.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ non_ac_form.primary_attribution.label }}<br>
+        {{ non_ac_form.primary_attribution }}<br>
+        {% for error in non_ac_form.primary_attribution.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ non_ac_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Conferences Form</h2>
+    {{ conf_form.hidden_tag() }}
+    <p>
+        {{ conf_form.start_date.label }}<br>
+        {{ conf_form.start_date }}<br>
+        {% for error in conf_form.start_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ conf_form.end_date.label }}<br>
+        {{ conf_form.end_date }}<br>
+        {% for error in conf_form.end_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ conf_form.title.label }}<br>
+        {{ conf_form.title }}<br>
+        {% for error in conf_form.title.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ conf_form.type.label }}<br>
+        {{ conf_form.type }}<br>
+        {% for error in conf_form.type.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ conf_form.role.label }}<br>
+        {{ conf_form.role }}<br>
+        {% for error in conf_form.role.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ conf_form.location.label }}<br>
+        {{ conf_form.location }}<br>
+        {% for error in conf_form.location.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ conf_form.primary_attribution.label }}<br>
+        {{ conf.primary_attribution }}<br>
+        {% for error in conf.primary_attribution.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ conf_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Communications Form</h2>
+    {{ commun_form.hidden_tag() }}
+    <p>
+        {{ commun_form.year.label }}<br>
+        {{ commun_form.year }}<br>
+        {% for error in commun_form.year.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ commun_form.num_of_lecs_demos.label }}<br>
+        {{ commun_form.num_of_lecs_demos }}<br>
+        {% for error in commun_form.num_of_lecs_demos.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ commun_form.num_of_visits.label }}<br>
+        {{ commun_form.num_of_visits }}<br>
+        {% for error in commun_form.num_of_visits.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ commun_form.num_of_interactions.label }}<br>
+        {{ commun_form.num_of_interactions }}<br>
+        {% for error in commun_form.num_of_interactions.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ commun_form.submit() }}</p>
+</form><br>
+<form action="" method="post">
+    <h2>Funding Ratio Form</h2>
+    {{ fund_ratio_form.hidden_tag() }}
+    <p>
+        {{ fund_ratio_form.year.label }}<br>
+        {{ fund_ratio_form.year }}<br>
+        {% for error in fund_ratio_form.year.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ fund_ratio_form.percentage.label }}<br>
+        {{ fund_ratio_form.percentage }}<br>
+        {% for error in fund_ratio_form.percentage.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ fund_ratio_form.submit() }}</p>
+</form><br>
+
+<form action="" method="post">
+    <h2>Public Engagement Form</h2>
+    {{ public_eng_form.hidden_tag() }}
+    <p>
+        {{ public_eng_form.start_date.label }}<br>
+        {{ public_eng_form.start_date }}<br>
+        {% for error in public_eng_form.start_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ public_eng_form.end_date.label }}<br>
+        {{ public_eng_form.end_date }}<br>
+        {% for error in public_eng_form.end_date.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ public_eng_form.topic.label }}<br>
+        {{ public_eng_form.topic }}<br>
+        {% for error in public_eng_form.topic.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ public_eng_form.type.label }}<br>
+        {{ public_eng_form.type }}<br>
+        {% for error in public_eng_form.type.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ public_eng_form.target_area.label }}<br>
+        {{ public_eng_form.target_area }}<br>
+        {% for error in public_eng_form.target_area.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ public_eng_form.primary_attribution.label }}<br>
+        {{ public_eng_form.primary_attribution }}<br>
+        {% for error in public_eng_form.primary_attribution.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>{{ public_eng_form.submit() }}</p>
+</form><br>
 {% endblock %}
