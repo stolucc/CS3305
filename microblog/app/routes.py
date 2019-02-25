@@ -1,10 +1,10 @@
 from flask import render_template, flash, redirect, url_for, request
-from app import app, db
+from app import app, db, mail
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
-from flask_mail import Message
+from flask_mail import *
 
 from app.models import *
 
@@ -341,7 +341,7 @@ def register():
         if not form.validate_username(form.username):
             flash("Username not valid")
             return redirect(url_for("register"))
-
+        mail.send(msg)
         user = User(username=form.username.data, email=form.email.data, access=1)
         user.set_password(form.password.data)
         db.session.add(user)
