@@ -19,5 +19,15 @@ def make_shell_context():
         "FundingDiversification": FundingDiversification,
         "TeamMembers": TeamMembers,
         "Impacts": Impacts,
+        "Innovations": Innovations,
+        "Publications": Publications,
+        "Presentation": Presentation,
+        "AcademicCollaboration": AcademicCollabs,
+        "Non Academic Collaborations": NonAcademicCollabs,
+        "Conferences": Conferences,
+        "Communications": Communications,
+        "Funding Ration": FundingRatio,
+        "Pubic Engagement": PublicEngagements
+
 
     }

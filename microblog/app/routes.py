@@ -144,219 +144,144 @@ def edit_profile():
         user_innovations_info = Innovations.query.filter_by(user_id=current_user.id).first()
         if user_innovations_info is None:
             user_innovations_info = Innovations(user_id=current_user.id)
-        user_innovations_info.impact_title = inov_form.title.data
-        user_innovations_info.impact_category = impact_form.category.data
-        user_innovations_info.impact_beneficiary = impact_form.primary_beneficiary.data
-        user_innovations_infopact_info.impact_attribution = impact_form.primary_attribution.data
-        db.session.add(user_innovations_infopact_info)
+        user_innovations_info.year = inov_form.year.data
+        user_innovations_info.innovation_type= inov_form.innovation_type.data
+        user_innovations_info.title = inov_form.title.data
+        user_innovations_infopact_info.primary_attribution = inov_form.primary_attribution.data
+        db.session.add(user_innovations_info)
         db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
-
+    elif publi_form.validate_on_submit():
+        publications_info = Publications.query.filter_by(user_id=current_user.id).first()
+        if publications_info is None:
+            publications_info = Publications(user_id=current_user.id)
+        publications_info.year = publi_form.year.data
+        publications_info.publication_type = publi_form.publication_type.data
+        publications_info.title = publi_form.title.data
+        publications_info.journal_name = publi_form.journal_name.data
+        publications_info.status = publi_form.status.data
+        publications_info.doi = publi_form.doi.data
+        publications_info.primary_attribution = publi_form.primary_attribution.data
+        db.session.add(publications_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+    elif pres_form.validate_on_submit():
+        pres_info = Presentation.query.filter_by(user_id=current_user.id).first()
+        if pres_info is None:
+            pres_info = Presentation(user_id=current_user.id)
+        pres_info.year = pres_form.year.data
+        pres_info.title = pres_form.title.data
+        pres_info.event_type = pres_form.event_type.data
+        pres_info.organising_body = pres_form.organising_body.data
+        pres_info.location = pres_form.location.data
+        pres_info.primary_attribution = pres_form.primary_attribution.data
+        db.session.add(pres_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+    elif ac_form.validate_on_submit():
+        ac_info = AcademicCollabs.query.filter_by(user_id=current_user.id).first()
+        if ac_info is None:
+            ac_info = AcademicCollabs(user_id=current_user.id)
+        ac_info.start_date = ac_form.start_date.data
+        ac_info.end_date = ac_form.end_date.data
+        ac_info.institution = ac_form.institution.data
+        ac_info.department = ac_form.department.data
+        ac_info.location = ac_form.location.data
+        ac_info.collaborator = ac_form.collaborator.data
+        ac_info.collaborator_goal = ac_form.collaborator_goal.data
+        ac_info.interaction_freq = ac_form.interaction_freq.data
+        ac_info.primary_attribution = ac_form.primary_attribution.data
+        db.session.add(ac_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+    elif non_ac_form.validate_on_submit():
+        non_ac_info = NonAcademicCollabs.query.filter_by(user_id=current_user.id).first()
+        if non_ac_info is None:
+            non_ac_info = NonAcademicCollabs(user_id=current_user.id)
+        non_ac_info.start_date = non_ac_form.start_date.data
+        non_ac_info.end_date = non_ac_form.end_date.data
+        non_ac_info.institution = non_ac_form.institution.data
+        non_ac_info.department = non_ac_form.department.data
+        non_ac_info.location = non_ac_form.location.data
+        non_ac_info.collaborator = non_ac_form.collaborator.data
+        non_ac_info.collaborator_goal = non_ac_form.collaborator_goal.data
+        non_ac_info.interaction_freq = non_ac_form.interaction_freq.data
+        non_ac_info.primary_attribution = non_ac_form.primary_attribution.data
+        db.session.add(non_ac_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+    elif conf_form.validate_on_submit():
+        conf_info = Conferences.query.filter_by(user_id=current_user.id).first()
+        if conf_info is None:
+            conf_info = Conferences(user_id=current_user.id)
+        conf_info.start_date = conf_form.start_date.data
+        conf_info.end_date = conf_form.end_date.data
+        conf_info.title = conf_form.title.data
+        conf_info.event_type = conf_form.event_type.data
+        conf_info.role = conf_form.role.data
+        conf_info.location = conf_form.location.data
+        conf_info.primary_attribution = conf_form.primary_attribution.data
+        db.session.add(conf_info)
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+    elif commun_form.validate_on_submit():
+        commun_info = Communications.query.filter_by(user_id=current_user.id).first()
+        if commun_info is None:
+            commun_info = Communications(user_id=current_user.id)
+        commun_info.year = commun_form.year.data
+        commun_info.number_lectures = commun_form.number_lectures.data
+        commun_info.number_visits = commun_form.number_visits.data
+        commun_info.number_media = commun_form.number_media.data
+        db.session.commit(commun_info)
+        db.session.commit(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+    elif fund_ratio_form.validate_on_submit():
+        fund_ratio_info = FundingRatio.query.filter_by(user_id=current_user.id).first()
+        if fund_ratio_info is None:
+            fund_ratio_info = FundingRatio.query.filter_by(user_id=current_user.id)
+        fund_ratio_info.year = fund_ratio_form.year.data
+        fund_ratio_info.annual_spend = fund_ratio_form.annual_spend.data
+        db.session.commit(fund_ratio_info)
+        db.session.commit(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
+    elif public_eng_form.validate_on_submit():
+        public_eng_info = PublicEngagements.query.filter_by(user_id=current_user.id).first()
+        if public_eng_info is None:
+            public_eng_info = PublicEngagements(user_id=current_user.id)
+        public_eng_info.name = public_eng_form.name.data
+        public_eng_info.start_date = public_eng_form.start_date.data 
+        public_eng_info.end_date = public_eng_form.end_date.data
+        public_eng_info.activity_type = public_eng_form.activity_type.data
+        public_eng_info.topic = public_eng_form.topic.data
+        public_eng_info.target_area = public_eng_form.target_area.data
+        public_eng_info.primary_attribution = public_eng_form.primary_attribution.data
+        db.session.commit(public_eng_info)
+        db.session.commit(current_user)
+        db.session.commit()
+        flash("Your changes have been saved")
+        return redirect(url_for("edit_profile"))
     return render_template("edit_profile.html", title="Edit Profile", edu_form=edu_form, emp_form=emp_form,
                            prof_form=prof_form, img=svg, dist_form=dist_form, fund_form=fund_form,
-                           team_form=team_form, impact_form=impact_form)
+                           team_form=team_form, impact_form=impact_form, inov_form=inov_form, publi_form=publi_form, pres_form=pres_form, ac_form=ac_form, non_ac_form=non_ac_form, conf_form=conf_form, commun_form=commun_form, fund_ratio_form=fund_ratio_form, public_eng_form=public_eng_form)
 
 
-''' form =ImpactsForm()
-    if form.validate_on_submit():
-        current_user.title  = form.title .data
-        current_user.category = form.category.data
-        current_user.primary_beneficiary  = form.primary_beneficiary .data
-        current_user.primary_attribution = form.primary_attribution.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.title .data = current_user.title
-        form.category.data = current_user.category
-        form.primary_beneficiary .data = current_user.primary_beneficiary
-        form.primary_attribution.data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =InovationForm()
-    if form.validate_on_submit():
-        current_user.year = form.year.data
-        current_user.innovation_type = form.innovation_type.data
-        current_user.title  = form.title .data
-        current_user.primary_attribution  = form.primary_attribution .data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.year.data = current_user.year
-        form.innovation_type.data = current_user.innovation_type
-        form.title .data = current_user.title
-        form.primary_attribution .data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =PublicationsForm()
-    if form.validate_on_submit():
-        current_user.year  = form.year .data
-        current_user.publication_type  = form.publication_type .data
-        current_user.title = form.title.data
-        current_user.journal_name = form.journal_name.data
-        current_user.status = form.status.data
-        current_user.doi = form.doi.data
-        current_user.primary_attribution = form.primary_attribution.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.year .data = current_user.year
-        form.publication_type .data = current_user.publication_type
-        form.title.data = current_user.title
-        form.journal_name.data = current_user.journal_name
-        form.status.data = current_user.status
-        form.doi.data = current_user.doi
-        form.primary_attribution.data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =PresentationsForm()
-    if form.validate_on_submit():
-        current_user.year = form.year.data
-        current_user.title = form.title.data
-        current_user.event_type = form.event_type.data
-        current_user.organising_body = form.organising_body.data
-        current_user.location = form.location.data
-        current_user.primary_attribution = form.primary_attribution.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.year.data = current_user.year
-        form.title.data = current_user.title
-        form.event_type.data = current_user.event_type
-        form.organising_body.data = current_user.organising_body
-        form.location.data = current_user.location
-        form.primary_attribution.data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =AcademicColabForm()
-    if form.validate_on_submit():
-        current_user.start_date = form.start_date.data
-        current_user.end_date = form.end_date.data
-        current_user.institution = form.institution.data
-        current_user.department = form.department.data
-        current_user.location = form.location.data
-        current_user.collaborator = form.collaborator.data
-        current_user.collaborator_goal = form.collaborator_goal.data
-        current_user.interaction_freq = form.interaction_freq.data
-        current_user.primary_attribution = form.primary_attribution.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.start_date.data = current_user.start_date
-        form.end_date.data = current_user.end_date
-        form.institution.data = current_user.institution
-        form.department.data = current_user.department
-        form.location.data = current_user.location
-        form.collaborator.data = current_user.collaborator
-        form.collaborator_goal.data = current_user.collaborator_goal
-        form.interaction_freq.data = current_user.interaction_freq
-        form.primary_attribution.data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =NonAcademicColabForm()
-    if form.validate_on_submit():
-        current_user.start_date = form.start_date.data
-        current_user.end_date = form.end_date.data
-        current_user.institution = form.institution.data
-        current_user.department = form.department.data
-        current_user.location = form.location.data
-        current_user.collaborator = form.collaborator.data
-        current_user.collaborator_goal = form.collaborator_goal.data
-        current_user.interaction_freq = form.interaction_freq.data
-        current_user.primary_attribution = form.primary_attribution.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.start_date.data = current_user.start_date
-        form.end_date.data = current_user.end_date
-        form.institution.data = current_user.institution
-        form.department.data = current_user.department
-        form.location.data = current_user.location
-        form.collaborator.data = current_user.collaborator
-        form.collaborator_goal.data = current_user.collaborator_goal
-        form.interaction_freq.data = current_user.interaction_freq
-        form.primary_attribution.data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =ConferencesForm()
-    if form.validate_on_submit():
-        current_user.start_date = form.start_date.data
-        current_user.end_date = form.end_date.data
-        current_user.title = form.title.data
-        current_user.event_type = form.event_type.data
-        current_user.role = form.role.data
-        current_user.location = form.location.data
-        current_user.primary_attribution = form.primary_attribution.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.start_date.data = current_user.start_date
-        form.end_date.data = current_user.end_date
-        form.title.data = current_user.title
-        form.event_type.data = current_user.event_type
-        form.role.data = current_user.role
-        form.location.data = current_user.location
-        form.primary_attribution.data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =CommunicationsForm()
-    if form.validate_on_submit():
-        current_user.year = form.year.data
-        current_user.number_lectures = form.number_lectures.data
-        current_user.number_visits = form.number_visits.data
-        current_user.number_media = form.number_media.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.year.data = current_user.year
-        form.number_lectures.data = current_user.number_lectures
-        form.number_visits.data = current_user.number_visits
-        form.number_media.data = current_user.number_media
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =FundingRatioForm()
-    if form.validate_on_submit():
-        current_user.year = form.year.data
-        current_user.annual_spend = form.annual_spend.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.year.data = current_user.year
-        form.annual_spend.data = current_user.annual_spend
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-
-    form =PublicEngagementForm()
-    if form.validate_on_submit():
-        current_user.name = form.name.data
-        current_user.start_date = form.start_date.data
-        current_user.end_date = form.end_date.data
-        current_user.activity_type = form.activity_type.data
-        current_user.topic = form.topic.data
-        current_user.target_area = form.target_area.data
-        current_user.primary_attribution = form.primary_attribution.data
-        db.session.commit()
-        flash("Your changes have been saved.")
-        return redirect(url_for("edit_profile"))
-    elif request.method == "GET":
-        form.name.data = current_user.name
-        form.start_date.data = current_user.start_date
-        form.end_date.data = current_user.end_date
-        form.activity_type.data = current_user.activity_type
-        form.topic.data = current_user.topic
-        form.target_area.data = current_user.target_area
-        form.primary_attribution.data = current_user.primary_attribution
-    return render_template("edit_profile.html", title="Edit Profile", form=form, img=svg)
-'''
+''' '''
 
 
 @app.route("/register", methods=["GET", "POST"])
