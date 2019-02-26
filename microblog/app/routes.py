@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for, request
-from app import app, db, mail
+from app import app, db #mail
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
@@ -437,6 +437,7 @@ def calls():
 def admin():
     return render_template("admin.html", title="Admin", img=svg)
 
+
 @app.route("/review_proposal", methods=["GET", "POST"])
 @login_required
 def review_proposal():
@@ -450,22 +451,22 @@ def review_proposal():
 
     return render_template("review_proposal.html", title="Proposal Application", form=form, img=svg)
 
+
 @app.route("/accepted")
 @login_required
 def accepted():
-
     return redirect(url_for("admin"))
+
 
 @app.route("/rejected")
 @login_required
 def rejected():
-
     return redirect(url_for("admin"))
+
 
 @app.route("/modify")
 @login_required
 def modify():
-
     return redirect(url_for("admin"))
 
 

@@ -7,9 +7,9 @@ from flask_login import UserMixin
 # Loads posts and users from the database
 
 ACCESS = {
-    "guest" : 0,
-    "user" : 1,
-    "admin" : 2
+    "guest": 0,
+    "user": 1,
+    "admin": 2
 }
 
 
@@ -138,7 +138,7 @@ class Impacts(db.Model):
     primary_attribution = db.Column(db.String(40))
 
 
-class Innovation_Comm(db.Model):
+class InnovationComm(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
@@ -170,7 +170,7 @@ class Presentation(db.Model):
     location = db.Column(db.String(30))
 
 
-class Academic_Collabs(db.Model):
+class AcademicCollabs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
@@ -184,7 +184,7 @@ class Academic_Collabs(db.Model):
     primary_attribution = db.Column(db.String(40))
 
 
-class Non_Academic_Collabs(db.Model):
+class NonAcademicCollabs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
@@ -198,7 +198,7 @@ class Non_Academic_Collabs(db.Model):
     primary_attribution = db.Column(db.String(40))
 
 
-class Conf_Works_Sems(db.Model):
+class ConfWorksSems(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
@@ -210,7 +210,7 @@ class Conf_Works_Sems(db.Model):
     primary_attribution = db.Column(db.String(40))
 
 
-class Comms_Overview(db.Model):
+class CommsOverview(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
@@ -219,14 +219,14 @@ class Comms_Overview(db.Model):
     num_of_interactions = db.Column(db.Integer)
 
 
-class SFI_Fund_Ratio(db.Model):
+class SFIFundRatio(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
     percentage = db.Column(db.Integer)
 
 
-class Education_Public_Engagement(db.Model):
+class EducationPublicEngagement(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
@@ -240,3 +240,4 @@ class Education_Public_Engagement(db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
