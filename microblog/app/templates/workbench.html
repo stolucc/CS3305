@@ -51,14 +51,14 @@
         <p>{{ entry.other_users }}</p>
     {% endfor %}
     <h2>Impacts</h2>
-    {% for entry in user_impact_info %}
+    {% for entry in imp_info %}
         <p>{{ entry.impact_title }}</p>
         <p>{{ entry.impact_category }}</p>
         <p>{{ entry.impact_beneficiary }}</p>
         <p>{{ entry.impact_attribution }}</p>
     {% endfor %}
     <h2>Innovations</h2>
-    {% for entry in user_innovations_info %}
+    {% for entry in user_innov_info %}
         <p>{{ entry.year }}</p>
         <p>{{ entry.innovation_type }}</p>
         <p>{{ entry.title }}</p>
@@ -125,7 +125,7 @@
         <p>{{ entry.number_media }}</p>
     {% endfor %}
     <h2>FundingRatio</h2>
-    {% for entry in fund_ratio_info %}
+    {% for entry in funding_ratio_info %}
         <p>{{ entry.year }}</p>
         <p>{{ entry.annual_spend }}</p>
     {% endfor %}

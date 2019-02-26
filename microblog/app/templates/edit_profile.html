@@ -256,57 +256,57 @@
 </form><br>
 <form action="" method="post">
     <h2>Publications Form</h2>
-    {{ publi_form.hidden_tag() }}
+    {{ public_form.hidden_tag() }}
     <p>
-        {{ publi_form.year.label }}<br>
-        {{ publi_form.year }}<br>
-        {% for error in publi_form.year.errors %}
+        {{ public_form.year.label }}<br>
+        {{ public_form.year }}<br>
+        {% for error in public_form.year.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ publi_form.type.label }}<br>
-        {{ publi_form.type }}<br>
-        {% for error in publi_form.type %}
+        {{ public_form.publication_type.label }}<br>
+        {{ public_form.publication_type }}<br>
+        {% for error in public_form.publication_type.errors %}
+            <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
+    <p>
+        {{ public_form.title.label }}<br>
+        {{ public_form.title }}<br>
+        {% for error in public_form.title.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ publi_form.title.label }}<br>
-        {{ publi_form.title }}<br>
-        {% for error in publi_form.title.errors %}
+        {{ public_form.primary_attribution.label }}<br>
+        {{ public_form.primary_attribution }}<br>
+        {% for error in public_form.primary_attribution.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ publi_form.primary_attribution.label }}<br>
-        {{ publi_form.primary_attribution }}<br>
-        {% for error in publi_form.primary_attribution.errors %}
+        {{ public_form.journal_name.label }}<br>
+        {{ public_form.journal_name }}<br>
+        {% for error in public_form.journal_name.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ publi_form.journal_conf_name.label }}<br>
-        {{ publi_form.journal_conf_name }}<br>
-        {% for error in publi_form.journal_conf_name.errors %}
+        {{ public_form.status.label }}<br>
+        {{ public_form.status }}<br>
+        {% for error in public_form.status.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ publi_form.status.label }}<br>
-        {{ publi_form.status }}<br>
-        {% for error in publi_form.status.errors %}
+        {{ public_form.doi.label }}<br>
+        {{ public_form.doi }}<br>
+        {% for error in public_form.doi.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
-    <p>
-        {{ publi_form.doi.label }}<br>
-        {{ publi_form.doi }}<br>
-        {% for error in publi_form.doi.errors %}
-        <span style="color: red;">[{{ error }}</span>
-        {%  endfor %}
-    </p>
-    <p>{{ publi_form.submit() }}</p>
+    <p>{{ public_form.submit() }}</p>
 </form><br>
 <form action="" method="post">
     <h2>Presentation Form</h2>
@@ -319,9 +319,9 @@
         {%  endfor %}
     </p>
     <p>
-        {{ pres_form.type.label }}<br>
-        {{ pres_form.type }}<br>
-        {% for error in pres_form.type.errors %}
+        {{ pres_form.event_type.label }}<br>
+        {{ pres_form.event_type }}<br>
+        {% for error in pres_form.event_type.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
@@ -373,9 +373,9 @@
         {%  endfor %}
     </p>
     <p>
-        {{ ac_form.name.label }}<br>
-        {{ ac_form.name }}<br>
-        {% for error in ac_form.name.errors %}
+        {{ ac_form.institution.label }}<br>
+        {{ ac_form.institution }}<br>
+        {% for error in ac_form.institution.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
@@ -396,14 +396,14 @@
     <p>
         {{ ac_form.collaborator.label }}<br>
         {{ ac_form.collaborator }}<br>
-        {% for error in ac_form.collaborator %}
+        {% for error in ac_form.collaborator.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ ac_form.goal.label }}<br>
-        {{ ac_form.goal }}<br>
-        {% for error in ac_form.goal.errors %}
+        {{ ac_form.collaborator_goal.label }}<br>
+        {{ ac_form.collaborator_goal }}<br>
+        {% for error in ac_form.collaborator_goal.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
@@ -425,7 +425,7 @@
 </form><br>
 <form action="" method="post">
     <h2>Non Academic Collabs Form</h2>
-    {{ non_form.hidden_tag() }}
+    {{ non_ac_form.hidden_tag() }}
     <p>
         {{ non_ac_form.start_date.label }}<br>
         {{ non_ac_form.start_date }}<br>
@@ -441,9 +441,9 @@
         {%  endfor %}
     </p>
     <p>
-        {{ non_ac_form.name.label }}<br>
-        {{ non_ac_form.name }}<br>
-        {% for error in non_ac_form.name.errors %}
+        {{ non_ac_form.institution.label }}<br>
+        {{ non_ac_form.institution }}<br>
+        {% for error in non_ac_form.institution.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
@@ -464,14 +464,14 @@
     <p>
         {{ non_ac_form.collaborator.label }}<br>
         {{ non_ac_form.collaborator }}<br>
-        {% for error in non_ac_form.collaborator %}
+        {% for error in non_ac_form.collaborator.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ non_ac_form.goal.label }}<br>
-        {{ non_ac_form.goal }}<br>
-        {% for error in non_ac_form.goal.errors %}
+        {{ non_ac_form.collaborator_goal.label }}<br>
+        {{ non_ac_form.collaborator_goal }}<br>
+        {% for error in non_ac_form.collaborator_goal.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
@@ -516,9 +516,9 @@
         {%  endfor %}
     </p>
     <p>
-        {{ conf_form.type.label }}<br>
-        {{ conf_form.type }}<br>
-        {% for error in conf_form.type.errors %}
+        {{ conf_form.event_type.label }}<br>
+        {{ conf_form.event_type }}<br>
+        {% for error in conf_form.event_type.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
@@ -538,8 +538,8 @@
     </p>
     <p>
         {{ conf_form.primary_attribution.label }}<br>
-        {{ conf.primary_attribution }}<br>
-        {% for error in conf.primary_attribution.errors %}
+        {{ conf_form.primary_attribution }}<br>
+        {% for error in conf_form.primary_attribution.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
@@ -556,23 +556,23 @@
         {%  endfor %}
     </p>
     <p>
-        {{ commun_form.num_of_lecs_demos.label }}<br>
-        {{ commun_form.num_of_lecs_demos }}<br>
-        {% for error in commun_form.num_of_lecs_demos.errors %}
+        {{ commun_form.number_lectures.label }}<br>
+        {{ commun_form.number_lectures }}<br>
+        {% for error in commun_form.number_lectures.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ commun_form.num_of_visits.label }}<br>
-        {{ commun_form.num_of_visits }}<br>
-        {% for error in commun_form.num_of_visits.errors %}
+        {{ commun_form.number_visits.label }}<br>
+        {{ commun_form.number_visits }}<br>
+        {% for error in commun_form.number_visits.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ commun_form.num_of_interactions.label }}<br>
-        {{ commun_form.num_of_interactions }}<br>
-        {% for error in commun_form.num_of_interactions.errors %}
+        {{ commun_form.number_media.label }}<br>
+        {{ commun_form.number_media }}<br>
+        {% for error in commun_form.number_media.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
@@ -589,9 +589,9 @@
         {%  endfor %}
     </p>
     <p>
-        {{ fund_ratio_form.percentage.label }}<br>
-        {{ fund_ratio_form.percentage }}<br>
-        {% for error in fund_ratio_form.percentage.errors %}
+        {{ fund_ratio_form.annual_spend.label }}<br>
+        {{ fund_ratio_form.annual_spend }}<br>
+        {% for error in fund_ratio_form.annual_spend.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
@@ -601,6 +601,13 @@
 <form action="" method="post">
     <h2>Public Engagement Form</h2>
     {{ public_eng_form.hidden_tag() }}
+    <p>
+        {{ public_eng_form.name.label }}<br>
+        {{ public_eng_form.name }}<br>
+        {% for error in public_eng_form.name.errors %}
+        <span style="color: red;">[{{ error }}</span>
+        {%  endfor %}
+    </p>
     <p>
         {{ public_eng_form.start_date.label }}<br>
         {{ public_eng_form.start_date }}<br>
@@ -616,16 +623,16 @@
         {%  endfor %}
     </p>
     <p>
-        {{ public_eng_form.topic.label }}<br>
-        {{ public_eng_form.topic }}<br>
-        {% for error in public_eng_form.topic.errors %}
+        {{ public_eng_form.activity_type.label }}<br>
+        {{ public_eng_form.activity_type }}<br>
+        {% for error in public_eng_form.activity_type.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>
     <p>
-        {{ public_eng_form.type.label }}<br>
-        {{ public_eng_form.type }}<br>
-        {% for error in public_eng_form.type.errors %}
+        {{ public_eng_form.topic.label }}<br>
+        {{ public_eng_form.topic }}<br>
+        {% for error in public_eng_form.topic.errors %}
         <span style="color: red;">[{{ error }}</span>
         {%  endfor %}
     </p>

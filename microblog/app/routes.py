@@ -31,7 +31,7 @@ def edit_profile():
     team_form = TeamMembersForm()
     impact_form = ImpactsForm()
     inov_form = InovationForm()
-    publi_form = PublicationsForm()
+    public_form = PublicationsForm()
     pres_form = PresentationsForm()
     non_ac_form = NonAcademicColabForm()
     ac_form = AcademicColabForm()
@@ -131,10 +131,10 @@ def edit_profile():
         user_impact_info = Impacts.query.filter_by(user_id=current_user.id).first()
         if user_impact_info is None:
             user_impact_info = Impacts(user_id=current_user.id)
-        user_impact_info.impact_title = impact_form.title.data
-        user_impact_info.impact_category = impact_form.category.data
-        user_impact_info.impact_beneficiary = impact_form.primary_beneficiary.data
-        user_impact_info.impact_attribution = impact_form.primary_attribution.data
+        user_impact_info.title = impact_form.title.data
+        user_impact_info.category = impact_form.category.data
+        user_impact_info.primary_beneficiary = impact_form.primary_beneficiary.data
+        user_impact_info.primary_attribution = impact_form.primary_attribution.data
         db.session.add(user_impact_info)
         db.session.add(current_user)
         db.session.commit()
@@ -155,17 +155,17 @@ def edit_profile():
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
 
-    elif publi_form.validate_on_submit():
+    elif public_form.validate_on_submit():
         publications_info = Publication.query.filter_by(user_id=current_user.id).first()
         if publications_info is None:
             publications_info = Publication(user_id=current_user.id)
-        publications_info.year = publi_form.year.data
-        publications_info.publication_type = publi_form.publication_type.data
-        publications_info.title = publi_form.title.data
-        publications_info.journal_name = publi_form.journal_name.data
-        publications_info.status = publi_form.status.data
-        publications_info.doi = publi_form.doi.data
-        publications_info.primary_attribution = publi_form.primary_attribution.data
+        publications_info.year = public_form.year.data
+        publications_info.publication_type = public_form.publication_type.data
+        publications_info.title = public_form.title.data
+        publications_info.journal_name = public_form.journal_name.data
+        publications_info.status = public_form.status.data
+        publications_info.doi = public_form.doi.data
+        publications_info.primary_attribution = public_form.primary_attribution.data
         db.session.add(publications_info)
         db.session.add(current_user)
         db.session.commit()
@@ -251,8 +251,8 @@ def edit_profile():
         commun_info.number_lectures = commun_form.number_lectures.data
         commun_info.number_visits = commun_form.number_visits.data
         commun_info.number_media = commun_form.number_media.data
-        db.session.commit(commun_info)
-        db.session.commit(current_user)
+        db.session.add(commun_info)
+        db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
@@ -260,11 +260,11 @@ def edit_profile():
     elif fund_ratio_form.validate_on_submit():
         fund_ratio_info = FundingRatio.query.filter_by(user_id=current_user.id).first()
         if fund_ratio_info is None:
-            fund_ratio_info = FundingRatio.query.filter_by(user_id=current_user.id)
+            fund_ratio_info = FundingRatio(user_id=current_user.id)
         fund_ratio_info.year = fund_ratio_form.year.data
         fund_ratio_info.annual_spend = fund_ratio_form.annual_spend.data
-        db.session.commit(fund_ratio_info)
-        db.session.commit(current_user)
+        db.session.add(fund_ratio_info)
+        db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
@@ -280,25 +280,24 @@ def edit_profile():
         public_eng_info.topic = public_eng_form.topic.data
         public_eng_info.target_area = public_eng_form.target_area.data
         public_eng_info.primary_attribution = public_eng_form.primary_attribution.data
-        db.session.commit(public_eng_info)
-        db.session.commit(current_user)
+        db.session.add(public_eng_info)
+        db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
 
     return render_template("edit_profile.html", title="Edit Profile", edu_form=edu_form, emp_form=emp_form,
                            prof_form=prof_form, img=svg, dist_form=dist_form, fund_form=fund_form,
-                           team_form=team_form, impact_form=impact_form, inov_form=inov_form, publi_form=publi_form,
+                           team_form=team_form, impact_form=impact_form, inov_form=inov_form, public_form=public_form,
                            pres_form=pres_form, ac_form=ac_form, non_ac_form=non_ac_form, conf_form=conf_form,
                            commun_form=commun_form, fund_ratio_form=fund_ratio_form, public_eng_form=public_eng_form)
 
 
 
 @app.route("/register", methods=["GET", "POST"])
-@login_required
 def register():
-    if not current_user.is_admin():
-        return redirect(url_for("index"))
+    #if not current_user.is_admin():
+        #return redirect(url_for("index"))
     #msg = Message("Thank you for registering",
     #              sender="jacobmckeon23@gmail.com",
     #              recipients=["jacobmckeon23@gmail.com"])
@@ -395,11 +394,11 @@ def workbench():
     presentations = current_user.presentations.all()
     presentations_length = len(presentations)
 
-    academiccollabs = current_user.academiccollabs.all()
-    academiccollabs_length = len(academiccollabs)
+    academic_collabs = current_user.academic_collabs.all()
+    academic_collabs_length = len(academic_collabs)
 
-    nonacademiccollabs = current_user.nonacademiccollabs.all()
-    nonacademiccollabs_length = len(nonacademiccollabs)
+    non_academic_collabs = current_user.non_academic_collabs.all()
+    non_academic_collabs_length = len(non_academic_collabs)
 
     conferences = current_user.conferences.all()
     conferences_length = len(conferences)
@@ -420,10 +419,10 @@ def workbench():
                            dist_info=distinctions_and_awards, dist_len=distinctions_and_awards_length,
                            fund_info=funding_diversification, fund_len=funding_diversification_length,
                            team_info=team_members, team_len=team_members_length, imp_info=impacts, imp_len=impacts_length,
-                           innov_info=innovations, innov_len=innovation_length, publ_info=publications,publ_len=publications_length, pres_info=presentations,
-                           pres_len=presentations_length, acad_info=academiccollabs, acad_len=academiccollabs_length, non_ac_info=nonacademiccollabs, non_ac_len=nonacademiccollabs_length,
-                           conf_info=conferences, confer_len=conferences_length, commu_info=communications, commu_len=communications_length,
-                           funding_ratio_info=funding_ratio, fundingrat_len=funding_ratio_length, public_eng_info=public_engagement, public_eng_len=public_engagement_length)
+                           innov_info=innovations, innov_len=innovation_length, publications_info=publications,publ_len=publications_length, pres_info=presentations,
+                           pres_len=presentations_length, ac_info=academic_collabs, acad_len=academic_collabs_length, non_ac_info=non_academic_collabs, non_ac_len=non_academic_collabs_length,
+                           conf_info=conferences, confer_len=conferences_length, commun_info=communications, commu_len=communications_length,
+                           funding_ratio_info=funding_ratio, funding_rat_len=funding_ratio_length, public_eng_info=public_engagement, public_eng_len=public_engagement_length)
 
 
 @app.route("/logout")
