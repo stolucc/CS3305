@@ -30,12 +30,12 @@ class User(db.Model, UserMixin):
     innovations = db.relationship("Innovation",backref="author", lazy="dynamic")
     publications = db.relationship("Publication", backref="author", lazy="dynamic")
     presentations = db.relationship("Presentation", backref="author", lazy="dynamic")
-    academiccollabs = db.relationship("Academic_Collabs", backref="author", lazy="dynamic")
-    nonacademiccollabs = db.relationship("Non_Academic_Collabs", backref="author",lazy="dynamic")
+    academiccollabs = db.relationship("AcademicCollabs", backref="author", lazy="dynamic")
+    nonacademiccollabs = db.relationship("NonAcademicCollabs", backref="author",lazy="dynamic")
     conferences = db.relationship("Conference", backref="author", lazy="dynamic")
     communications = db.relationship("Communications",backref="author",lazy="dynamic")
-    funding_ratio = db.relationship("FundingRation", backref="author",lazy="dynamic")
-    public_engagement = db.relationship("Public Engagement", backref="author",lazy="dynamic")
+    funding_ratio = db.relationship("FundingRatio", backref="author",lazy="dynamic")
+    public_engagement = db.relationship("PublicEngagement", backref="author",lazy="dynamic")
 
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow())
@@ -148,7 +148,7 @@ class Impacts(db.Model):
     primary_attribution = db.Column(db.String(40))
 
 
-class Innovation_Comm(db.Model):
+class Innovation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
@@ -157,7 +157,7 @@ class Innovation_Comm(db.Model):
     primary_attribution = db.Column(db.String(40))
 
 
-class Publications(db.Model):
+class Publication(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
@@ -180,7 +180,7 @@ class Presentation(db.Model):
     location = db.Column(db.String(30))
 
 
-class Academic_Collabs(db.Model):
+class AcademicCollabs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
@@ -194,7 +194,7 @@ class Academic_Collabs(db.Model):
     primary_attribution = db.Column(db.String(40))
 
 
-class Non_Academic_Collabs(db.Model):
+class NonAcademicCollabs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
@@ -208,7 +208,7 @@ class Non_Academic_Collabs(db.Model):
     primary_attribution = db.Column(db.String(40))
 
 
-class ConfWorksSems(db.Model):
+class Conference(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
@@ -220,7 +220,7 @@ class ConfWorksSems(db.Model):
     primary_attribution = db.Column(db.String(40))
 
 
-class Comms_Overview(db.Model):
+class Communications(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
@@ -229,14 +229,14 @@ class Comms_Overview(db.Model):
     num_of_interactions = db.Column(db.Integer)
 
 
-class SFI_Fund_Ratio(db.Model):
+class FundingRatio(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
     percentage = db.Column(db.Integer)
 
 
-class Education_Public_Engagement(db.Model):
+class PublicEngagement(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())

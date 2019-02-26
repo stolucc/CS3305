@@ -140,10 +140,11 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     elif inov_form.validate_on_submit():
-        user_innovations_info = Innovations.query.filter_by(user_id=current_user.id).first()
+        user_innovations_info = Innovation.query.filter_by(user_id=current_user.id).first()
         if user_innovations_info is None:
-            user_innovations_info = Innovations(user_id=current_user.id)
+            user_innovations_info = Innovation(user_id=current_user.id)
         user_innovations_info.year = inov_form.year.data
         user_innovations_info.innovation_type= inov_form.innovation_type.data
         user_innovations_info.title = inov_form.title.data
@@ -153,10 +154,11 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     elif publi_form.validate_on_submit():
-        publications_info = Publications.query.filter_by(user_id=current_user.id).first()
+        publications_info = Publication.query.filter_by(user_id=current_user.id).first()
         if publications_info is None:
-            publications_info = Publications(user_id=current_user.id)
+            publications_info = Publication(user_id=current_user.id)
         publications_info.year = publi_form.year.data
         publications_info.publication_type = publi_form.publication_type.data
         publications_info.title = publi_form.title.data
@@ -169,6 +171,7 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     elif pres_form.validate_on_submit():
         pres_info = Presentation.query.filter_by(user_id=current_user.id).first()
         if pres_info is None:
@@ -184,6 +187,7 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     elif ac_form.validate_on_submit():
         ac_info = AcademicCollabs.query.filter_by(user_id=current_user.id).first()
         if ac_info is None:
@@ -202,6 +206,7 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     elif non_ac_form.validate_on_submit():
         non_ac_info = NonAcademicCollabs.query.filter_by(user_id=current_user.id).first()
         if non_ac_info is None:
@@ -220,10 +225,11 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     elif conf_form.validate_on_submit():
-        conf_info = Conferences.query.filter_by(user_id=current_user.id).first()
+        conf_info = Conference.query.filter_by(user_id=current_user.id).first()
         if conf_info is None:
-            conf_info = Conferences(user_id=current_user.id)
+            conf_info = Conference(user_id=current_user.id)
         conf_info.start_date = conf_form.start_date.data
         conf_info.end_date = conf_form.end_date.data
         conf_info.title = conf_form.title.data
@@ -236,6 +242,7 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     elif commun_form.validate_on_submit():
         commun_info = Communications.query.filter_by(user_id=current_user.id).first()
         if commun_info is None:
@@ -249,6 +256,7 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     elif fund_ratio_form.validate_on_submit():
         fund_ratio_info = FundingRatio.query.filter_by(user_id=current_user.id).first()
         if fund_ratio_info is None:
@@ -260,10 +268,11 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     elif public_eng_form.validate_on_submit():
-        public_eng_info = PublicEngagements.query.filter_by(user_id=current_user.id).first()
+        public_eng_info = PublicEngagement.query.filter_by(user_id=current_user.id).first()
         if public_eng_info is None:
-            public_eng_info = PublicEngagements(user_id=current_user.id)
+            public_eng_info = PublicEngagement(user_id=current_user.id)
         public_eng_info.name = public_eng_form.name.data
         public_eng_info.start_date = public_eng_form.start_date.data
         public_eng_info.end_date = public_eng_form.end_date.data
@@ -276,9 +285,12 @@ def edit_profile():
         db.session.commit()
         flash("Your changes have been saved")
         return redirect(url_for("edit_profile"))
+
     return render_template("edit_profile.html", title="Edit Profile", edu_form=edu_form, emp_form=emp_form,
                            prof_form=prof_form, img=svg, dist_form=dist_form, fund_form=fund_form,
-                           team_form=team_form, impact_form=impact_form, inov_form=inov_form, publi_form=publi_form, pres_form=pres_form, ac_form=ac_form, non_ac_form=non_ac_form, conf_form=conf_form, commun_form=commun_form, fund_ratio_form=fund_ratio_form, public_eng_form=public_eng_form)
+                           team_form=team_form, impact_form=impact_form, inov_form=inov_form, publi_form=publi_form,
+                           pres_form=pres_form, ac_form=ac_form, non_ac_form=non_ac_form, conf_form=conf_form,
+                           commun_form=commun_form, fund_ratio_form=fund_ratio_form, public_eng_form=public_eng_form)
 
 
 
