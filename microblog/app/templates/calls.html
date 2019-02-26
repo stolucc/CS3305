@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Calls For Proposal</h1>
-<form action ="" method="post">
+<form action ="" method="post" id="calls">
 	{{ form.hidden_tag() }}
 	<p>
 		{{ form.deadline_type.label }}<br>
@@ -22,6 +22,22 @@
 </form>
 <ul>
 	<li class = "container">
+		<div class = "summary">
+			<h2>sample proposal</h2>
+			<p>
+				sample info....
+			</p>
+			<a href="application.html">Apply</a>
+		</div>
+		<div class = "details">
+			<p>
+				Deadline:<br />
+				Award Amount:<br />
+				Duration:<br />
+			</p>
+		</div>
+	</li>
+    <li class = "container">
 		<div class = "summary">
 			<h2>sample proposal</h2>
 			<p>
