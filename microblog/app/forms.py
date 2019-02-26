@@ -56,14 +56,14 @@ class EducationForm(FlaskForm):
     submit = SubmitField("Save")
 
 
-class Employment(FlaskForm):
+class EmploymentForm(FlaskForm):
     institution = StringField("Institution/Company", validators=[DataRequired()])
     location = StringField("Location", validators=[DataRequired()])
     years = StringField("Years", validators=[DataRequired()])
     submit = SubmitField("Save")
 
 
-class ProfessionalSocietiesForm(FlaskForm):
+class ProfessionalStudiesForm(FlaskForm):
     start_date = StringField("Start Date", validators=[DataRequired()])
     end_date = StringField("End Date", validators=[DataRequired()])
     society = StringField("Name of Society", validators=[DataRequired()])
@@ -72,7 +72,7 @@ class ProfessionalSocietiesForm(FlaskForm):
     submit = SubmitField("Save")
 
 
-class DistinctionsAwardsForm(FlaskForm):
+class DistinctionsAndAwardsForm(FlaskForm):
     year = StringField("Year", validators=[DataRequired()])
     awarding_body = StringField("Awarding Body", validators=[DataRequired()])
     award_details = StringField("Details of Award", validators=[DataRequired()])
@@ -80,7 +80,7 @@ class DistinctionsAwardsForm(FlaskForm):
     submit = SubmitField("Save")
 
 
-class FundingForm(FlaskForm):
+class FundingDiversificationForm(FlaskForm):
     start_date = StringField("Start Date", validators=[DataRequired()])
     end_date = StringField("End Date", validators=[DataRequired()])
     funding_amount = StringField("Amount of Funding", validators=[DataRequired()])
