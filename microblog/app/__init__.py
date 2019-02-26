@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, flash, request, redirect, url_for
 from config import Config
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -8,8 +8,13 @@ from flask_mail import Mail
 
 #Makes Python treat the directories as cotaining python packages
 
+UPLOAD_FOLDER = "/home/jack/PycharmProjects/CS3305/microblog/app/uploads"
+ALLOWED_EXTENSIONS = set(["pdf"])
+
 app = Flask(__name__)
 app.config.from_object(Config)
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
 db = SQLAlchemy(app)
 #mail = Mail(app)
 migrate = Migrate(app, db)

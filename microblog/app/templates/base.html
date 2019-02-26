@@ -25,6 +25,7 @@
                     <a href="{{ url_for('admin') }}">Admin</a>
                 {% endif %}
                 <a href="{{ url_for('workbench') }}">Workbench</a>
+                <a href="{{ url_for('upload_file') }}">Upload File</a>
                 <a href="{{  url_for('profile', username=current_user.username) }}">Profile</a>
                 <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
