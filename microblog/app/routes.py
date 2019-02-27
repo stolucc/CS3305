@@ -338,6 +338,10 @@ def makecall():
             reporting_guidelines=form.reporting_guidelines.data,
             start_date=form.start_date.data
         )
+        if form.start_date.data < datatime.datetime.now():
+            call_status="InActive"
+        else:
+            call_status="Active"    
         db.session.add(call)
         db.session.add(user)
         db.session.commit()
