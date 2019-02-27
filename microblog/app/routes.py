@@ -4,7 +4,7 @@ from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
-#from flask_mail import *
+# from flask_mail import *
 
 from app.models import *
 
@@ -17,7 +17,6 @@ svg = "/static/sfi-logo.svg"
 @app.route("/index")
 def index():
     return render_template("index.html", title="Home", img=svg)
-
 
 
 @app.route("/edit_profile", methods=["GET", "POST"])
@@ -146,7 +145,7 @@ def edit_profile():
         if user_innovations_info is None:
             user_innovations_info = Innovation(user_id=current_user.id)
         user_innovations_info.year = inov_form.year.data
-        user_innovations_info.innovation_type= inov_form.innovation_type.data
+        user_innovations_info.innovation_type = inov_form.innovation_type.data
         user_innovations_info.title = inov_form.title.data
         user_innovations_info.primary_attribution = inov_form.primary_attribution.data
         db.session.add(user_innovations_info)
@@ -293,12 +292,11 @@ def edit_profile():
                            commun_form=commun_form, fund_ratio_form=fund_ratio_form, public_eng_form=public_eng_form)
 
 
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    #if not current_user.is_admin():
-        #return redirect(url_for("index"))
-    #msg = Message("Thank you for registering",
+    # if not current_user.is_admin():
+    # return redirect(url_for("index"))
+    # msg = Message("Thank you for registering",
     #              sender="jacobmckeon23@gmail.com",
     #              recipients=["jacobmckeon23@gmail.com"])
     form = RegisterForm()
@@ -312,7 +310,7 @@ def register():
         if not form.validate_username(form.username):
             flash("Username not valid")
             return redirect(url_for("register"))
-        #mail.send(msg)
+        # mail.send(msg)
         user = User(username=form.username.data, email=form.email.data, access=1)
         user.set_password(form.password.data)
         db.session.add(user)
@@ -325,13 +323,39 @@ def register():
 @app.route("/makecall", methods=["GET", "POST"])
 @login_required
 def makecall():
-    user = User.query.filter_by(username=current_user.username).first_or_404()
-
-    if not user.is_admin():
-        flash("No Permission for this area")
-        return redirect(url_for("index"))
-
+    user = User.query.filter_by(id=current_user.id).first_or_404()
     form = CallsForProposalForm()
+    if form.validate_on_submit():
+        status = ""
+        currentdate = datetime.now()
+        startdate = str(form.start_date.data).replace("-", "")
+        int(startdate)
+        strdate = ""
+        strdate += str(currentdate.year)
+        strdate += str(currentdate.month)
+        strdate += str(currentdate.day)
+        if int(form.start_date.data.replace("-", "")) < int(strdate.replace("-", "")):
+            status = "Inactive"
+        else:
+            status = "Active"
+        call = Proposal(
+            user_id=user.id,
+            type_of_call=form.type_of_call.data,
+            deadline=form.deadline.data,
+            name=form.name.data,
+            text_of_call=form.text_of_call.data,
+            target_audience=form.target_audience.data,
+            eligibility_criteria=form.eligibility_criteria.data,
+            reporting_guidelines=form.reporting_guidelines.data,
+            start_date=form.start_date.data,
+            call_status=status
+        )
+
+        db.session.add(call)
+        db.session.add(user)
+        db.session.commit()
+        flash("Succesfully published call")
+        return redirect(url_for("index"))
 
     return render_template("makecall.html", form=form, img=svg, title="Make Call Proposal")
 
@@ -418,11 +442,16 @@ def workbench():
                            prof_info=professional_studies, prof_len=professional_studies_length,
                            dist_info=distinctions_and_awards, dist_len=distinctions_and_awards_length,
                            fund_info=funding_diversification, fund_len=funding_diversification_length,
-                           team_info=team_members, team_len=team_members_length, imp_info=impacts, imp_len=impacts_length,
-                           innov_info=innovations, innov_len=innovation_length, publications_info=publications,publ_len=publications_length, pres_info=presentations,
-                           pres_len=presentations_length, ac_info=academic_collabs, acad_len=academic_collabs_length, non_ac_info=non_academic_collabs, non_ac_len=non_academic_collabs_length,
-                           conf_info=conferences, confer_len=conferences_length, commun_info=communications, commu_len=communications_length,
-                           funding_ratio_info=funding_ratio, funding_rat_len=funding_ratio_length, public_eng_info=public_engagement, public_eng_len=public_engagement_length)
+                           team_info=team_members, team_len=team_members_length, imp_info=impacts,
+                           imp_len=impacts_length,
+                           innov_info=innovations, innov_len=innovation_length, publications_info=publications,
+                           publ_len=publications_length, pres_info=presentations,
+                           pres_len=presentations_length, ac_info=academic_collabs, acad_len=academic_collabs_length,
+                           non_ac_info=non_academic_collabs, non_ac_len=non_academic_collabs_length,
+                           conf_info=conferences, confer_len=conferences_length, commun_info=communications,
+                           commu_len=communications_length,
+                           funding_ratio_info=funding_ratio, funding_rat_len=funding_ratio_length,
+                           public_eng_info=public_engagement, public_eng_len=public_engagement_length)
 
 
 @app.route("/logout")
@@ -434,13 +463,15 @@ def logout():
 @app.route("/calls", methods=["GET", "POST"])
 def calls():
     form = CallsForProposalFilter()
-    return render_template("calls.html", title="Calls for Proposals", form=form, img=svg)
+    proposal_info = current_user.proposals.all()
+    return render_template("calls.html", title="Calls for Proposals", form=form, proposal_info=proposal_info, img=svg)
 
 
 @app.route("/admin")
 @login_required
 def admin():
     return render_template("admin.html", title="Admin", img=svg)
+
 
 @app.route("/review_proposal", methods=["GET", "POST"])
 @login_required
@@ -455,22 +486,22 @@ def review_proposal():
 
     return render_template("review_proposal.html", title="Proposal Application", form=form, img=svg)
 
+
 @app.route("/accepted")
 @login_required
 def accepted():
-
     return redirect(url_for("admin"))
+
 
 @app.route("/rejected")
 @login_required
 def rejected():
-
     return redirect(url_for("admin"))
+
 
 @app.route("/modify")
 @login_required
 def modify():
-
     return redirect(url_for("admin"))
 
 
