@@ -61,13 +61,13 @@ class Proposal(db.Model):
     name = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    deadline = db.Column(db.DateTime)
+    deadline = db.Column(db.String(20))
     text_of_call = db.Column(db.String(500))
     target_audience = db.Column(db.String(50))
     eligibility_criteria = db.Column(db.String(100))
     # award duration by calculating difference between start date and end date'
     reporting_guidelines = db.Column(db.String(150))
-    start_date = db.Column(db.DateTime)
+    start_date = db.Column(db.String(20))
     type_of_call = db.Column(db.String(40))
     call_status = db.Column(db.String(20))
 

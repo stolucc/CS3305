@@ -327,6 +327,18 @@ def makecall():
     flash("something")
     form = CallsForProposalForm()
     if form.validate_on_submit():
+        status = ""
+        currentdate = datetime.now()
+        startdate = str(form.start_date.data).replace("-", "")
+        int(startdate)
+        strdate=""
+        strdate += str(currentdate.year)
+        strdate += str(currentdate.month)
+        strdate += str(currentdate.day)
+        if int(form.start_date.data.replace("-", "")) < int(strdate.replace("-", "")):
+            status = "Inactive"
+        else:
+            status = "Active"
         call = Proposal(
             user_id=user.id,
             type_of_call=form.type_of_call.data,
@@ -336,12 +348,12 @@ def makecall():
             target_audience=form.target_audience.data,
             eligibility_criteria=form.eligibility_criteria.data,
             reporting_guidelines=form.reporting_guidelines.data,
-            start_date=form.start_date.data
+            start_date=form.start_date.data,
+            call_status=status
+
         )
-        if form.start_date.data < datatime.datetime.now():
-            call_status="InActive"
-        else:
-            call_status="Active"    
+
+        
         db.session.add(call)
         db.session.add(user)
         db.session.commit()

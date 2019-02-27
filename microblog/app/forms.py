@@ -230,7 +230,7 @@ class PublicEngagementForm(FlaskForm):
 
 class CallsForProposalFilter(FlaskForm):
     deadline_type = SelectField('Deadline',
-                                choices=[('open', 'Open'),
+                                choices=[('deadline', 'Deadline'), ('open', 'Open'),
                                          ('closed', 'Closed'), ('other', 'Other')])
     call_type = SelectField('Call Type',
                             choices=[('funding', 'Funding Oppurtunities'), ('conference', 'Conference/Workshop'),
@@ -247,7 +247,10 @@ class CallsForProposalFilter(FlaskForm):
 
 
 class CallsForProposalForm(FlaskForm):
-    type_of_call= SelectField('Call Type',
+    deadline = StringField("Deadline (YYYY-MM-DD)", validators=[DataRequired()])
+    name = StringField("Name of Call", validators=[DataRequired()])
+    text_of_call = StringField("Text of Call", validators=[DataRequired()])
+    type_of_call = SelectField('Call Type',
                             choices=[('funding', 'Funding Oppurtunities'), ('conference', 'Conference/Workshop'),
                                      ('early', 'Early/Mid Career Investigator Led'),
                                      ('education', 'Education and Public management'),
@@ -258,14 +261,11 @@ class CallsForProposalForm(FlaskForm):
                                      ('recruitment', 'Recruitment Only'),
                                      ('partnerships', 'SFI Partnerships'), ('centres', 'SFI Research Centres'),
                                      ('other', 'Other')])
-    deadline = StringField("Deadline",validators=[DataRequired()])
-    name=StringField("Call Name", validators=[DataRequired()])
-    text_of_call = StringField("Text of call", validators=[DataRequired()])
     target_audience = StringField("Target Audience", validators=[DataRequired()])
     eligibility_criteria = StringField("Eligibility Criteria", validators=[DataRequired()])
     # duration of award can be acquired through calculating difference between deadline and current date
     reporting_guidelines = StringField("Reporting Guidelines", validators = [DataRequired()])
-    start_date = StringField("Start Date", validators = [DataRequired()])
+    start_date = StringField("Start Date (YYYY-MM-DD)", validators=[DataRequired()])
     submit = SubmitField("Submit Proposal")
 
 class ApplicationForm(FlaskForm):
