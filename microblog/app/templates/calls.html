@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<main>
 <h1>Calls For Proposal</h1>
-<form action ="" method="post" id="calls">
+<form class="calls" action ="" method="post" id="calls">
 	{{ form.hidden_tag() }}
 	<p>
 		{{ form.deadline_type.label }}<br>
@@ -18,7 +19,7 @@
 		<span style="color: red;">[{{ error }}]</span>
 		{% endfor %}
 	</p>
-	<p>{{form.submit()}}</p>
+	<p class="submit">{{form.submit()}}</p>
 </form>
 <ul>
 	<li class = "container">
@@ -81,4 +82,5 @@
         <p>Target Audience: {{ entry.target_audience }}</p>
     {% endfor %}
 </ul>
+</main>
 {% endblock %}
