@@ -332,6 +332,12 @@ def makecall():
         return redirect(url_for("index"))
 
     form = CallsForProposalForm()
+    if form.validate_on_submit():
+        call = Proposal(name=form.name.data,deadline= form.deadline.data, type_of_call=form.type_of_call.data,text_of_call=form.text_of_call.data,
+        target_audience=form.target_audience.data,eligibility_criteria=form.eligibility_criteria.data,reporting_guidelines=form.reporting_guidelines.data,start_date=form.start_date.data)
+        db.session.add(call)
+        db.session.commit()
+        flash("Succesfully published call")
 
     return render_template("makecall.html", form=form, img=svg, title="Make Call Proposal")
 
