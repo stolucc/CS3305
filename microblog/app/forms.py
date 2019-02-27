@@ -247,14 +247,26 @@ class CallsForProposalFilter(FlaskForm):
 
 
 class CallsForProposalForm(FlaskForm):
-    deadline = DateField("Deadline", format("%Y-%m-%d"), default=date.today())
+    deadline = StringField("Deadline", validators=[DataRequired()])
+    type_of_call = SelectField("Type of Call",
+                            choices=[('funding', 'Funding Oppurtunities'), ('conference', 'Conference/Workshop'),
+                                     ('early', 'Early/Mid Career Investigator Led'),
+                                     ('education', 'Education and Public management'),
+                                     ('entrepreneur', 'Entrepreneurship'),
+                                     ('established', 'Established Investigator Led'),
+                                     ('european', 'European Oppurtunities'), ('industry', 'Industry Facing'),
+                                     ('infrastructure', 'Infrastructure'), ('policy', 'Policy'),
+                                     ('recruitment', 'Recruitment Only'),
+                                     ('partnerships', 'SFI Partnerships'), ('centres', 'SFI Research Centres'),
+                                     ('other', 'Other')], validators=[DataRequired()])
     text_of_call = StringField("Text of call", validators=[DataRequired()])
+    name = StringField("Name of Call", validators=[DataRequired()])
     target_audience = StringField("Target Audience", validators=[DataRequired()])
     eligibility_criteria = StringField("Eligibility Criteria", validators=[DataRequired()])
     # duration of award can be acquired through calculating difference between deadline and current date
     reporting_guidelines = StringField("Reporting Guidelines", validators = [DataRequired()])
-    start_date = DateField("Start Date", format("%Y-%m-%d"), default=date.today())
-    submit = SubmitField("Submit Proposal")
+    start_date = StringField("Start Date", default=date.today())
+    submit = SubmitField("Submit Proposal", validators=[DataRequired()])
 
 class ApplicationForm(FlaskForm):
     fname = StringField("Funding Name")

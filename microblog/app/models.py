@@ -62,6 +62,7 @@ class Proposal(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     deadline = db.Column(db.DATE)
+    type_of_call = db.Column(db.String(50))
     text_of_call = db.Column(db.String(500))
     target_audience = db.Column(db.String(50))
     eligibility_criteria = db.Column(db.String(100))
