@@ -230,7 +230,7 @@ class PublicEngagementForm(FlaskForm):
 
 class CallsForProposalFilter(FlaskForm):
     deadline_type = SelectField('Deadline',
-                                choices=[('deadline', 'Deadline'), ('open', 'Open'),
+                                choices=[('open', 'Open'),
                                          ('closed', 'Closed'), ('other', 'Other')])
     call_type = SelectField('Call Type',
                             choices=[('funding', 'Funding Oppurtunities'), ('conference', 'Conference/Workshop'),
