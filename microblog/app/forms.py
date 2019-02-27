@@ -27,11 +27,14 @@ class RegisterForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     confirmpass = PasswordField("Confirm_Password", validators=[DataRequired()])
     submit = SubmitField("Register")
-    def validate_password(self,password):
+
+    def validate_password(self, password):
         password = str(password)
-        if re.findall("[A-Z]", password) and re.findall("[a-z]",password) and re.findall("0-9", password) and len(password) > 8:
+        if re.findall("[A-Z]", password) and re.findall("[a-z]", password) and re.findall("0-9", password) and len(
+                password) > 8:
             return True
         return False
+
     def validate_passwordmatch(self, password, confirmpass):
         pass1 = password.data
         pass2 = confirmpass.data
@@ -247,26 +250,27 @@ class CallsForProposalFilter(FlaskForm):
 
 
 class CallsForProposalForm(FlaskForm):
-    deadline = StringField("Deadline (YYYY-MM-DD)", validators=[DataRequired()])
-    name = StringField("Name of Call", validators=[DataRequired()])
-    text_of_call = StringField("Text of Call", validators=[DataRequired()])
     type_of_call = SelectField('Call Type',
-                            choices=[('funding', 'Funding Oppurtunities'), ('conference', 'Conference/Workshop'),
-                                     ('early', 'Early/Mid Career Investigator Led'),
-                                     ('education', 'Education and Public management'),
-                                     ('entrepreneur', 'Entrepreneurship'),
-                                     ('established', 'Established Investigator Led'),
-                                     ('european', 'European Oppurtunities'), ('industry', 'Industry Facing'),
-                                     ('infrastructure', 'Infrastructure'), ('policy', 'Policy'),
-                                     ('recruitment', 'Recruitment Only'),
-                                     ('partnerships', 'SFI Partnerships'), ('centres', 'SFI Research Centres'),
-                                     ('other', 'Other')])
+                               choices=[('funding', 'Funding Oppurtunities'), ('conference', 'Conference/Workshop'),
+                                        ('early', 'Early/Mid Career Investigator Led'),
+                                        ('education', 'Education and Public management'),
+                                        ('entrepreneur', 'Entrepreneurship'),
+                                        ('established', 'Established Investigator Led'),
+                                        ('european', 'European Oppurtunities'), ('industry', 'Industry Facing'),
+                                        ('infrastructure', 'Infrastructure'), ('policy', 'Policy'),
+                                        ('recruitment', 'Recruitment Only'),
+                                        ('partnerships', 'SFI Partnerships'), ('centres', 'SFI Research Centres'),
+                                        ('other', 'Other')])
+    deadline = StringField("Deadline", validators=[DataRequired()])
+    name = StringField("Call Name", validators=[DataRequired()])
+    text_of_call = StringField("Text of call", validators=[DataRequired()])
     target_audience = StringField("Target Audience", validators=[DataRequired()])
     eligibility_criteria = StringField("Eligibility Criteria", validators=[DataRequired()])
     # duration of award can be acquired through calculating difference between deadline and current date
-    reporting_guidelines = StringField("Reporting Guidelines", validators = [DataRequired()])
-    start_date = StringField("Start Date (YYYY-MM-DD)", validators=[DataRequired()])
+    reporting_guidelines = StringField("Reporting Guidelines", validators=[DataRequired()])
+    start_date = StringField("Start Date", validators=[DataRequired()])
     submit = SubmitField("Submit Proposal")
+
 
 class ApplicationForm(FlaskForm):
     fname = StringField("Funding Name")

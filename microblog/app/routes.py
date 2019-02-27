@@ -324,14 +324,13 @@ def register():
 @login_required
 def makecall():
     user = User.query.filter_by(id=current_user.id).first_or_404()
-    flash("something")
     form = CallsForProposalForm()
     if form.validate_on_submit():
         status = ""
         currentdate = datetime.now()
         startdate = str(form.start_date.data).replace("-", "")
         int(startdate)
-        strdate=""
+        strdate = ""
         strdate += str(currentdate.year)
         strdate += str(currentdate.month)
         strdate += str(currentdate.day)
@@ -350,10 +349,8 @@ def makecall():
             reporting_guidelines=form.reporting_guidelines.data,
             start_date=form.start_date.data,
             call_status=status
-
         )
 
-        
         db.session.add(call)
         db.session.add(user)
         db.session.commit()
@@ -466,7 +463,8 @@ def logout():
 @app.route("/calls", methods=["GET", "POST"])
 def calls():
     form = CallsForProposalFilter()
-    return render_template("calls.html", title="Calls for Proposals", form=form, img=svg)
+    proposal_info = current_user.proposals.all()
+    return render_template("calls.html", title="Calls for Proposals", form=form, proposal_info=proposal_info, img=svg)
 
 
 @app.route("/admin")
