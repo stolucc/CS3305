@@ -1,93 +1,151 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> Workbench</h1>
-
+<main>
 <div class="workbench">
-    <ul>
-        <li><a href="">Application Pending Action: 0</a></li>
-        <li><a href="">Scientific Reports Pending Action: 0</a></li>
-        <li><a href="">Financial Reports Pending Action: 0</a></li>
-        <li>    <a href="">Budgets Pending Action: 0</a></li>
-        <li><a href="">Pre Award Applicant<br> Response Pending Action: 0</a></li>
-        <li><a href="">Other Items Pending Action: 0</a></li>
-    </ul>
-</div>
-<form action ="" method="post" id="calls">
-	{{ form.hidden_tag() }}
-	<p>
-		{{ form.deadline_type.label }}<br>
-		{{ form.deadline_type }}<br>
-		{% for error in form.deadline_type.errors %}
-		<span style="color: red;">[{{ error }}]</span>
-		{% endfor %}
-	</p>
-	<p>
-		{{ form.call_type.label }}<br>
-		{{ form.call_type }}<br>
-		{% for error in form.call_type.errors %}
-		<span style="color: red;">[{{ error }}]</span>
-		{% endfor %}
-	</p>
-	<p>{{form.submit()}}</p>
-</form>
-<ul>
-	<li class = "container">
-		<div class = "summary">
-			<h2>sample proposal</h2>
-			<p>
-				sample info....
-			</p>
-			<a href="application.html">Apply</a>
-		</div>
-		<div class = "details">
-			<p>
-				Deadline:<br />
-				Award Amount:<br />
-				Duration:<br />
-			</p>
-		</div>
-	</li>
-    <li class = "container">
-		<div class = "summary">
-			<h2>sample proposal</h2>
-			<p>
-				sample info....
-			</p>
-			<a href="application.html">Apply</a>
-		</div>
-		<div class = "details">
-			<p>
-				Deadline:<br />
-				Award Amount:<br />
-				Duration:<br />
-			</p>
-		</div>
-	</li>
-    {% for call in calls %}
-    <li class = "container">
-		<div class = "summary">
-			<h2>{{ call.heading }}</h2>
-			<p>
-				{{ call.info }}
-			</p>
-			<a href="application">Apply</a>
-		</div>
-		<div class = "details">
-			<p>
-				Deadline: {{ call.deadline }}<br />
-				Award Amount: {{ call.award }}<br />
-				Duration: {{ call.duration }}<br />
-			</p>
-		</div>
-	</li>
-	{% endfor %}
-</ul>
     <h1>Workbench</h1>
     <h2> User: {{ user.username }}</h2>
-    {% for info in education_info %}
-    <p>{{ info }}</p>
+    <h2>Education Info</h2>
+    {% for entry in edu_info %}
+        <p>{{ entry.degree }}</p>
+        <p>{{ entry.field_of_study }}</p>
+        <p>{{ entry.institution }}</p>
+        <p>{{ entry.location }}</p>
+        <p>{{ entry.year_of_degree }}</p>
     {%  endfor %}
-    <p>Education Info: ({{ edu_len }})</p>
+    <h2>Employment Info</h2>
+    {% for entry in emp_info %}
+        <p>{{ entry.institution }}</p>
+        <p>{{ entry.location }}</p>
+        <p>{{ entry.years }}</p>
+    {% endfor %}
+    <h2>Professional Studies</h2>
+    {% for entry in prof_info %}
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.society_name }}</p>
+        <p>{{ entry.member_type }}</p>
+        <p>{{ entry.status }}</p>
+    {% endfor %}
+    <h2>Distinctions and Awards</h2>
+    {% for entry in dist_info %}
+        <p>{{ entry.year }}</p>
+        <p>{{ entry.awarding_body }}</p>
+        <p>{{ entry.award_details }}</p>
+        <p>{{ entry.member_name }}</p>
+    {% endfor %}
+    <h2>Funding Diversification</h2>
+    {% for entry in fund_info %}
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.funding_amt }}</p>
+        <p>{{ entry.funding_body }}</p>
+        <p>{{ entry.funding_program }}</p>
+    {% endfor %}
+    <h2>Team Members</h2>
+    {% for entry in team_info %}
+        <p>{{ entry.name }}</p>
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.position_in_team }}</p>
+        <p>{{ entry.other_users }}</p>
+    {% endfor %}
+    <h2>Impacts</h2>
+    {% for entry in imp_info %}
+        <p>{{ entry.impact_title }}</p>
+        <p>{{ entry.impact_category }}</p>
+        <p>{{ entry.impact_beneficiary }}</p>
+        <p>{{ entry.impact_attribution }}</p>
+    {% endfor %}
+    <h2>Innovations</h2>
+    {% for entry in user_innov_info %}
+        <p>{{ entry.year }}</p>
+        <p>{{ entry.innovation_type }}</p>
+        <p>{{ entry.title }}</p>
+        <p>{{ entry.primary_attribution }}</p>
+    {% endfor %}
+    <h2>Publications</h2>
+    {% for entry in publications_info %}
+        <p>{{ entry.year }}</p>
+        <p>{{ entry.publications_type }}</p>
+        <p>{{ entry.title }}</p>
+        <p>{{ entry.journal_name }}</p>
+        <p>{{ entry.status}}</p>
+        <p>{{ entry.doi }}</p>
+        <p>{{ entry.primary_attribution }}</p>
+    {% endfor %}
+    <h2>Presentations</h2>
+    {% for entry in pres_info %}
+        <p>{{ entry.year }}</p>
+        <p>{{ entry.title }}</p>
+        <p>{{ entry.event_type }}</p>
+        <p>{{ entry.organising_body }}</p>
+        <p>{{ entry.location }}</p>
+        <p>{{ entry.primary_attribution }}</p>
+    {% endfor %}
+    <h2>AcademicCollaborations</h2>
+    {% for entry in ac_info %}
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.institution }}</p>
+        <p>{{ entry.department }}</p>
+        <p>{{ entry.location }}</p>
+        <p>{{ entry.collaborator }}</p>
+        <p>{{ entry.collaborator_goal }}</p>
+        <p>{{ entry.interaction_freq }}</p>
+        <p>{{ entry.primary_attribution }}</p>
+    {% endfor %}
+    <h2>NonAcademicCollaborations</h2>
+    {% for entry in non_ac_info %}
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.institution }}</p>
+        <p>{{ entry.department }}</p>
+        <p>{{ entry.location }}</p>
+        <p>{{ entry.collaborator }}</p>
+        <p>{{ entry.collaborator_goal }}</p>
+        <p>{{ entry.interaction_freq }}</p>
+        <p>{{ entry.primary_attribution }}</p>
+    {% endfor %}
+    <h2>Conferences</h2>
+    {% for entry in conf_info %}
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.title }}</p>
+        <p>{{ entry.event_type }}</p>
+        <p>{{ entry.role }}</p>
+        <p>{{ entry.location }}</p>
+        <p>{{ entry.primary_attribution }}</p>
+    {% endfor %}
+    <h2>Communications</h2>
+    {% for entry in commun_info %}
+        <p>{{ entry.year }}</p>
+        <p>{{ entry.number_lectures }}</p>
+        <p>{{ entry.number_visits }}</p>
+        <p>{{ entry.number_media }}</p>
+    {% endfor %}
+    <h2>FundingRatio</h2>
+    {% for entry in funding_ratio_info %}
+        <p>{{ entry.year }}</p>
+        <p>{{ entry.annual_spend }}</p>
+    {% endfor %}
+    <h2>PublicEngagements</h2>
+    {% for entry in public_eng_info %}
+        <p>{{ entry.name }}</p>
+        <p>{{ entry.start_date }}</p>
+        <p>{{ entry.end_date }}</p>
+        <p>{{ entry.activity_type }}</p>
+        <p>{{ entry.topic }}</p>
+        <p>{{ entry.target_area }}</p>
+        <p>{{ entry.primary_attribution }}</p>
+    {% endfor %}
 
+    <p><b>Education Info: ({{ edu_len }})</b></p>
+    <p><b>Employment Info: ({{ emp_len }})</b></p>
+    <p><b>Professional Studies Info: ({{ prof_len }})</b></p>
+    <p><b>Distinctions and Awards Info: ({{ dist_len }})</b></p>
+    <p><b>FundingDiversification Info: ({{ fund_len }})</b></p>
+    <p><b>Team Members Info: ({{ team_len }})</b></p>
+</div>
+</main>
 {% endblock %}

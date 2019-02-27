@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<main>
 <h1> Make Call for Proposal</h1>
 <form action ="" method="post">
     {{ form.hidden_tag() }}
@@ -13,7 +14,7 @@
     </p>
     <p>
         {{ form.text_of_call.label }}<br>
-        {{ form.text_of_call(size=100) }}<br>
+        {{ form.text_of_call(cols=50, rows=4) }}<br>
         {% for error in form.text_of_call.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
@@ -27,14 +28,14 @@
     </p>
     <p>
         {{ form.eligibility_criteria.label }} <br>
-        {{ form.eligibility_criteria(size=80) }}<br>
+        {{ form.eligibility_criteria(cols=50, rows=4) }}<br>
         {% for error in form.eligibility_criteria.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
     </p>
     <p>
         {{ form.reporting_guidelines.label }} <br>
-        {{ form.reporting_guidelines(size=80) }}<br>
+        {{ form.reporting_guidelines(cols=50, rows=2) }}<br>
         {% for error in form.reporting_guidelines.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
@@ -48,4 +49,5 @@
     </p>
     <p>{{form.submit()}}</p>
 </form>
+</main>
 {% endblock %}
