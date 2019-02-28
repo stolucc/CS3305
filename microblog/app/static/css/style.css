@@ -3,21 +3,19 @@
     display:inline;
 }
 nav {
-    display:inline;
+    background-color:#343A40;
     float:left;
     width:10%;
-    min-height: 60em;
+    height:100%;
+    overflow-x: hidden;
+    position: absolute;
 }
 
 .nav-item {
     text-align:center;
     border-bottom:.1em #e5e5e5 solid;
     padding: 1em 0em;
-}
-
-.nav-item:hover {
-   font-size: 1.2em;
-
+    color:white;
 }
 
 .nav-link {
@@ -32,9 +30,9 @@ main {
 }
 
 .banner {
-    height: 20em;
-    width: auto;
-    margin:10%;
+    height: 40em;
+    width: 90%;
+    margin-bottom:3em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -44,8 +42,7 @@ p, div, a {
     font-family: 'Nobile', Helvetica, Arial, sans-serif;
 }
 .calls p {
-    display:inline;
-    float:left;
+    display:inline-block;
     margin-left: 1em;
 }
 
@@ -81,3 +78,155 @@ select {
   input[type=text]:focus,input[type=password]:focus{
     border: 3px solid #555;
   }
+
+  .box {
+      min-width: 20em;
+      margin:10em 6em 0em 3em;
+      padding:0em;
+      display:inline-block;
+      text-decoration: none;
+      list-style: none;
+  }
+
+  .button {
+    min-width: 20em;
+    padding:4em 6em 4em 4em;
+    background-color:#00A79A;
+    color:white;
+    transition: all 0.5s;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .button:hover {
+      border:.5em #e5e5e5 solid;
+      font-size: 1em;
+  }
+ .admin-link, .admin-link:hover, .admin-link:active, .admin-link:visited  {
+      color:white;
+      text-decoration: none;
+  }
+
+  .material-icons {
+    font-size:2em;
+    float:right;
+    margin-right:5em;
+  }
+
+  .social {
+      float:right;
+      margin-left:80%;
+      position: fixed;
+      bottom: 0;
+      width: 50%;
+  }
+
+  .fa {
+    padding:1em;
+    font-size: 1.2em;
+    height:3em;
+    width: 3em;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+  
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+  .fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+  .fa-youtube {
+    background: #bb0000;
+    color: white;
+  }
+  
+  .fa-instagram {
+    background: #125688;
+    color: white;
+  }
+
+  .work-button {
+    margin:1em 1em 1em 0em;
+    min-width: 28em;
+    padding:4em 6em 4em 4em;
+    background-color:#00A79A;
+    color:white;
+    transition: all 0.5s;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .work-button:hover {
+      border:.5em #e5e5e5 solid;
+      font-size: 1em;
+  }
+
+  a,a:hover, a:focus, a:active {
+    text-decoration: none;
+    color:#e5e5e5;
+
+  }
+  a:hover {
+    font-weight: bold;
+  }
+
+  .edit {
+      color:#00A79A;
+  }
+
+  .edit:hover {
+      color:#00A79A;
+  }
+
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16 {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16:hover,
+.close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#myBtn1,#myBtn2,#myBtn3,#myBtn4,#myBtn5,#myBtn6,#myBtn7,#myBtn8,#myBtn9,#myBtn10,#myBtn11,#myBtn12,#myBtn13,#myBtn14,#myBtn15,#myBtn16 {
+background-color: #00A79A;
+color: white;
+display: inline;
+padding: 2em 2em;
+margin: 8px 0;
+border: none;
+cursor: pointer;
+width: 20%;
+    
+}
+#myBtn1:hover,#myBtn2:hover,#myBtn3:hover,#myBtn4:hover,#myBtn5:hover,#myBtn6:hover,#myBtn7:hover,#myBtn8:hover,#myBtn9:hover,#myBtn10:hover,#myBtn11:hover,#myBtn12:hover,#myBtn13:hover,#myBtn14:hover,#myBtn15:hover,#myBtn16:hover {
+  background-color: #e5e5e5;
+  color: #00A79A;
+}

@@ -27,11 +27,14 @@ class RegisterForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     confirmpass = PasswordField("Confirm_Password", validators=[DataRequired()])
     submit = SubmitField("Register")
-    def validate_password(self,password):
+
+    def validate_password(self, password):
         password = str(password)
-        if re.findall("[A-Z]", password) and re.findall("[a-z]",password) and re.findall("0-9", password) and len(password) > 8:
+        if re.findall("[A-Z]", password) and re.findall("[a-z]", password) and re.findall("0-9", password) and len(
+                password) > 8:
             return True
         return False
+
     def validate_passwordmatch(self, password, confirmpass):
         pass1 = password.data
         pass2 = confirmpass.data
@@ -54,55 +57,53 @@ class RegisterForm(FlaskForm):
 
 class EducationForm(FlaskForm):
     degree = StringField("Degree", validators=[DataRequired()])
-    field_of_study = PasswordField("Field of Study", validators=[DataRequired()])
+    field_of_study = StringField("Field of Study", validators=[DataRequired()])
     institution = StringField("Institution", validators=[DataRequired()])
     location = StringField("Location", validators=[DataRequired()])
     year_awarded = StringField("Year of Degree Awarded", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    submit = SubmitField("Save Education Info")
 
 
-class Employment(FlaskForm):
+class EmploymentForm(FlaskForm):
     institution = StringField("Institution/Company", validators=[DataRequired()])
     location = StringField("Location", validators=[DataRequired()])
     years = StringField("Years", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    submit = SubmitField("Save Employment Info")
 
 
-class ProfessionalSocietiesForm(FlaskForm):
+class ProfessionalStudiesForm(FlaskForm):
     start_date = StringField("Start Date", validators=[DataRequired()])
     end_date = StringField("End Date", validators=[DataRequired()])
     society = StringField("Name of Society", validators=[DataRequired()])
     membership = StringField("Type of Membership", validators=[DataRequired()])
     status = StringField("Status (e.g active)", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    submit = SubmitField("Save Professional Studies Info")
 
 
-class DistinctionsAwardsForm(FlaskForm):
+class DistinctionsAndAwardsForm(FlaskForm):
     year = StringField("Year", validators=[DataRequired()])
     awarding_body = StringField("Awarding Body", validators=[DataRequired()])
     award_details = StringField("Details of Award", validators=[DataRequired()])
     member_name = StringField("Team Member Name", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    submit = SubmitField("Save Distinctions And Awards Info")
 
 
-class FundingForm(FlaskForm):
+class FundingDiversificationForm(FlaskForm):
     start_date = StringField("Start Date", validators=[DataRequired()])
     end_date = StringField("End Date", validators=[DataRequired()])
     funding_amount = StringField("Amount of Funding", validators=[DataRequired()])
     funding_body = StringField("Funding Body", validators=[DataRequired()])
-    fudning_programme = StringField("Funding Programme", validators=[DataRequired()])
-    status = StringField("Status (e.g Active)", validators=[DataRequired()])
-    primary_attribution = StringField("Primary Attribution", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    funding_program = StringField("Funding Programme", validators=[DataRequired()])
+    submit = SubmitField("Save Funding Info")
 
 
 class TeamMembersForm(FlaskForm):
-    start_date = StringField("Start Date with Team", validators=[DataRequired()])
-    departure_date = StringField("Departure Date", validators=[DataRequired()])
     name = StringField("Name", validators=[DataRequired()])
     position_in_team = StringField("Position within the Team", validators=[DataRequired()])
-    primary_attribution = StringField("Primary Attribution", validators=[DataRequired()])
-    submit = SubmitField("Save")
+    start_date = StringField("Start Date with Team", validators=[DataRequired()])
+    departure_date = StringField("Departure Date", validators=[DataRequired()])
+    other_users = StringField("Other Users on Team", validators=[DataRequired()])
+    submit = SubmitField("Save Team Members Info")
 
 
 class ImpactsForm(FlaskForm):
@@ -249,24 +250,36 @@ class CallsForProposalFilter(FlaskForm):
 
 
 class CallsForProposalForm(FlaskForm):
-    deadline = DateField("Deadline", format("%Y-%m-%d"), default=date.today())
+    type_of_call = SelectField('Call Type',
+                               choices=[('funding', 'Funding Oppurtunities'), ('conference', 'Conference/Workshop'),
+                                        ('early', 'Early/Mid Career Investigator Led'),
+                                        ('education', 'Education and Public management'),
+                                        ('entrepreneur', 'Entrepreneurship'),
+                                        ('established', 'Established Investigator Led'),
+                                        ('european', 'European Oppurtunities'), ('industry', 'Industry Facing'),
+                                        ('infrastructure', 'Infrastructure'), ('policy', 'Policy'),
+                                        ('recruitment', 'Recruitment Only'),
+                                        ('partnerships', 'SFI Partnerships'), ('centres', 'SFI Research Centres'),
+                                        ('other', 'Other')])
+    deadline = StringField("Deadline", validators=[DataRequired()])
+    name = StringField("Call Name", validators=[DataRequired()])
     text_of_call = StringField("Text of call", validators=[DataRequired()])
     target_audience = StringField("Target Audience", validators=[DataRequired()])
     eligibility_criteria = StringField("Eligibility Criteria", validators=[DataRequired()])
     # duration of award can be acquired through calculating difference between deadline and current date
-    reporting_guidelines = StringField("Reporting Guidelines", validators = [DataRequired()])
-    start_date = DateField("Start Date", format("%Y-%m-%d"), default=date.today())
+    reporting_guidelines = StringField("Reporting Guidelines", validators=[DataRequired()])
+    start_date = StringField("Start Date", validators=[DataRequired()])
     submit = SubmitField("Submit Proposal")
 
+
 class ApplicationForm(FlaskForm):
-    fname = StringField("Funding Name", validators=[DataRequired()])
-    proposal = StringField("Title of Proposal", validators=[DataRequired()])
-    lead_name = StringField("Full Name of Lead Investigators", validators=[DataRequired()])
-    co_name = StringField("Full Name of Co-Investigator(s)", validators=[DataRequired()])
-    research = StringField("Research Body", validators=[DataRequired()])
-    co_commit = StringField("Percentage Co-Investigator Commitment", validators=[DataRequired()])
-    lead_commit = StringField("Percentage Lead Investigator Commitment", validators=[DataRequired()])
-    budget = StringField("Total Requested SFI Budget", validators=[DataRequired()])
-    start_date = StringField("Requested Starting Date", validators=[DataRequired()])
-    duration = StringField("Proposed Duration", validators=[DataRequired()])
-    submit = SubmitField("Apply")
+    fname = StringField("Funding Name")
+    proposal = StringField("Title of Proposal")
+    lead_name = StringField("Full Name of Lead Investigators")
+    co_name = StringField("Full Name of Co-Investigator(s)")
+    research = StringField("Research Body")
+    co_commit = StringField("Percentage Co-Investigator Commitment")
+    lead_commit = StringField("Percentage Lead Investigator Commitment")
+    budget = StringField("Total Requested SFI Budget")
+    start_date = StringField("Requested Starting Date")
+    duration = StringField("Proposed Duration")

@@ -26,6 +26,16 @@ class User(db.Model, UserMixin):
     distinctions_and_awards = db.relationship("DistinctionsAndAwards", backref="author", lazy="dynamic")
     funding_diversification = db.relationship("FundingDiversification", backref="author", lazy="dynamic")
     team_members = db.relationship("TeamMembers", backref="author", lazy="dynamic")
+    impacts = db.relationship("Impacts", backref="author", lazy="dynamic")
+    innovations = db.relationship("Innovation",backref="author", lazy="dynamic")
+    publications = db.relationship("Publication", backref="author", lazy="dynamic")
+    presentations = db.relationship("Presentation", backref="author", lazy="dynamic")
+    academic_collabs = db.relationship("AcademicCollabs", backref="author", lazy="dynamic")
+    non_academic_collabs = db.relationship("NonAcademicCollabs", backref="author",lazy="dynamic")
+    conferences = db.relationship("Conference", backref="author", lazy="dynamic")
+    communications = db.relationship("Communications",backref="author",lazy="dynamic")
+    funding_ratio = db.relationship("FundingRatio", backref="author",lazy="dynamic")
+    public_engagement = db.relationship("PublicEngagement", backref="author",lazy="dynamic")
 
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow())
@@ -51,13 +61,15 @@ class Proposal(db.Model):
     name = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    deadline = db.Column(db.DATE)
+    deadline = db.Column(db.String(20))
     text_of_call = db.Column(db.String(500))
     target_audience = db.Column(db.String(50))
     eligibility_criteria = db.Column(db.String(100))
     # award duration by calculating difference between start date and end date'
     reporting_guidelines = db.Column(db.String(150))
-    start_date = db.Column(db.DATE)
+    start_date = db.Column(db.String(20))
+    type_of_call = db.Column(db.String(40))
+    call_status = db.Column(db.String(20))
 
     def __repr__(self):
         return "<Proposal {}>".format(self.name)
@@ -76,7 +88,7 @@ class EducationInfo(db.Model):
     field_of_study = db.Column(db.String(120))
     institution = db.Column(db.String(120))
     location = db.Column(db.String(120))
-    year_of_degree = db.Column(db.Integer)
+    year_of_degree = db.Column(db.String(20))
 
     def __repr__(self):
         return "Degree: {}".format(self.degree)
@@ -87,14 +99,14 @@ class Employment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     institution = db.Column(db.String(60))
     location = db.Column(db.String(120))
-    years = db.Column(db.String(3))
+    years = db.Column(db.String(10))
 
 
 class ProfessionalStudies(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
-    start_date = db.Column(db.DATE())
-    end_date = db.Column(db.DATE())
+    start_date = db.Column(db.String(12))
+    end_date = db.Column(db.String(12))
     society_name = db.Column(db.String(40))
     member_type = db.Column(db.String(40))
     status = db.Column(db.String(10))
@@ -103,7 +115,7 @@ class ProfessionalStudies(db.Model):
 class DistinctionsAndAwards(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
-    year = db.Column(db.Integer)
+    year = db.Column(db.String(4))
     awarding_body = db.Column(db.String(60))
     award_details = db.Column(db.String(120))
     member_name = db.Column(db.String(40))
@@ -112,8 +124,8 @@ class DistinctionsAndAwards(db.Model):
 class FundingDiversification(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
-    start_date = db.Column(db.DATE())
-    end_date = db.Column(db.DATE())
+    start_date = db.Column(db.String(12))
+    end_date = db.Column(db.String(12))
     funding_amt = db.Column(db.Integer)
     funding_body = db.Column(db.String(60))
     funding_program = db.Column(db.String(60))
@@ -122,38 +134,39 @@ class FundingDiversification(db.Model):
 class TeamMembers(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40))
+    position_in_team = db.Column(db.String(120))
     other_users = db.Column(db.String(120))
-    start_date = db.Column(db.DATE())
-    end_date = db.Column(db.DATE())
-    names = db.Column(db.String(120))
+    start_date = db.Column(db.String(12))
+    end_date = db.Column(db.String(12))
 
 
 class Impacts(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
-    impact_title = db.Column(db.String(60))
-    impact_category = db.Column(db.String(40))
+    title = db.Column(db.String(60))
+    category = db.Column(db.String(40))
     primary_beneficiary = db.Column(db.String(40))
     primary_attribution = db.Column(db.String(40))
 
 
-class Innovation_Comm(db.Model):
+class Innovation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
-    type = db.Column(db.String(40))
+    innovation_type = db.Column(db.String(40))
     title = db.Column(db.String(60))
     primary_attribution = db.Column(db.String(40))
 
 
-class Publications(db.Model):
+class Publication(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
-    type = db.Column(db.String(40))
+    publication_type = db.Column(db.String(40))
     title = db.Column(db.String(60))
     primary_attribution = db.Column(db.String(40))
-    journal_conf_name = db.Column(db.String(50))
+    journal_name = db.Column(db.String(50))
     status = db.Column(db.String(20))
     doi = db.Column(db.String(50))
 
@@ -162,76 +175,76 @@ class Presentation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
-    type = db.Column(db.String(40))
+    event_type = db.Column(db.String(40))
     title = db.Column(db.String(60))
     primary_attribution = db.Column(db.String(40))
     organising_body = db.Column(db.String(40))
     location = db.Column(db.String(30))
 
 
-class Academic_Collabs(db.Model):
+class AcademicCollabs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
     end_date = db.Column(db.DATE())
-    name = db.Column(db.String(50))
+    institution = db.Column(db.String(50))
     department = db.Column(db.String(40))
     location = db.Column(db.String(30))
     collaborator = db.Column(db.String(40))
-    goal = db.Column(db.String(50))
+    collaborator_goal = db.Column(db.String(50))
     interaction_freq = db.Column(db.String(20))
     primary_attribution = db.Column(db.String(40))
 
 
-class Non_Academic_Collabs(db.Model):
+class NonAcademicCollabs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
     end_date = db.Column(db.DATE())
-    name = db.Column(db.String(50))
+    institution = db.Column(db.String(50))
     department = db.Column(db.String(40))
     location = db.Column(db.String(30))
     collaborator = db.Column(db.String(40))
-    goal = db.Column(db.String(50))
+    collaborator_goal = db.Column(db.String(50))
     interaction_freq = db.Column(db.String(20))
     primary_attribution = db.Column(db.String(40))
 
 
-class Conf_Works_Sems(db.Model):
+class Conference(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
     end_date = db.Column(db.DATE())
     title = db.Column(db.String(50))
-    type = db.Column(db.String(40))
+    event_type = db.Column(db.String(40))
     role = db.Column(db.String(40))
     location = db.Column(db.String(30))
     primary_attribution = db.Column(db.String(40))
 
 
-class Comms_Overview(db.Model):
+class Communications(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
-    num_of_lecs_demos = db.Column(db.Integer)
-    num_of_visits = db.Column(db.Integer)
-    num_of_interactions = db.Column(db.Integer)
+    number_lectures = db.Column(db.Integer)
+    number_visits = db.Column(db.Integer)
+    number_media = db.Column(db.Integer)
 
 
-class SFI_Fund_Ratio(db.Model):
+class FundingRatio(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
-    percentage = db.Column(db.Integer)
+    annual_spend = db.Column(db.String(50))
 
 
-class Education_Public_Engagement(db.Model):
+class PublicEngagement(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
     start_date = db.Column(db.DATE())
     end_date = db.Column(db.DATE())
     topic = db.Column(db.String(50))
-    type = db.Column(db.String(40))
+    activity_type = db.Column(db.String(40))
     target_area = db.Column(db.String(20))
     primary_attribution = db.Column(db.String(40))
 
