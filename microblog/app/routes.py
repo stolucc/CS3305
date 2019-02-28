@@ -505,7 +505,7 @@ def logout():
 @app.route("/calls", methods=["GET", "POST"])
 def calls():
     form = CallsForProposalFilter()
-    proposal_info = current_user.proposals.all()
+    proposal_info = Proposal.query.all()
     return render_template("calls.html", title="Calls for Proposals", form=form, proposal_info=proposal_info, img=svg)
 
 
@@ -539,7 +539,7 @@ def proposal_application(id):
         flash("You have successfully applied!")
         db.session.add(app_info)
         db.session.commit()
-        return redirect(url_for("Workbench"))
+        return redirect(url_for("workbench"))
     return render_template("application.html", title="Proposal Application", img=svg, proposal=proposal)
 
 
