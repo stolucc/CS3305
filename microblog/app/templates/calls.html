@@ -2,76 +2,6 @@
 
 {% block content %}
 <h1>Calls For Proposal</h1>
-<form action ="" method="post" id="calls">
-	{{ form.hidden_tag() }}
-	<p>
-		{{ form.deadline_type.label }}<br>
-		{{ form.deadline_type }}<br>
-		{% for error in form.deadline_type.errors %}
-		<span style="color: red;">[{{ error }}]</span>
-		{% endfor %}
-	</p>
-	<p>
-		{{ form.call_type.label }}<br>
-		{{ form.call_type }}<br>
-		{% for error in form.call_type.errors %}
-		<span style="color: red;">[{{ error }}]</span>
-		{% endfor %}
-	</p>
-	<p>{{form.submit()}}</p>
-</form>
-<ul>
-	<li class = "container">
-		<div class = "summary">
-			<h2>sample proposal</h2>
-			<p>
-				sample info....
-			</p>
-			<a href="application.html">Apply</a>
-		</div>
-		<div class = "details">
-			<p>
-				Deadline:<br />
-				Award Amount:<br />
-				Duration:<br />
-			</p>
-		</div>
-	</li>
-    <li class = "container">
-		<div class = "summary">
-			<h2>sample proposal</h2>
-			<p>
-				sample info....
-			</p>
-			<a href="application.html">Apply</a>
-		</div>
-		<div class = "details">
-			<p>
-				Deadline:<br />
-				Award Amount:<br />
-				Duration:<br />
-			</p>
-		</div>
-	</li>
-    {% for call in calls %}
-    <li class = "container">
-		<div class = "summary">
-			<h2>{{ call.heading }}</h2>
-			<p>
-				{{ call.info }}
-			</p>
-			<a href="application">Apply</a>
-		</div>
-		<div class = "details">
-			<p>
-				Deadline: {{ call.deadline }}<br />
-				Award Amount: {{ call.award }}<br />
-				Duration: {{ call.duration }}<br />
-			</p>
-		</div>
-	</li>
-    {% endfor %}
-</ul>
 <ul>
     <h2>Proposal Info</h2>
     {% for entry in proposal_info %}
@@ -79,6 +9,7 @@
         <p>Deadline: {{ entry.deadline }}</p>
         <p>Text of Call: {{ entry.text_of_call }}</p>
         <p>Target Audience: {{ entry.target_audience }}</p>
+        <a href="{{ url_for('proposal_application', id=entry.id) }}">Apply</a>
     {% endfor %}
 </ul>
 {% endblock %}

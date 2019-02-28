@@ -13,7 +13,7 @@ from app.models import *
 # Creates a URL route to each html page and connects them with their corresponding form from forms.py
 
 svg = "/static/sfi-logo.svg"
-UPLOAD_FOLDER = '/path/to/the/uploads'
+UPLOAD_FOLDER = '/home/jack/PycharmProjects/CS3305/microblog/app/uploads'
 ALLOWED_EXTENSIONS = set(['pdf'])
 
 
@@ -28,6 +28,7 @@ def allowed_file(filename):
 
 
 @app.route("/upload_file", methods=["GET", "POST"])
+@login_required
 def upload_file():
     if request.method == "POST":
         # check if the post request has the file part
@@ -334,8 +335,9 @@ def edit_profile():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    # if not current_user.is_admin():
-    # return redirect(url_for("index"))
+    if not current_user.is_admin():
+        flash("Admin area only")
+        return redirect(url_for("index"))
     # msg = Message("Thank you for registering",
     #              sender="jacobmckeon23@gmail.com",
     #              recipients=["jacobmckeon23@gmail.com"])
@@ -513,23 +515,46 @@ def admin():
     return render_template("admin.html", title="Admin", img=svg)
 
 
-@app.route("/review_proposal", methods=["GET", "POST"])
+@app.route("/proposal_application/<id>", methods=["GET", "POST"])
 @login_required
-def review_proposal():
+def proposal_application(id):
     user = User.query.filter_by(username=current_user.username).first_or_404()
+    proposal = Proposal.query.filter_by(id=id).first_or_404()
+    if request.method == "POST":
+        app_info = Application(user_id=current_user.id)
+        if "file" not in request.files:
+            flash("No file part")
+            return redirect(request.url)
+        file = request.files["file"]
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == "":
+            flash("No selected file")
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+        app_info.path_to_file = filename
+        app_info.proposal_id = proposal.id
+        flash("You have successfully applied!")
+        db.session.add(app_info)
+        db.session.commit()
+        return redirect(url_for("Workbench"))
+    return render_template("application.html", title="Proposal Application", img=svg, proposal=proposal)
 
-    if not user.is_admin():
-        flash("No Permission for this area")
+
+@app.route("/accepted/<id>")
+@login_required
+def accepted(id):
+    if not current_user.is_admin():
+        flash("Admin area only")
         return redirect(url_for("index"))
 
-    form = ApplicationForm()
+    application = Application.query.filter_by(id=id).first_or_404()
+    proposal = Proposal.query.filter_by(id=application.user_id).first_or_404()
 
-    return render_template("review_proposal.html", title="Proposal Application", form=form, img=svg)
 
 
-@app.route("/accepted")
-@login_required
-def accepted():
     return redirect(url_for("admin"))
 
 
@@ -544,6 +569,26 @@ def rejected():
 def modify():
     return redirect(url_for("admin"))
 
+@app.route("/review_reports")
+@login_required
+def review_reports():
+    if not current_user.is_admin():
+        flash("Admin area only")
+        return redirect(url_for("index"))
+    proposals = Proposal.query.filter_by(user_id=current_user.id)
+
+    return render_template("review_reports.html", proposals=proposals, svg=svg, title="Review Proposals")
+
+
+@app.route("/review_individual_apps/<id>")
+@login_required
+def review_individual_apps(id):
+    if not current_user.is_admin():
+        flash("Admin area only")
+        return redirect(url_for("index"))
+    proposal = Proposal.query.filter_by(id=id).first_or_404()
+    applications = proposal.applications.all()
+    return render_template("review_individual_apps.html", svg=svg, title="Review Individual Applications", applications=applications)
 
 # how to start venv: "source venv/bin/activate"
 

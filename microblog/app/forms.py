@@ -272,14 +272,3 @@ class CallsForProposalForm(FlaskForm):
     submit = SubmitField("Submit Proposal")
 
 
-class ApplicationForm(FlaskForm):
-    fname = StringField("Funding Name")
-    proposal = StringField("Title of Proposal")
-    lead_name = StringField("Full Name of Lead Investigators")
-    co_name = StringField("Full Name of Co-Investigator(s)")
-    research = StringField("Research Body")
-    co_commit = StringField("Percentage Co-Investigator Commitment")
-    lead_commit = StringField("Percentage Lead Investigator Commitment")
-    budget = StringField("Total Requested SFI Budget")
-    start_date = StringField("Requested Starting Date")
-    duration = StringField("Proposed Duration")
