@@ -183,3 +183,7 @@ select {
   a:hover {
     font-weight: bold;
   }
+
+  .edit {
+      color:#00A79A;
+  }
