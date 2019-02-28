@@ -3,10 +3,12 @@
     display:inline;
 }
 nav {
-    display:inline;
+    background-color:#343A40;
     float:left;
     width:10%;
-    min-height: 60em;
+    height:100%;
+    overflow-x: hidden;
+    position: absolute;
 }
 
 .nav-item {
@@ -14,12 +16,6 @@ nav {
     border-bottom:.1em #e5e5e5 solid;
     padding: 1em 0em;
     color:white;
-}
-
-.nav-item:hover {
-   animation-duration: 1s;
-   animation-name: slidein;
-
 }
 
 .nav-link {
@@ -179,11 +175,11 @@ select {
       font-size: 1em;
   }
 
-  @keyframes slidein {
-      from {
-          margin-left: 1em;
-      }
-      to {
-          margin-left:3em;
-      }
+  a,a:hover, a:focus, a:active {
+    text-decoration: none;
+    color:#e5e5e5;
+
+  }
+  a:hover {
+    font-weight: bold;
   }
