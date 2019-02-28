@@ -72,4 +72,13 @@
 	</li>
     {% endfor %}
 </ul>
+<ul>
+    <h2>Proposal Info</h2>
+    {% for entry in proposal_info %}
+        <p>Name: {{ entry.name }}</p>
+        <p>Deadline: {{ entry.deadline }}</p>
+        <p>Text of Call: {{ entry.text_of_call }}</p>
+        <p>Target Audience: {{ entry.target_audience }}</p>
+    {% endfor %}
+</ul>
 {% endblock %}
