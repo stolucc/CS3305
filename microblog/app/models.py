@@ -60,6 +60,7 @@ class Proposal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     applications = db.relationship("Application", backref="author", lazy="dynamic")
     name = db.Column(db.String(140))
+    activities = db.relationship("Activity", backref="author", lazy="dynamic")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     deadline = db.Column(db.String(20))
@@ -71,9 +72,16 @@ class Proposal(db.Model):
     start_date = db.Column(db.String(20))
     type_of_call = db.Column(db.String(40))
     call_status = db.Column(db.String(20))
+    application_status = db.Column(db.Boolean())
 
     def __repr__(self):
         return "<Proposal {}>".format(self.name)
+
+class Activity(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    proposal_id = db.Column(db.Integer, db.ForeignKey("proposal.id"))
+    activity_title = db.Column(db.String(100))
+    activity_body = db.Column(db.String(400))
 
 
 class Application(db.Model):

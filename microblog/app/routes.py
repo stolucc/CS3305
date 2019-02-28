@@ -3,10 +3,10 @@ from app import app, db
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from werkzeug.utils import  secure_filename
+from werkzeug.utils import secure_filename
 from datetime import datetime
 import os
-#from flask_mail import *
+# from flask_mail import *
 
 from app.models import *
 
@@ -24,7 +24,7 @@ def index():
 
 
 def allowed_file(filename):
-    return "." in filename and filename.rsplit(".",1)[1].lower() in ALLOWED_EXTENSIONS
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route("/upload_file", methods=["GET", "POST"])
@@ -54,6 +54,7 @@ def upload_file():
       <input type=submit value=Upload>
     </form>
     """
+
 
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
@@ -106,7 +107,7 @@ def edit_profile():
         db.session.add(current_user)
         db.session.commit()
         flash("Your changes have been saved.")
-        return redirect(url_for("index"))
+        return redirect(url_for("edit_profile"))
 
     elif prof_form.validate_on_submit():
         user_prof_info = ProfessionalStudies.query.filter_by(user_id=current_user.id).first()
@@ -390,7 +391,8 @@ def makecall():
             eligibility_criteria=form.eligibility_criteria.data,
             reporting_guidelines=form.reporting_guidelines.data,
             start_date=form.start_date.data,
-            call_status=status
+            call_status=status,
+            application_status=True
         )
 
         db.session.add(call)
@@ -424,7 +426,8 @@ def login():
 @login_required
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('profile.html', user=user, img=svg)
+    proposals = Proposal.query.filter_by(user_id=user.id)
+    return render_template('profile.html', user=user, img=svg, proposals=proposals)
 
 
 @app.route("/workbench")
@@ -505,7 +508,8 @@ def logout():
 @app.route("/calls", methods=["GET", "POST"])
 def calls():
     form = CallsForProposalFilter()
-    proposal_info = Proposal.query.all()
+    proposal_info = Proposal.query.filter_by(application_status=True)
+
     return render_template("calls.html", title="Calls for Proposals", form=form, proposal_info=proposal_info, img=svg)
 
 
@@ -551,10 +555,15 @@ def accepted(id):
         return redirect(url_for("index"))
 
     application = Application.query.filter_by(id=id).first_or_404()
-    proposal = Proposal.query.filter_by(id=application.user_id).first_or_404()
+    winning_applicant = User.query.filter_by(id=application.user_id).first_or_404()
+    proposal = Proposal.query.filter_by(id=application.proposal_id).first_or_404()
+    proposal.application_status = False
+    proposal.user_id = winning_applicant.id
 
+    db.session.add(proposal)
+    db.session.commit()
 
-
+    flash("Application has been accepted. Notifying applicant.")
     return redirect(url_for("admin"))
 
 
@@ -568,6 +577,7 @@ def rejected():
 @login_required
 def modify():
     return redirect(url_for("admin"))
+
 
 @app.route("/review_reports")
 @login_required
@@ -588,9 +598,37 @@ def review_individual_apps(id):
         return redirect(url_for("index"))
     proposal = Proposal.query.filter_by(id=id).first_or_404()
     applications = proposal.applications.all()
-    return render_template("review_individual_apps.html", svg=svg, title="Review Individual Applications", applications=applications)
+    return render_template("review_individual_apps.html", svg=svg, title="Review Individual Applications",
+                           applications=applications)
+
 
 # how to start venv: "source venv/bin/activate"
+
+@app.route("/add_activity/<proposal_id>", methods=["GET", "POST"])
+@login_required
+def add_activity(proposal_id):
+    proposal = Proposal.query.filter_by(id=proposal_id).first_or_404()
+    form = ActivityForm()
+    if form.validate_on_submit():
+        activity = Activity(proposal_id=proposal.id)
+        activity.activity_title = form.activity_title.data
+        activity.activity_body = form.activity_body.data
+        db.session.add(activity)
+        db.session.add(proposal)
+        db.session.commit()
+        flash("Activity Recorded")
+        return redirect(url_for("profile", username=current_user.username))
+
+    return render_template("add_activity.html", form=form)
+
+
+@app.route("/view_activities/<proposal_id>", methods=["GET", "POST"])
+@login_required
+def view_activities(proposal_id):
+    proposal = Proposal.query.filter_by(id=proposal_id).first_or_404()
+    activities = proposal.activities.all()
+
+    return render_template("view_activities.html", activities=activities)
 
 
 @app.before_request

@@ -64,6 +64,12 @@ class EducationForm(FlaskForm):
     submit = SubmitField("Save Education Info")
 
 
+class ActivityForm(FlaskForm):
+    activity_title = StringField("Activity Title", validators=[DataRequired()])
+    activity_body = StringField("Activity Body", validators=[DataRequired()])
+    submit = SubmitField("Save your activities")
+
+
 class EmploymentForm(FlaskForm):
     institution = StringField("Institution/Company", validators=[DataRequired()])
     location = StringField("Location", validators=[DataRequired()])

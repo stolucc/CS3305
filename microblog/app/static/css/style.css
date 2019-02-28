@@ -49,7 +49,6 @@ p, div, a {
 [type=submit] {
     background-color: #00A79A;
     border: none;
-    color: white;
     padding: 1em 2em;
     text-decoration: none;
     cursor: pointer;
@@ -151,6 +150,7 @@ select {
   
   .fa-youtube {
     background: #bb0000;
+    background: #bb0000;
     color: white;
   }
   
@@ -177,13 +177,9 @@ select {
 
   a,a:hover, a:focus, a:active {
     text-decoration: none;
-    color:#e5e5e5;
+    color: #6f6f6f;
 
   }
   a:hover {
     font-weight: bold;
-  }
-
-  .edit {
-      color:#00A79A;
   }

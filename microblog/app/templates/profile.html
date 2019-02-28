@@ -12,8 +12,14 @@
         </tr>
     </table>
     {%  if user == current_user %}
-    <a class="edit" href="{{  url_for('edit_profile') }}"><i class="material-icons">mode_edit</i></a>
-
+        <a class="edit" href="{{  url_for('edit_profile') }}"><i class="material-icons">edit profile</i></a>
+        <h2>Awarded Grants</h2>
+        {% for proposal in proposals %}
+            <p>Name: {{ proposal.name }}</p>
+            <p>Eligibility Criteria: {{ proposal.eligibility_criteria }}</p>
+            <p><a href="{{ url_for('add_activity', proposal_id=proposal.id) }}">Add Activity</a></p>
+            <p><a href="{{ url_for('view_activities', proposal_id=proposal.id) }}">View Activities</a></p>
+        {% endfor %}
     {% endif %}
 </main>
 {% endblock %}
