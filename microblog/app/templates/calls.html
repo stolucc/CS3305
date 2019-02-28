@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<main>
 <h1>Calls For Proposal</h1>
 <ul>
     <h2>Proposal Info</h2>
@@ -12,4 +13,5 @@
         <a href="{{ url_for('proposal_application', id=entry.id) }}">Apply</a>
     {% endfor %}
 </ul>
+</main>
 {% endblock %}
