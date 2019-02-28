@@ -277,4 +277,8 @@ class CallsForProposalForm(FlaskForm):
     start_date = StringField("Start Date", validators=[DataRequired()])
     submit = SubmitField("Submit Proposal")
 
+class UserSearchForm(FlaskForm):
+    search = StringField("Search for users")
+    submit = SubmitField("Search")
+
 

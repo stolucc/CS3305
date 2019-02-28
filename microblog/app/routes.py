@@ -519,6 +519,21 @@ def admin():
     return render_template("admin.html", title="Admin", img=svg)
 
 
+@app.route("/assign_admin", methods=["GET", "POST"])
+@login_required
+def assign_admin():
+    user = User.query.filter_by(username=current_user.username).first_or_404()
+
+    if not user.is_admin():
+        flash("No Permission for this area")
+        return redirect(url_for("index"))
+
+    form = UserSearchForm()
+
+    return render_template("assign_admin.html", title="Assign Admin", form=form, img=svg)
+
+
+
 @app.route("/proposal_application/<id>", methods=["GET", "POST"])
 @login_required
 def proposal_application(id):
