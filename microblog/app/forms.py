@@ -24,6 +24,11 @@ class EditProfileForm(FlaskForm):
 class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired(), Email()])
+    access = SelectField('Access Type',
+                         choices=[('researcher', 'Researcher'),
+                                  ('admin', 'Admin'),
+                                  ('host institution', 'Host Intitution'),
+                                  ('reviewer', 'Reviewer')])
     password = PasswordField("Password", validators=[DataRequired()])
     confirmpass = PasswordField("Confirm_Password", validators=[DataRequired()])
     submit = SubmitField("Register")
@@ -68,6 +73,14 @@ class ActivityForm(FlaskForm):
     activity_title = StringField("Activity Title", validators=[DataRequired()])
     activity_body = StringField("Activity Body", validators=[DataRequired()])
     submit = SubmitField("Save your activities")
+
+
+class AnnualReportForm(FlaskForm):
+    deviations = StringField("Deviations from original Research Plan", validators=[DataRequired()])
+    research_highlights = StringField("3 most important research highlights", validators=[DataRequired()])
+    challenges = StringField("Challenges you encountered", validators=[DataRequired()])
+    planned_activities = StringField("Planned activities for the coming year", validators=[DataRequired()])
+    submit = SubmitField("Save Annual Report")
 
 
 class EmploymentForm(FlaskForm):
@@ -277,8 +290,7 @@ class CallsForProposalForm(FlaskForm):
     start_date = StringField("Start Date", validators=[DataRequired()])
     submit = SubmitField("Submit Proposal")
 
+
 class UserSearchForm(FlaskForm):
     search = StringField("Search for users")
     submit = SubmitField("Search")
-
-

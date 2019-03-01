@@ -64,6 +64,9 @@ def uploaded_file(filename):
 @app.route("/edit_profile", methods=["GET", "POST"])
 @login_required
 def edit_profile():
+    if current_user.access == 2 or current_user.access == 3 or current_user.access == 4:
+        flash("This area is for researcher profile edits only")
+        return redirect(url_for("index"))
     edu_form = EducationForm()
     emp_form = EmploymentForm()
     prof_form = ProfessionalStudiesForm()
@@ -356,6 +359,7 @@ def register():
         # mail.send(msg)
         user = User(username=form.username.data, email=form.email.data, access=1)
         user.set_password(form.password.data)
+        user.set_access(form.access.data)
         db.session.add(user)
         db.session.commit()
         flash("Succesfully Registered")
@@ -366,6 +370,9 @@ def register():
 @app.route("/makecall", methods=["GET", "POST"])
 @login_required
 def makecall():
+    if not current_user.is_admin():
+        flash("Admin area only")
+        return redirect(url_for("index"))
     user = User.query.filter_by(id=current_user.id).first_or_404()
     form = CallsForProposalForm()
     if form.validate_on_submit():
@@ -426,13 +433,17 @@ def login():
 @login_required
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
+    access = user.get_access()
     proposals = Proposal.query.filter_by(user_id=user.id)
-    return render_template('profile.html', user=user, img=svg, proposals=proposals)
+    return render_template('profile.html', user=user, img=svg, proposals=proposals, access=access)
 
 
 @app.route("/workbench")
 @login_required
 def workbench():
+    if not current_user.access == 1:
+        flash("Area only for researchers")
+        return redirect(url_for("index"))
     education_info = current_user.education_info.all()
     education_length = len(education_info)
 
@@ -507,6 +518,7 @@ def logout():
 
 @app.route("/calls", methods=["GET", "POST"])
 def calls():
+
     form = CallsForProposalFilter()
     proposal_info = Proposal.query.filter_by(application_status=True)
 
@@ -516,6 +528,9 @@ def calls():
 @app.route("/admin")
 @login_required
 def admin():
+    if not current_user.is_admin():
+        flash("Admin area only")
+        return redirect(url_for("index"))
     return render_template("admin.html", title="Admin", img=svg)
 
 
@@ -537,6 +552,9 @@ def assign_admin():
 @app.route("/proposal_application/<id>", methods=["GET", "POST"])
 @login_required
 def proposal_application(id):
+    if not current_user.access == 1:
+        flash("Area only for researchers")
+        return redirect(url_for("index"))
     user = User.query.filter_by(username=current_user.username).first_or_404()
     proposal = Proposal.query.filter_by(id=id).first_or_404()
     if request.method == "POST":
@@ -585,24 +603,76 @@ def accepted(id):
 @app.route("/rejected")
 @login_required
 def rejected():
+    if not current_user.is_admin():
+        flash("Admin area only")
+        return redirect(url_for("index"))
     return redirect(url_for("admin"))
 
 
 @app.route("/modify")
 @login_required
 def modify():
+    if not current_user.is_admin():
+        flash("Admin area only")
+        return redirect(url_for("index"))
     return redirect(url_for("admin"))
 
 
 @app.route("/review_reports")
 @login_required
 def review_reports():
-    if not current_user.is_admin():
-        flash("Admin area only")
+    if not current_user.access == 2 and not current_user.access == 4:
+        flash("Reviewers area only")
         return redirect(url_for("index"))
     proposals = Proposal.query.filter_by(user_id=current_user.id)
 
     return render_template("review_reports.html", proposals=proposals, svg=svg, title="Review Proposals")
+
+
+@app.route("/annual_report_form/<proposal_id>", methods=["GET", "POST"])
+@login_required
+def annual_report_form(proposal_id):
+    if not current_user.access == 1:
+        flash("Researchers area only")
+        return redirect(url_for("index"))
+    form = AnnualReportForm()
+    proposal = Proposal.query.filter_by(id=proposal_id).first()
+
+    if form.validate_on_submit():
+        annual_report_check = AnnualReport.query.filter_by(proposal_id=proposal_id).first()
+        # if there is already a annual report submitted
+        if not annual_report_check is None:
+            flash("You have already submitted an Annual Report for the Grant: '%s'" % proposal.name)
+            return redirect(url_for("profile", username=current_user.username))
+        annual_report = AnnualReport(proposal_id=proposal_id)
+        annual_report.deviations = form.deviations.data
+        annual_report.research_highlights = form.research_highlights.data
+        annual_report.challenges = form.challenges.data
+        annual_report.planned_activities = form.planned_activities.data
+
+        db.session.add(annual_report)
+        db.session.commit()
+
+        flash("Added your Annual Report! Thank You!")
+        return redirect(url_for("index"))
+
+
+    return render_template("annual_report.html", form=form, proposal_id=proposal_id, svg=svg)
+
+
+@app.route("/account_application", methods=["GET", "POST"])
+@login_required
+def account_application():
+    if not current_user.access == 3:
+        flash("Host Institution area only")
+        return redirect(url_for("index"))
+
+    form = AccountApplicationForm()
+
+    if form.validate_on_submit():
+        None
+
+    return render_template("account_application.html", form=form, svg=svg)
 
 
 @app.route("/review_individual_apps/<id>")
@@ -622,6 +692,9 @@ def review_individual_apps(id):
 @app.route("/add_activity/<proposal_id>", methods=["GET", "POST"])
 @login_required
 def add_activity(proposal_id):
+    if not current_user.access == 1:
+        flash("Researchers area only")
+        return redirect(url_for("index"))
     proposal = Proposal.query.filter_by(id=proposal_id).first_or_404()
     form = ActivityForm()
     if form.validate_on_submit():
@@ -634,7 +707,7 @@ def add_activity(proposal_id):
         flash("Activity Recorded")
         return redirect(url_for("profile", username=current_user.username))
 
-    return render_template("add_activity.html", form=form)
+    return render_template("add_activity.html", form=form, svg=svg)
 
 
 @app.route("/view_activities/<proposal_id>", methods=["GET", "POST"])
@@ -643,11 +716,11 @@ def view_activities(proposal_id):
     proposal = Proposal.query.filter_by(id=proposal_id).first_or_404()
     activities = proposal.activities.all()
 
-    return render_template("view_activities.html", activities=activities)
+    return render_template("view_activities.html", activities=activities, svg=svg)
 
 
 @app.before_request
 def before_request():
     if current_user.is_authenticated:
-        current_user.last_seen = datetime.utcnow()
+        current_user.last_seen = datetime.utcnow().strftime("%B %d %Y")
         db.session.commit()

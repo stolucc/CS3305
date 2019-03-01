@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+<h1>Annual Report</h1>
+<form action ="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.deviations.label }}<br>
+        {{ form.deviations }}<br>
+        {% for error in form.deviations.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.research_highlights.label }}<br>
+        {{ form.research_highlights }}<br>
+        {% for error in form.research_highlights.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.challenges.label }}<br>
+        {{ form.challenges }}<br>
+        {% for error in form.challenges.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.planned_activities.label }}<br>
+        {{ form.planned_activities }}<br>
+        {% for error in form.planned_activities.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{form.submit()}}</p>
+</form>
+</main>
+{% endblock %}

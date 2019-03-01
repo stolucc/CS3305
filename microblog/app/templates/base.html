@@ -25,12 +25,15 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
                 {% else %}
                     {% if current_user.is_admin() %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('makecall') }}">Make Call for Proposal</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin') }}">Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('makecall') }}">Make Call for Proposal</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin') }}">Admin</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('review_reports') }}">Review Reports</a></li>
+                    {% elif current_user.access == 1 %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('workbench') }}">Workbench</a></li>
+                    {% elif current_user.access == 3 %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('account_application') }}">Apply for Account</a></li>
                     {% endif %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('workbench') }}">Workbench</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{  url_for('profile', username=current_user.username) }}">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
                 {% endif %}

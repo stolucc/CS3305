@@ -10,7 +10,11 @@
         <p>Deadline: {{ entry.deadline }}</p>
         <p>Text of Call: {{ entry.text_of_call }}</p>
         <p>Target Audience: {{ entry.target_audience }}</p>
-        <a href="{{ url_for('proposal_application', id=entry.id) }}">Apply</a>
+        {% if not current_user.is_anonymous %}
+            {% if current_user.access == 1 %}
+                <a href="{{ url_for('proposal_application', id=entry.id) }}">Apply</a>
+            {% endif %}
+        {% endif %}
     {% endfor %}
 </ul>
 </main>
