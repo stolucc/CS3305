@@ -4,14 +4,15 @@
 <main>
 <div class="workbench">
     <h1>Workbench</h1>
-    <h2>{{ user.username }}</h2>
-
-    <p>Education Info: ({{ edu_len }})</p>
-    <p>Employment Info: ({{ emp_len }})</p>
-    <p>Professional Studies Info: ({{ prof_len }})</p>
-    <p>Distinctions and Awards Info: ({{ dist_len }})</p>
-    <p>FundingDiversification Info: ({{ fund_len }})</p>
-    <p>Team Members Info: ({{ team_len }})</p>
+    <h2> User: {{ user.username }}</h2>
+    <div class="box">
+    <button class="work-button"><b>Education Info: ({{ edu_len }})</b></button>
+    <button class="work-button"><b>Employment Info: ({{ emp_len }})</b></button>
+    <button class="work-button"><b>Professional Studies Info: ({{ prof_len }})</b></button>
+    <button class="work-button"><b>Distinctions and Awards Info: ({{ dist_len }})</b></button>
+    <button class="work-button"><b>FundingDiversification Info: ({{ fund_len }})</b></button>
+    <button class="work-button"><b>Team Members Info: ({{ team_len }})</b></button>
+</div>
 </div>
 </main>
 {% endblock %}

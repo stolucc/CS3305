@@ -1,11 +1,14 @@
 <html>
     <head>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
       <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <script src="{{  url_for('static', filename='js/myscripts.js') }}"></script>
         {% if title %}
         <title>{{ title }} - Sesame</title>
         {% else %}
@@ -17,7 +20,6 @@
         <div class="logo">
             <a href="{{ url_for('index') }}"><img src="{{ img }}"></a>
         </div>
-        <div class="nav">
         <nav class="navbar">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
@@ -26,22 +28,16 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
                 {% else %}
                     {% if current_user.is_admin() %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('makecall') }}">Make Call for Proposal</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin') }}">Admin</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('review_reports') }}">Review Reports</a></li>
-                    {% elif current_user.access == 1 %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('workbench') }}">Workbench</a></li>
-                    {% elif current_user.access == 3 %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('account_application') }}">Apply for Account</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('makecall') }}">Make Call for Proposal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin') }}">Admin</a></li>
                     {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('workbench') }}">Workbench</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{  url_for('profile', username=current_user.username) }}">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
                 {% endif %}
             </ul>
         </nav>
-        </div>
-        <div class="flash">
             <hr>
             {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -52,7 +48,13 @@
             </ul>
             {% endif %}
             {% endwith %}
-            </div>
             {% block content %}{% endblock %}
+                    <div class="social">
+                            <a href="https://www.facebook.com/ScienceFoundationIreland/" target="_blank" class="fa fa-facebook"></a>
+                            <a href="https://twitter.com/scienceirel" target="_blank" class="fa fa-twitter"></a>
+                            <a href="https://www.linkedin.com/company/science-foundation-ireland" target="_blank" class="fa fa-linkedin"></a>
+                            <a href="https://www.youtube.com/ScienceFoundationIreland" target="_blank" class="fa fa-youtube"></a>
+                            <a href="https://www.instagram.com/scienceireland/" target="_blank" class="fa fa-instagram"></a>
+                    </div>
     </body>
 </html>
