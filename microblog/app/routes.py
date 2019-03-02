@@ -342,9 +342,6 @@ def register():
     if not current_user.is_admin():
         flash("Admin area only")
         return redirect(url_for("index"))
-    # msg = Message("Thank you for registering",
-    #              sender="jacobmckeon23@gmail.com",
-    #              recipients=["jacobmckeon23@gmail.com"])
     form = RegisterForm()
     if form.validate_on_submit():
         if not form.validate_email(form.email):
@@ -356,14 +353,14 @@ def register():
         if not form.validate_username(form.username):
             flash("Username not valid")
             return redirect(url_for("register"))
-        msg = Message("Hello", sender = 'group8cs3305@gmail.com', recipients = ['jacobmckeon23@gmail.com'])
-        msg.body = "Hello"    
-        mail.send(msg)
         user = User(username=form.username.data, email=form.email.data, access=1)
         user.set_password(form.password.data)
         user.set_access(form.access.data)
         db.session.add(user)
         db.session.commit()
+        msg = Message("Registration", sender = 'group8cs3305@gmail.com', recipients = [user.email])
+        msg.body = "Thank you for registering an account with us. Please take the time to update your profile."
+        mail.send(msg)
         flash("Succesfully Registered")
         return redirect(url_for("index"))
     return render_template("register.html", title="Register", form=form, img=svg)

@@ -4,7 +4,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import mimetypes
-from flask_mail import Mail
+from flask_mail_sendgrid import MailSendGrid
 
 #Makes Python treat the directories as cotaining python packages
 
@@ -15,17 +15,10 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
+app.config['MAIL_SENDGRID_API_KEY'] = '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'
+mail = MailSendGrid(app)
 db = SQLAlchemy(app)
 
-
-app.config['MAIL_SERVER'] = 'smtpgmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'group8cs3305@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Cat1234567'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
-migrate = Migrate(app, db, mail)
 login = LoginManager(app)
 login.login_view = "login"
 
