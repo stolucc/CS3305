@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+<main>
 <h2>Applications</h2>
 {% for app in applications %}
     <p><a href="/uploads/{{ app.path_to_file }}">{{ app.path_to_file }}</a></p>
     <a href="{{ url_for('accepted', id=app.id) }}">Accept</a>
-    <a>Reject</a>
+    <a href="{{ url_for('rejected', id=app.id) }}">Reject</a>
+    <a href="{{ url_for('modify', id=app.id) }}">Request Modification</a>
 {% endfor %}
-
+</main>
 {% endblock %}

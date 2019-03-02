@@ -532,6 +532,14 @@ def admin():
         return redirect(url_for("index"))
     return render_template("admin.html", title="Admin", img=svg)
 
+@app.route("/reviewer")
+@login_required
+def reviewer():
+    if not current_user.access == 4:
+        flash("Reviewer area only")
+        return redirect(url_for("index"))
+    return render_template("reviewer.html", title="Reviewer", img=svg)
+
 
 @app.route("/assign_admin", methods=["GET", "POST"])
 @login_required
@@ -570,7 +578,7 @@ def proposal_application(id):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        app_info.path_to_file = filename
+        app_info.path_to_file = file.filename
         app_info.proposal_id = proposal.id
         flash("You have successfully applied!")
         db.session.add(app_info)
@@ -582,8 +590,8 @@ def proposal_application(id):
 @app.route("/accepted/<id>")
 @login_required
 def accepted(id):
-    if not current_user.is_admin():
-        flash("Admin area only")
+    if not current_user.access == 2 and not current_user.access == 4:
+        flash("Reviewer area only")
         return redirect(url_for("index"))
 
     application = Application.query.filter_by(id=id).first_or_404()
@@ -595,26 +603,46 @@ def accepted(id):
     db.session.add(proposal)
     db.session.commit()
 
+    msg = Message("Application", sender='group8cs3305@gmail.com', recipients=[winning_applicant.email])
+    msg.body = "Thank you for applying. Your application has been accepted."
+    mail.send(msg)
+
     flash("Application has been accepted. Notifying applicant.")
-    return redirect(url_for("admin"))
+    return redirect(url_for("review_applications"))
 
 
-@app.route("/rejected")
+@app.route("/rejected/<id>")
 @login_required
-def rejected():
-    if not current_user.is_admin():
-        flash("Admin area only")
+def rejected(id):
+    if not current_user.access == 2 and not current_user.access == 4:
+        flash("Reviewer area only")
         return redirect(url_for("index"))
-    return redirect(url_for("admin"))
+    application = Application.query.filter_by(id=id).first_or_404()
+    applicant = User.query.filter_by(id=application.user_id).first_or_404()
+
+    msg = Message("Application", sender='group8cs3305@gmail.com', recipients=[applicant.email])
+    msg.body = "Thank you for applying. Unfortunately your application has been rejected."
+    mail.send(msg)
+
+    flash("Application has been rejected. Notifying applicant.")
+    return redirect(url_for("review_applications"))
 
 
-@app.route("/modify")
+@app.route("/modify/<id>")
 @login_required
-def modify():
-    if not current_user.is_admin():
-        flash("Admin area only")
+def modify(id):
+    if not current_user.access == 2 and not current_user.access == 4:
+        flash("Reviewer area only")
         return redirect(url_for("index"))
-    return redirect(url_for("admin"))
+    application = Application.query.filter_by(id=id).first_or_404()
+    applicant = User.query.filter_by(id=application.user_id).first_or_404()
+
+    msg = Message("Application", sender='group8cs3305@gmail.com', recipients=[applicant.email])
+    msg.body = "Thank you for applying. We are interested in your application but require some modification to it."
+    mail.send(msg)
+
+    flash("Application requires modification. Notifying applicant.")
+    return redirect(url_for("review_applications"))
 
 
 @app.route("/review_reports")
@@ -623,9 +651,9 @@ def review_reports():
     if not current_user.access == 2 and not current_user.access == 4:
         flash("Reviewers area only")
         return redirect(url_for("index"))
-    proposals = Proposal.query.filter_by(user_id=current_user.id)
+    proposals = Proposal.query.filter_by(application_status=False)
 
-    return render_template("review_reports.html", proposals=proposals, svg=svg, title="Review Proposals")
+    return render_template("review_reports.html", proposals=proposals, svg=svg, title="Review Reports")
 
 
 @app.route("/annual_report_form/<proposal_id>", methods=["GET", "POST"])
@@ -673,17 +701,36 @@ def account_application():
 
     return render_template("account_application.html", form=form, svg=svg)
 
+@app.route("/review_individual_reports/<id>")
+@login_required
+def review_individual_reports(id):
+    if not current_user.access == 2 and not current_user.access == 4:
+        flash("Reviewers area only")
+        return redirect(url_for("index"))
+    annual_report = AnnualReport(proposal_id=id)
+    return render_template("review_individual_reports.html", svg=svg, title="Review Individual Reports",
+                           annual_report=annual_report)
 
 @app.route("/review_individual_apps/<id>")
 @login_required
 def review_individual_apps(id):
-    if not current_user.is_admin():
-        flash("Admin area only")
+    if not current_user.access == 2 and not current_user.access == 4:
+        flash("Reviewers area only")
         return redirect(url_for("index"))
     proposal = Proposal.query.filter_by(id=id).first_or_404()
     applications = proposal.applications.all()
     return render_template("review_individual_apps.html", svg=svg, title="Review Individual Applications",
                            applications=applications)
+
+@app.route("/review_applications")
+@login_required
+def review_applications():
+    if not current_user.access == 2 and not current_user.access == 4:
+        flash("Reviewers area only")
+        return redirect(url_for("index"))
+    proposals = Proposal.query.filter_by(application_status=True)
+    return render_template("review_applications.html", svg=svg, title="Proposals",
+                           proposals=proposals)
 
 
 # how to start venv: "source venv/bin/activate"
