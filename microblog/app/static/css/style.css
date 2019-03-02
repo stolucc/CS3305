@@ -1,14 +1,19 @@
 .logo {
-   margin-left:40%;
-    display:inline;
+   margin-left:50%;
+    display:inline-block;
 }
-nav {
+
+.nav {
     background-color:#343A40;
     float:left;
     width:10%;
     height:100%;
-    overflow-x: hidden;
-    position: absolute;
+    position: fixed;
+    top:0;
+}
+nav {
+    width:100%;
+    float:left;
 }
 
 .nav-item {
@@ -26,7 +31,7 @@ nav {
 
 main {
     display:block;
-    padding-left:20em;
+    margin-left:20%;
 }
 
 .banner {
@@ -37,6 +42,10 @@ main {
 
 h1, h2, h3, h4, h5, h6 {
     font-family:Georgia, Times, serif;
+}
+
+h1 {
+    border-bottom: .1em solid #00A79A;
 }
 p, div, a {
     font-family: 'Nobile', Helvetica, Arial, sans-serif;
@@ -97,11 +106,17 @@ select {
     cursor: pointer;
   }
 
+  .button a {
+      color:white;
+  }
+
   .button:hover {
       border:.5em #e5e5e5 solid;
-      font-size: 1em;
+      color:white;
+      font-weight: bold;
+      
   }
- .admin-link, .admin-link:hover, .admin-link:active, .admin-link:visited  {
+ .nav-link, .nav-link:hover, .nav-link:active, .nav-link:visited  {
       color:white;
       text-decoration: none;
   }
@@ -172,14 +187,18 @@ select {
 
   .work-button:hover {
       border:.5em #e5e5e5 solid;
-      font-size: 1em;
+      font-weight: bold;
   }
 
   a,a:hover, a:focus, a:active {
     text-decoration: none;
-    color: #6f6f6f;
 
   }
   a:hover {
     font-weight: bold;
+  }
+
+  .flash {
+      padding-left:20%;
+      width:100%;
   }
