@@ -600,12 +600,19 @@ def accepted(id):
     return redirect(url_for("admin"))
 
 
-@app.route("/rejected")
+@app.route("/rejected/<id>")
 @login_required
-def rejected():
+def rejected(id):
     if not current_user.is_admin():
         flash("Admin area only")
         return redirect(url_for("index"))
+
+    application = Application.query.filter_by(id=id).first_or_404()
+    rejected_applicant = User.query.filter_by(id=application.user_id).first_or_404()
+    db.session.delete(application)
+    db.commit()
+
+    flash("Application has been rejected. Notfying applicant.")
     return redirect(url_for("admin"))
 
 

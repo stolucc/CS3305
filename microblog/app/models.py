@@ -272,8 +272,8 @@ class FundingRatio(db.Model):
 class PublicEngagement(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     id = db.Column(db.Integer, primary_key=True)
-    start_date = db.Column(db.DATE())
-    end_date = db.Column(db.DATE())
+    start_date = db.Column(db.String(20))
+    end_date = db.Column(db.String(20))
     topic = db.Column(db.String(50))
     activity_type = db.Column(db.String(40))
     target_area = db.Column(db.String(20))
