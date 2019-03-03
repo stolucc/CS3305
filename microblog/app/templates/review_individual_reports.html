@@ -2,10 +2,10 @@
 
 {% block content %}
 <main>
-<h2>Report</h2>
-<p>Deviations from original Research Plan: {{ annual_report.deviations }}</p>
-<p>3 most important research highlights: {{ annual_report.research_highlights }}</p>
-<p>Challenges you encountered: {{ annual_report.challenges }}</p>
-<p>Planned activities for the coming year: {{ annual_report.planned_activities }}</p>
+<h1>Report</h1>
+<h3>Deviations from original Research Plan:</h3><p> {{ annual_report.deviations }}</p>
+<h3>3 most important research highlights:</h3><p> {{ annual_report.research_highlights }}</p>
+<h3>Challenges you encountered:</h3><p> {{ annual_report.challenges }}</p>
+<h3>Planned activities for the coming year:</h3><p> {{ annual_report.planned_activities }}</p>
 </main>
 {% endblock %}
