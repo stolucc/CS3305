@@ -89,7 +89,7 @@ select {
 
   .box {
       min-width: 20em;
-      margin:10em 5em 0em 3em;
+      margin:10em 5em 0em 0em;
       padding:0em;
       display:inline-block;
       text-decoration: none;
@@ -111,8 +111,8 @@ select {
   }
 
   .button:hover {
-      border:.5em #e5e5e5 solid;
-      color:white;
+    background-color: #e5e5e5;
+    color: #00A79A;
       font-weight: bold;
       
   }
@@ -192,7 +192,8 @@ select {
   }
 
   .work-button:hover {
-      border:.5em #e5e5e5 solid;
+    background-color: #e5e5e5;
+    color: #00A79A;
       font-weight: bold;
   }
 
@@ -258,14 +259,19 @@ select {
     text-align: center;
   }
 
-
+  #myModal1,#myModal2,#myModal3,#myModal4,#myModal5,#myModal6,#myModal7,#myModal8,#myModal9,#myModal10,#myModal11,#myModal12,#myModal13,#myModal14,#myModal15,#myModal16 {
+    overflow:scroll;
+  }
+ 
   .modal-content {
-    margin:10% 0% 0% 20%;
+    margin:5% 0% 0% 20%;
     min-width: 60%;
     max-width: 60%;
     background-color: #e5e5e5;
     padding: 20px;
     border: 1px solid #888;
+    position: absolute;
+    overflow: auto !important;
   }
   
   .close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16 {
@@ -297,3 +303,35 @@ select {
     background-color: #e5e5e5;
     color: #00A79A;
   }
+
+  .reviews {
+    border:.1em #e5e5e5 solid;
+    border-radius:.5em;
+    width:30%;
+    height:20%;
+    margin:2em 5em 2em 4em;
+    display:inline-block;
+  }
+
+  .reviews h3 {
+    text-align:center;
+  }
+
+  .review-content {
+    margin-top:23%;
+  }
+
+  .review-content a{
+    color:white;
+  }
+
+  .review-content button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+  }
+

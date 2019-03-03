@@ -149,79 +149,101 @@ span2.onclick = function() {
   }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal1) {
-    modal1.style.display = "none";
+
+window.addEventListener('click', function(event){
+  if (event.target == myModal1) {
+    myModal1.style.display = "none";
   }
-}
-window.onclick = function(event) {
-    if (event.target == modal2) {
-      modal2.style.display = "none";
-    }
+});
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal2) {
+    myModal2.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal3) {
-      modal3.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal3) {
+    myModal3.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal4) {
-      modal4.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal4) {
+    myModal4.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal5) {
-      modal5.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal5) {
+    myModal5.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal6) {
-      modal6.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal6) {
+    myModal6.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal7) {
-      modal7.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal7) {
+    myModal7.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal9) {
-      modal9.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal8) {
+    myModal8.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal10) {
-      modal10.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal9) {
+    myModal9.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal11) {
-      modal11.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal10) {
+    myModal10.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal12) {
-      modal12.style.display = "none";
-    }
+}); 
+
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal11) {
+    myModal11.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal13) {
-      modal13.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal12) {
+    myModal12.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal14) {
-      modal14.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal13) {
+    myModal13.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal15) {
-      modal15.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal14) {
+    myModal14.style.display = "none";
   }
-  window.onclick = function(event) {
-    if (event.target == modal16) {
-      modal16.style.display = "none";
-    }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal15) {
+    myModal15.style.display = "none";
   }
+}); 
+
+window.addEventListener('click', function(event){
+  if(event.target == myModal16) {
+    myModal16.style.display = "none";
+  }
+}); 
 }
