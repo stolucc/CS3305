@@ -676,6 +676,12 @@ def annual_report_form(proposal_id):
         annual_report.research_highlights = form.research_highlights.data
         annual_report.challenges = form.challenges.data
         annual_report.planned_activities = form.planned_activities.data
+        annual_report.employment = form.employment.data
+        annual_report.education = form.education.data
+        annual_report.professional_studies = form.professional_studies.data
+        annual_report.distinction_and_awards = form.distinction_and_awards.data
+        annual_report.funding_diversification = form.funding_diversification.data
+        annual_report.team_members = form.team_members.data
 
         db.session.add(annual_report)
         db.session.commit()

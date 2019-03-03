@@ -33,6 +33,13 @@
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
     </p>
+    <p><br>Please select which of the following information you would like to include in your report</p>
+    <p> {{ form.education() }} {{ form.education.label }}</p>
+    <p> {{ form.employment() }} {{ form.employment.label }}</p>
+    <p> {{ form.professional_studies() }} {{ form.professional_studies.label }}</p>
+    <p> {{ form.distinction_and_awards() }} {{ form.distinction_and_awards.label }}</p>
+    <p> {{ form.funding_diversification() }} {{ form.funding_diversification.label }}</p>
+    <p> {{ form.team_members() }} {{ form.team_members.label }}</p>
     <p>{{form.submit()}}</p>
 </form>
 </main>

@@ -80,6 +80,12 @@ class AnnualReportForm(FlaskForm):
     research_highlights = StringField("3 most important research highlights", validators=[DataRequired()])
     challenges = StringField("Challenges you encountered", validators=[DataRequired()])
     planned_activities = StringField("Planned activities for the coming year", validators=[DataRequired()])
+    education = BooleanField("Education")
+    employment = BooleanField("Employment")
+    professional_studies = BooleanField("Professional Studies")
+    distinction_and_awards = BooleanField("Distinction and Awards")
+    funding_diversification = BooleanField("Funding Diversification")
+    team_members = BooleanField("Team Members")
     submit = SubmitField("Save Annual Report")
 
 
