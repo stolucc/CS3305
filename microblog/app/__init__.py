@@ -15,9 +15,10 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
-app.config['MAIL_SENDGRID_API_KEY'] = ''
+app.config['MAIL_SENDGRID_API_KEY'] = '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'
 mail = MailSendGrid(app)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 login = LoginManager(app)
 login.login_view = "login"

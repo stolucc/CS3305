@@ -559,22 +559,36 @@ def assign_admin():
 @app.route("/proposal_application/<id>", methods=["GET", "POST"])
 @login_required
 def proposal_application(id):
+    form = ApplicationForm()
     if not current_user.access == 1:
         flash("Area only for researchers")
         return redirect(url_for("index"))
     user = User.query.filter_by(username=current_user.username).first_or_404()
     proposal = Proposal.query.filter_by(id=id).first_or_404()
     if request.method == "POST":
+        if form.accept.data == False:
+            flash("Must accept terms and conditions")
+            return redirect(url_for("proposal_application", id=id))
         app_info = Application(user_id=current_user.id)
+        app_info.proposal_title = form.proposal_title.data
+        app_info.award_duration = form.award_duration.data
+        app_info.nrp = form.nrp.data
+        app_info.legal_remit = form.legal_remit.data
+        app_info.use_of_animals = form.use_of_animals.data
+        app_info.use_of_humans = form.use_of_humans.data
+        app_info.location = form.location.data
+        if form.co_applicants.data:
+            app_info.co_applicants = form.co_applicants.data
+        app_info.abstract = form.abstract.data
         if "file" not in request.files:
             flash("No file part")
-            return redirect(request.url)
+            return redirect(url_for("index"))
         file = request.files["file"]
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == "":
             flash("No selected file")
-            return redirect(request.url)
+            return redirect(url_for("proposal_application", id=id))
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
@@ -584,7 +598,7 @@ def proposal_application(id):
         db.session.add(app_info)
         db.session.commit()
         return redirect(url_for("workbench"))
-    return render_template("application.html", title="Proposal Application", img=svg, proposal=proposal)
+    return render_template("application.html", title="Proposal Application", img=svg, proposal=proposal, form = form)
 
 
 @app.route("/accepted/<id>")
@@ -623,9 +637,11 @@ def rejected(id):
     msg = Message("Application", sender='group8cs3305@gmail.com', recipients=[applicant.email])
     msg.body = "Thank you for applying. Unfortunately your application has been rejected."
     mail.send(msg)
+    db.session.delete(application)
+    db.session.commit()
 
-    flash("Application has been rejected. Notifying applicant.")
-    return redirect(url_for("review_applications"))
+    flash("Application has been rejected. Notifying applicant: %s at email: %s." % (applicant.username, applicant.email))
+    return redirect(url_for("admin"))
 
 
 @app.route("/modify/<id>")
@@ -652,8 +668,9 @@ def review_reports():
         flash("Reviewers area only")
         return redirect(url_for("index"))
     proposals = Proposal.query.filter_by(application_status=False)
+    users = User
 
-    return render_template("review_reports.html", proposals=proposals, svg=svg, title="Review Reports")
+    return render_template("review_reports.html", proposals=proposals, svg=svg, title="Review Reports", users=users)
 
 
 @app.route("/annual_report_form/<proposal_id>", methods=["GET", "POST"])

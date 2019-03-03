@@ -1,11 +1,87 @@
 {% extends "base.html" %}
 
 {% block content %}
+<main>
 <h1>Proposal Application</h1>
-<form action="" method=post enctype=multipart/form-data>
-    <p>File to upload for Application to {{ proposal.name }}</p>
-    <input type=file name=file>
-    <input type="submit" value="Upload">
-</form>
+
+<form action ="" method="post" enctype=multipart/form-data>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.proposal_title.label }}<br>
+        {{ form.proposal_title }}<br>
+        {% for error in form.proposal_title.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.award_duration.label }}<br>
+        {{ form.award_duration }}<br>
+        {% for error in form.award_duration.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.nrp.label }}<br>
+        {{ form.nrp }}<br>
+        {% for error in form.nrp.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.legal_remit.label }} <br>
+        {{ form.legal_remit }}<br>
+        {% for error in form.legal_remit.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.use_of_animals.label }} <br>
+        {{ form.use_of_animals }}<br>
+        {% for error in form.use_of_animals.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.use_of_humans.label }} <br>
+        {{ form.use_of_humans }}<br>
+        {% for error in form.use_of_humans.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.location.label }} <br>
+        {{ form.location }}<br>
+        {% for error in form.location.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.co_applicants.label }} <br>
+        {{ form.co_applicants }}<br>
+        {% for error in form.co_applicants.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.abstract.label }} <br>
+        {{ form.abstract }}<br>
+        {% for error in form.abstract.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p><input type=file name=file></p>
+    <p>Submission of an application confirms acceptance of and agreement with the SFI Terms and
+Conditions of Research Grants; that the applicant meets eligibility requirements; that the project
+is in full agreement with all legal and regulatory matters governing research in Ireland; that no
+aspect of this project is already being funded from another source and that all details provided
+are correct.” (“I agree”)</p>
+    <p>
+        {{ form.accept.label }} <br>
+        {{ form.accept }}<br>
+        {% for error in form.accept.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{form.submit()}}</p>
 </main>
 {% endblock %}

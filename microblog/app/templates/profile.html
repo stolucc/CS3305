@@ -8,6 +8,7 @@
             <td>
                 {%  if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
                 {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{%  endif %}
+                <p>Email: {{ user.email }}</p>
             </td>
         </tr>
     </table>

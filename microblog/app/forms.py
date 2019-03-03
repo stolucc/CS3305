@@ -60,6 +60,38 @@ class RegisterForm(FlaskForm):
         return True
 
 
+class ApplicationForm(FlaskForm):
+    proposal_title = StringField("Proposal Title", validators=[DataRequired()])
+    award_duration = StringField("Duration of Award", validators=[DataRequired()])
+    nrp = SelectField("National Research Priority (NRP) Area", choices=[('Priority Area A', 'Priority Area A - Future Networks & Communications'),
+                                                                        ("Priority Area B", "Priority Area B - Data Analytics, Management, Security & Privacy"),
+                                                                        ("Priority Area C", "Priority Area C - Digital Platforms, Content & Applications"),
+                                                                        ("Priority Area D", "Priority Area D - Connected Health and Independent Living"),
+                                                                        ("Priority Area E", "Priority Area E - Medical Devices"),
+                                                                        ("Priority Area F", "Priority Area F - Diagnostics"),
+                                                                        ("Priority Area G", "Priority Area G - Therapeutics: Synthesis, Formulation, Processing and Drug Delivery"),
+                                                                        ("Priority Area H", "Priority Area H - Food for Health"),
+                                                                        ("Priority Area I", "Priority Area I - Sustainable Food Production and Processing"),
+                                                                        ("Priority Area J", "Priority Area J - Marine Renewable Energy"),
+                                                                        ("Priority Area K", "Priority Area K - Smart Grids & Smart Cities"),
+                                                                        ("Priority Area L", "Priority Area L - Manufacturing Competitiveness"),
+                                                                        ("Priority Area M", "Priority Area M - Processing Technologies and Novel Materials"),
+                                                                        ("Priority Area N", "Priority Area N - Innovation in Servics and Business Processes"),
+                                                                        ("Software", "Software"),
+                                                                        ("Other", "Other")
+                                            ])
+    legal_remit = StringField("Please describe how your proposal is aligned with SFI's legal remit (max 250 words)",
+                              validators = [DataRequired()])
+    use_of_animals = BooleanField("This application involves the use of animals", validators=[DataRequired()])
+    use_of_humans = BooleanField("This applications involves the use of human participants, human biological material, or identifiable data",
+                                 validators=[DataRequired()])
+    location = StringField("Location at time of submission", validators=[DataRequired()])
+    co_applicants = StringField("Co-applicants", [DataRequired()])
+    abstract = StringField("Lay abstract", validators=[DataRequired()])
+    accept = BooleanField("I accept these terms", validators=[DataRequired()])
+    submit = SubmitField("Apply")
+
+
 class EducationForm(FlaskForm):
     degree = StringField("Degree", validators=[DataRequired()])
     field_of_study = StringField("Field of Study", validators=[DataRequired()])
