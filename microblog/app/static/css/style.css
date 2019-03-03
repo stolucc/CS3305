@@ -89,7 +89,7 @@ select {
 
   .box {
       min-width: 20em;
-      margin:10em 6em 0em 3em;
+      margin:10em 5em 0em 3em;
       padding:0em;
       display:inline-block;
       text-decoration: none;
@@ -128,46 +128,52 @@ select {
   }
 
   .social {
-      float:right;
-      margin-left:80%;
-      position: fixed;
-      bottom: 0;
-      width: 50%;
-  }
+    float:right;
+    margin-left:80%;
+    position: fixed;
+    bottom: 0;
+    width: 50%;
+}
 
-  .fa {
-    padding:1em;
-    font-size: 1.2em;
-    height:3em;
-    width: 3em;
-    text-align: center;
-    text-decoration: none;
-  }
-  
-  .fa:hover {
-      opacity: 0.7;
-  }
-  
-  .fa-facebook {
-    background: #3B5998;
-    color: white;
-  }
-  
-  .fa-twitter {
-    background: #55ACEE;
-    color: white;
-  }
-  
-  .fa-linkedin {
-    background: #007bb5;
-    color: white;
-  }
-  
-  .fa-youtube {
-    background: #bb0000;
-    background: #bb0000;
-    color: white;
-  }
+.fa {
+  padding:1em;
+  font-size: 1.2em;
+  height:3em;
+  width: 3em;
+  text-align: center;
+  text-decoration: none;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
   
   .fa-instagram {
     background: #125688;
@@ -214,6 +220,7 @@ select {
     position: relative;
     width:37em;
     display:inline-block;
+    margin-bottom:2em;
   }
   
   .image {
@@ -249,4 +256,44 @@ select {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
+  }
+
+
+  .modal-content {
+    margin:10% 0% 0% 20%;
+    min-width: 60%;
+    max-width: 60%;
+    background-color: #e5e5e5;
+    padding: 20px;
+    border: 1px solid #888;
+  }
+  
+  .close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16 {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16:hover,
+  .close1,.close2,.close3,.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close13,.close14,.close15,.close16:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  #myBtn1,#myBtn2,#myBtn3,#myBtn4,#myBtn5,#myBtn6,#myBtn7,#myBtn8,#myBtn9,#myBtn10,#myBtn11,#myBtn12,#myBtn13,#myBtn14,#myBtn15,#myBtn16 {
+  background-color: #00A79A;
+  color: white;
+  display: inline;
+  padding: 2em 2em;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+      
+  }
+  #myBtn1:hover,#myBtn2:hover,#myBtn3:hover,#myBtn4:hover,#myBtn5:hover,#myBtn6:hover,#myBtn7:hover,#myBtn8:hover,#myBtn9:hover,#myBtn10:hover,#myBtn11:hover,#myBtn12:hover,#myBtn13:hover,#myBtn14:hover,#myBtn15:hover,#myBtn16:hover {
+    background-color: #e5e5e5;
+    color: #00A79A;
   }
