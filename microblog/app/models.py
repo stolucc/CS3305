@@ -42,7 +42,7 @@ class User(db.Model, UserMixin):
     last_seen = db.Column(db.String(20), default=datetime.utcnow().strftime("%B %d %Y"))
 
     def __repr__(self):
-        return "<User {}>".format(self.username)
+        return self.username
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -110,6 +110,15 @@ class Application(db.Model):
     proposal_id = db.Column(db.Integer, db.ForeignKey("proposal.id"))
     id = db.Column(db.Integer, primary_key=True)
     path_to_file = db.Column(db.String(30))
+    proposal_title = db.Column(db.String(100))
+    award_duration = db.Column(db.String(100))
+    nrp = db.Column(db.String(100))
+    legal_remit = db.Column(db.String(700))
+    use_of_animals = db.Column(db.Boolean())
+    use_of_humans = db.Column(db.Boolean())
+    location = db.Column(db.String(50))
+    co_applicants = db.Column(db.String(100))
+    abstract = db.Column(db.String(1000))
 
 
 class EducationInfo(db.Model):

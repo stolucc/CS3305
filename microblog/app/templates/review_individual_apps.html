@@ -4,10 +4,15 @@
 <main>
 <h2>Applications</h2>
 {% for app in applications %}
-    <p><a href="/uploads/{{ app.path_to_file }}">{{ app.path_to_file }}</a></p>
-    <a href="{{ url_for('accepted', id=app.id) }}">Accept</a>
-    <a href="{{ url_for('rejected', id=app.id) }}">Reject</a>
-    <a href="{{ url_for('modify', id=app.id) }}">Request Modification</a>
+    <h2>Title: {{ app.proposal_title }}</h2>
+    <p>Duration: {{ app.award_duration }}</p>
+    <p>NRP: {{ app.nrp }}</p>
+    <p>Legal Remit: {{ app.legal_remit }}</p>
+    <p>Location: {{ app.location }}</p>
+    <p>Application: <a href="/uploads/{{ app.path_to_file }}">{{ app.path_to_file }}</a></p>
+    <p><a href="{{ url_for('accepted', id=app.id) }}">Accept</a></p>
+    <p><a href="{{ url_for('rejected', id=app.id) }}">Reject</a></p>
+    <p><a href="{{ url_for('modify', id=app.id) }}">Request Modification</a></p>
 {% endfor %}
 </main>
 {% endblock %}
