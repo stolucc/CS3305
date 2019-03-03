@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+<h1>Reviewer</h1>
+<div class="admin">
+    <ul>
+        <div class="box">
+            <button class="button"><a class="admin-link" href="{{ url_for('review_applications') }}">Review<br>Applications</a></button>
+        </div>
+        <div class="box">
+            <button class="button"><a class="admin-link" href="{{ url_for('review_reports') }}">Review<br>Reports</a></button>
+        </div>
+    </ul>
+</div>
+</main>
+{% endblock %}

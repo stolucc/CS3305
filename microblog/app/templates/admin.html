@@ -3,27 +3,25 @@
 {% block content %}
 <main>
 <h1>Admin</h1>
-<div class="admin">
-    <ul>
+    <a class="admin-link" href="{{ url_for('makecall') }}">
         <div class="box">
-            <button class="button"><a href="makecall">Publish Call<br>for Proposal</a></button>
+            <button class="button">Publish Call<br>for Proposal</button>
         </div>
+    </a>
+    <a class="admin-link" href="{{ url_for('register') }}">
         <div class="box">
-            <button class="button"><a href="register">Register<br>User</a></button>
+            <button class="button">Register<br>User</button>
         </div>
+    </a>
+    <a class="admin-link" href="{{ url_for('review_applications') }}">
         <div class="box">
-            <button class="button"><a href="">Review<br>Reports</a></button>
+            <button class="button">Review<br>Applications</button>
         </div>
+    </a>
+    <a class="admin-link" href="{{ url_for('review_reports') }}">
         <div class="box">
-            <button class="button"><a href="review_proposal">Proposal<br>Applications</a></button>
+            <button class="button">Review<br>Reports</button>
         </div>
-        <div class="box">
-            <button class="button"><a href="">View User<br>Activity</a></button>
-        </div>
-        <div class="box">
-            <button class="button"><a href="assign_admin">Assign Admin<br>Privileges</a></button>
-        </div>
-    </ul>
-</div>
+    </a>
 </main>
 {% endblock %}
