@@ -3,9 +3,13 @@
 {%  block content %}
 <main>
 <h1>Activities</h1>
+<ul>
 {% for activity in activities %}
+    <li class="list">
     <h2>{{ activity.activity_title }}</h2>
     <p>{{ activity.activity_body }}</p>
+    </li>
 {% endfor %}
+</ul>
 </main>
 {% endblock %}

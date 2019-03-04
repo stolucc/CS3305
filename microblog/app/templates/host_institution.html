@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+<h1>Admin</h1>
+    <a class="admin-link" href="{{ url_for('view_researchers') }}">
+        <div class="box">
+            <button class="button">View<br>Researchers</button>
+        </div>
+    </a>
+    <a class="admin-link" href="{{ url_for('account_application') }}">
+        <div class="box">
+            <button class="button">Account<br>Application</button>
+        </div>
+    </a>
+</main>
+{% endblock %}

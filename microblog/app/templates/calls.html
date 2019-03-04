@@ -4,8 +4,8 @@
 <main>
 <h1>Calls For Proposal</h1>
 <ul>
-    <h2>Proposal Info</h2>
     {% for entry in proposal_info %}
+        <li class="list">
         <p>Name: {{ entry.name }}</p>
         <p>Deadline: {{ entry.deadline }}</p>
         <p>Text of Call: {{ entry.text_of_call }}</p>
@@ -15,6 +15,7 @@
                 <a href="{{ url_for('proposal_application', id=entry.id) }}"><button>Apply</button></a>
             {% endif %}
         {% endif %}
+        </li>
     {% endfor %}
 </ul>
 </main>

@@ -6,8 +6,8 @@
 <ul>
 {% for entry in users %}
     <li class="list">
-    <p>User: {{ entry.username }}</p>
-    <a href="{{ url_for('profile', username=entry.username) }}"><button>View Profile</button></a>
+    <p>User: {{ entry.user_id }}</p>
+    <a href="{{ url_for('profile', username=entry.user_id) }}"><button>View Profile</button></a>
     </li>
 {% endfor %}
 </ul>

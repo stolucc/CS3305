@@ -3,9 +3,13 @@
 {% block content %}
 <main>
 <h1>Proposals</h1>
+<ul>
 {% for entry in proposals %}
-    <p>Title: {{ entry.name }}</p>
-    <a href="{{ url_for('review_individual_apps', id=entry.id) }}"><button>View Applications</button></a>
+    <li class="list">
+        <p>Title: {{ entry.name }}</p>
+        <a href="{{ url_for('review_individual_apps', id=entry.id) }}"><button>View Applications</button></a>
+    </li>
 {% endfor %}
+</ul>
 </main>
 {% endblock %}

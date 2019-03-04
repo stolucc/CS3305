@@ -28,6 +28,22 @@ nav {
     color:white;
 }
 
+ul {
+    width: 55%;
+    float: left;
+}
+
+.list {
+    list-style: none;
+	border-top: 1px solid #00A79A;
+    margin: 1em;
+    padding: 10px;
+}
+
+.workbench {
+    float: left;
+    width:40%;
+}
 
 main {
     display:block;
@@ -71,11 +87,17 @@ button:hover {
 }
 
 [type=submit] {
-    background-color: #00A79A;
-    border: none;
-    padding: 1em 2em;
-    text-decoration: none;
+    background-color:#00A79A;
+    color:white;
+    text-align: center;
     cursor: pointer;
+    padding: 0.5em 0.75em;
+}
+
+[type=submit]:hover {
+    background-color: #e5e5e5;
+    color: #00A79A;
+    font-weight: bold;
 }
 
 .submit {
@@ -104,7 +126,7 @@ select {
 
   .box {
       min-width: 20em;
-      margin:10em 5em 0em 0em;
+      margin:1em 5em 1em 1em;
       padding:0em;
       display:inline-block;
       text-decoration: none;

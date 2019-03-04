@@ -35,7 +35,7 @@
                     {% elif current_user.access == 1 %}
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('workbench') }}">Workbench</a></li>
                     {% elif current_user.access == 3 %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('account_application') }}">Apply for Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('host_institution') }}">Host Institution</a></li>
                     {% endif %}
                     <li class="nav-item"><a class="nav-link" href="{{  url_for('profile', username=current_user.username) }}">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>

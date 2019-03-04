@@ -2,9 +2,9 @@
 
 {% block content %}
 <main>
+    <h2> User: {{ user.username }}</h2>
 <div class="workbench">
     <h1>Workbench</h1>
-    <h2> User: {{ user.username }}</h2>
     <div class="box">
     <button class="work-button"><b>Education Info: ({{ edu_len }})</b></button>
     <button class="work-button"><b>Employment Info: ({{ emp_len }})</b></button>
@@ -14,5 +14,21 @@
     <button class="work-button"><b>Team Members Info: ({{ team_len }})</b></button>
 </div>
 </div>
+<h1>Calls For Proposal</h1>
+<ul>
+    {% for entry in proposal_info %}
+        <li class="list">
+        <p>Name: {{ entry.name }}</p>
+        <p>Deadline: {{ entry.deadline }}</p>
+        <p>Text of Call: {{ entry.text_of_call }}</p>
+        <p>Target Audience: {{ entry.target_audience }}</p>
+        {% if not current_user.is_anonymous %}
+            {% if current_user.access == 1 %}
+                <a href="{{ url_for('proposal_application', id=entry.id) }}"><button>Apply</button></a>
+            {% endif %}
+        {% endif %}
+        </li>
+    {% endfor %}
+</ul>
 </main>
 {% endblock %}

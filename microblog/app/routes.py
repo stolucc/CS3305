@@ -492,7 +492,8 @@ def workbench():
     public_engagement_length = len(public_engagement)
 
     form = CallsForProposalFilter()
-    return render_template("workbench.html", user=current_user, img=svg, edu_info=education_info, form=form,
+    proposal_info = Proposal.query.filter_by(application_status=True)
+    return render_template("workbench.html", proposal_info=proposal_info, user=current_user, img=svg, edu_info=education_info, form=form,
                            edu_len=education_length, emp_info=employment_info, emp_len=employment_length,
                            prof_info=professional_studies, prof_len=professional_studies_length,
                            dist_info=distinctions_and_awards, dist_len=distinctions_and_awards_length,
@@ -539,6 +540,14 @@ def reviewer():
         flash("Reviewer area only")
         return redirect(url_for("index"))
     return render_template("reviewer.html", title="Reviewer", img=svg)
+
+@app.route("/host_institution")
+@login_required
+def host_institution():
+    if not current_user.access == 3:
+        flash("Host Institution area only")
+        return redirect(url_for("index"))
+    return render_template("host_institution.html", title="Host Institution", img=svg)
 
 
 @app.route("/assign_admin", methods=["GET", "POST"])
@@ -669,6 +678,17 @@ def view_users():
     users = User.query.all()
 
     return render_template("view_users.html", svg=svg, title="View Users", users=users)
+
+@app.route("/view_researchers")
+@login_required
+def view_researchers():
+    if not current_user.access == 3:
+        flash("Host Institution area only")
+        return redirect(url_for("index"))
+    institution=current_user.username
+    users = EducationInfo.query.filter_by(institution=institution)
+
+    return render_template("view_researchers.html", svg=svg, title="View Researchers", users=users)
 
 @app.route("/review_reports")
 @login_required

@@ -3,7 +3,9 @@
 {% block content %}
 <main>
 <h1>Applications</h1>
+<ul>
 {% for app in applications %}
+    <li class="list">
     <h2>Title: {{ app.proposal_title }}</h2>
     <p>Duration: {{ app.award_duration }}</p>
     <p>NRP: {{ app.nrp }}</p>
@@ -13,6 +15,8 @@
     <a href="{{ url_for('accepted', id=app.id) }}"><button>Accept</button></a>
     <a href="{{ url_for('rejected', id=app.id) }}"><button>Reject</button></a>
     <a href="{{ url_for('modify', id=app.id) }}"><button>Request Modification</button></a>
+    </li>
+</ul>
 {% endfor %}
 </main>
 {% endblock %}
