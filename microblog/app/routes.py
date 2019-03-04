@@ -365,6 +365,27 @@ def register():
         return redirect(url_for("index"))
     return render_template("register.html", title="Register", form=form, img=svg)
 
+@app.route("/account_application", methods=["GET", "POST"])
+def account_application():
+    if not current_user.access == 3:
+        flash("Host Institution area only")
+        return redirect(url_for("index"))
+    form = RegisterForm()
+    if form.validate_on_submit():
+        if not form.validate_email(form.email):
+            flash("Please enter a valid email")
+            return redirect(url_for("register"))
+        if not form.validate_username(form.username):
+            flash("Username not valid")
+            return redirect(url_for("register"))
+        user = User(username=form.username.data, email=form.email.data, access=1)
+        msg = Message("Account Application", sender = 'group8cs3305@gmail.com', recipients = [user.email])
+        msg.body = "Thank you for applying for an account with us. Your application will be processed within 5 working days."
+        mail.send(msg)
+        flash("Successfully Applied for Account")
+        return redirect(url_for("index"))
+    return render_template("account_application.html", title="Account Application", form=form, img=svg)
+
 
 @app.route("/makecall", methods=["GET", "POST"])
 @login_required
@@ -428,10 +449,10 @@ def login():
     return render_template("login.html", title="Sign In", form=form, img=svg)
 
 
-@app.route('/profile/<username>')
+@app.route('/profile/<user_id>')
 @login_required
-def profile(username):
-    user = User.query.filter_by(username=username).first_or_404()
+def profile(user_id):
+    user = User.query.filter_by(id=user_id).first_or_404()
     access = user.get_access()
     proposals = Proposal.query.filter_by(user_id=user.id)
     return render_template('profile.html', user=user, img=svg, proposals=proposals, access=access)
@@ -716,7 +737,7 @@ def annual_report_form(proposal_id):
         # if there is already a annual report submitted
         if not annual_report_check is None:
             flash("You have already submitted an Annual Report for the Grant: '%s'" % proposal.name)
-            return redirect(url_for("profile", username=current_user.username))
+            return redirect(url_for("profile", user_id=current_user.id))
         annual_report = AnnualReport(proposal_id=proposal_id)
         annual_report.deviations = form.deviations.data
         annual_report.research_highlights = form.research_highlights.data
@@ -737,21 +758,6 @@ def annual_report_form(proposal_id):
 
 
     return render_template("annual_report.html", form=form, proposal_id=proposal_id, svg=svg)
-
-
-@app.route("/account_application", methods=["GET", "POST"])
-@login_required
-def account_application():
-    if not current_user.access == 3:
-        flash("Host Institution area only")
-        return redirect(url_for("index"))
-
-    form = AccountApplicationForm()
-
-    if form.validate_on_submit():
-        None
-
-    return render_template("account_application.html", form=form, svg=svg)
 
 @app.route("/review_individual_reports/<id>")
 @login_required
@@ -803,7 +809,7 @@ def add_activity(proposal_id):
         db.session.add(proposal)
         db.session.commit()
         flash("Activity Recorded")
-        return redirect(url_for("profile", username=current_user.username))
+        return redirect(url_for("profile", user_id=current_user.id))
 
     return render_template("add_activity.html", form=form, svg=svg)
 
