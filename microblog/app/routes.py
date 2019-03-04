@@ -831,7 +831,7 @@ def education(username):
         return redirect(url_for("index"))
     user = User.query.filter_by(username=username).first()
     education_info = user.education_info
-    return render_template("employment.html", education_info=education_info, svg=svg)
+    return render_template("education.html", education_info=education_info, svg=svg)
 
 
 @app.route("/employment/<username>")
@@ -842,7 +842,7 @@ def employment(username):
         return redirect(url_for("index"))
     user = User.query.filter_by(username=username).first()
     employment = user.employment
-    return render_template("education.html", employment=employment, svg=svg)
+    return render_template("employment.html", employment=employment, svg=svg)
 
 
 @app.route("/professional_studies/<username>")
