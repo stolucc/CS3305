@@ -8,7 +8,7 @@
     <h3>Title: {{ entry.name }}</h3>
     <p>Name of Researcher: {{ users.query.filter_by(id=entry.user_id).first() }}</p>
     <div class="review-content">
-    <button><a class="review-content" href="{{ url_for('review_individual_reports', id=entry.id) }}">View Reports</a></button>
+    <a class="review-content" href="{{ url_for('review_individual_reports', id=entry.id) }}"><button>View Reports</button></a>
     </div>
 </div>
 {% endfor %}

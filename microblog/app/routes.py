@@ -660,6 +660,15 @@ def modify(id):
     flash("Application requires modification. Notifying applicant.")
     return redirect(url_for("review_applications"))
 
+@app.route("/view_users")
+@login_required
+def view_users():
+    if not current_user.is_admin():
+        flash("Admin area only")
+        return redirect(url_for("index"))
+    users = User.query.all()
+
+    return render_template("view_users.html", svg=svg, title="View Users", users=users)
 
 @app.route("/review_reports")
 @login_required

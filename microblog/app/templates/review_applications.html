@@ -5,7 +5,7 @@
 <h1>Proposals</h1>
 {% for entry in proposals %}
     <p>Title: {{ entry.name }}</p>
-    <a href="{{ url_for('review_individual_apps', id=entry.id) }}">View Applications</a>
+    <a href="{{ url_for('review_individual_apps', id=entry.id) }}"><button>View Applications</button></a>
 {% endfor %}
 </main>
 {% endblock %}

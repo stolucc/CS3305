@@ -12,7 +12,7 @@
         <p>Target Audience: {{ entry.target_audience }}</p>
         {% if not current_user.is_anonymous %}
             {% if current_user.access == 1 %}
-                <a href="{{ url_for('proposal_application', id=entry.id) }}">Apply</a>
+                <a href="{{ url_for('proposal_application', id=entry.id) }}"><button>Apply</button></a>
             {% endif %}
         {% endif %}
     {% endfor %}

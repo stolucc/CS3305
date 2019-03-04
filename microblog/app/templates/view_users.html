@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+<h1>Proposals</h1>
+{% for entry in users %}
+    <p>User: {{ entry.username }}</p>
+    <a href="{{ url_for('profile', username=entry.username) }}"><button>View Profile</button></a>
+{% endfor %}
+</main>
+{% endblock %}

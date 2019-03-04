@@ -9,12 +9,31 @@
                 {%  if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
                 {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{%  endif %}
                 <p>Email: {{ user.email }}</p>
+                {% if user.access == 1 %}
+                    <p>User Privileges: Researcher</p>
+                {% elif user.access == 2 %}
+                    <p>User Privileges: Admin</p>
+                {% elif user.access == 3 %}
+                    <p>User Privileges: Host Institution</p>
+                {% elif user.access == 4 %}
+                    <p>User Privileges: Reviewer</p>
+                {% endif %}
             </td>
         </tr>
     </table>
-    {%  if user == current_user %}
-    <a class="edit" href="{{  url_for('edit_profile') }}"><i class="material-icons">mode_edit</i></a>
+        {% if current_user == user %}
+            <a class="edit" href="{{  url_for('edit_profile') }}"><i class="material-icons">edit profile</i></a>
+        {% endif %}
+        <h2>Awarded Grants</h2>
+        {% for proposal in proposals %}
+            <p>Name: {{ proposal.name }}</p>
+            <p>Eligibility Criteria: {{ proposal.eligibility_criteria }}</p>
+            {% if current_user == user %}
+                <a href="{{ url_for('add_activity', proposal_id=proposal.id) }}"><button>Add Activity</button></a>
+                <a href="{{ url_for('view_activities', proposal_id=proposal.id) }}"><button>View Activities</button></a>
+                <a href="{{ url_for('annual_report_form', proposal_id=proposal.id) }}"><button>Add Annual Report</button></a>
+            {% endif %}
+        {% endfor %}
 
-    {% endif %}
 </main>
 {% endblock %}

@@ -50,6 +50,21 @@ h1 {
 p, div, a {
     font-family: 'Nobile', Helvetica, Arial, sans-serif;
 }
+
+button {
+    background-color:#00A79A;
+    color:white;
+    text-align: center;
+    cursor: pointer;
+    padding: 0.5em 0.75em;
+}
+
+button:hover {
+    background-color: #e5e5e5;
+    color: #00A79A;
+    font-weight: bold;
+}
+
 .calls p {
     display:inline-block;
     margin-left: 1em;
