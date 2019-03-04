@@ -591,7 +591,7 @@ def proposal_application(id):
         app_info.abstract = form.abstract.data
         if "file" not in request.files:
             flash("No file part")
-            return redirect(url_for("index"))
+            return redirect(url_for("proposal_application", id=id))
         file = request.files["file"]
         # if user does not select file, browser also
         # submit an empty part without filename

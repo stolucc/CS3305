@@ -82,11 +82,10 @@ class ApplicationForm(FlaskForm):
                                             ])
     legal_remit = StringField("Please describe how your proposal is aligned with SFI's legal remit (max 250 words)",
                               validators = [DataRequired()])
-    use_of_animals = BooleanField("This application involves the use of animals", validators=[DataRequired()])
-    use_of_humans = BooleanField("This applications involves the use of human participants, human biological material, or identifiable data",
-                                 validators=[DataRequired()])
+    use_of_animals = BooleanField("This application involves the use of animals")
+    use_of_humans = BooleanField("This applications involves the use of human participants, human biological material, or identifiable data")
     location = StringField("Location at time of submission", validators=[DataRequired()])
-    co_applicants = StringField("Co-applicants", [DataRequired()])
+    co_applicants = StringField("Co-applicants")
     abstract = StringField("Lay abstract", validators=[DataRequired()])
     accept = BooleanField("I accept these terms", validators=[DataRequired()])
     submit = SubmitField("Apply")
