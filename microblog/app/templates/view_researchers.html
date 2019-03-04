@@ -4,9 +4,9 @@
 <main>
 <h1>Researchers</h1>
 <ul>
-{% for entry in users %}
+{% for entry in education_info %}
     <li class="list">
-    <p>User: {{ entry.user_id }}</p>
+    <p>User: {{ users.query.filter_by(id=entry.user_id).first() }}</p>
     <a href="{{ url_for('profile', user_id=entry.user_id) }}"><button>View Profile</button></a>
     </li>
 {% endfor %}

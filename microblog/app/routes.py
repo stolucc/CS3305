@@ -706,10 +706,11 @@ def view_researchers():
     if not current_user.access == 3:
         flash("Host Institution area only")
         return redirect(url_for("index"))
-    institution=current_user.username
-    users = EducationInfo.query.filter_by(institution=institution)
+    education_info = EducationInfo.query.all()
+    users = User
+    #users = EducationInfo.query.filter_by(institution=institution)
 
-    return render_template("view_researchers.html", svg=svg, title="View Researchers", users=users)
+    return render_template("view_researchers.html", svg=svg, title="View Researchers", users=users, education_info=education_info)
 
 @app.route("/review_reports")
 @login_required
