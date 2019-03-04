@@ -5,9 +5,9 @@
 <table>
     <tr valign=""top>
         <td>
-            <h1>User: {{  user.username }}</h1>
+            <h1>User:</h1><p> {{  user.username }}</p>
             {%  if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-            {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{%  endif %}
+            {% if user.last_seen %}<h3>Last seen on:</h3><p> {{ user.last_seen }}</p>{%  endif %}
         </td>
     </tr>
 </table>
