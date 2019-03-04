@@ -765,7 +765,7 @@ def review_individual_reports(id):
     if not current_user.access == 2 and not current_user.access == 4:
         flash("Reviewers area only")
         return redirect(url_for("index"))
-    annual_report = AnnualReport(proposal_id=id)
+    annual_report = AnnualReport.query.filter_by(proposal_id=id).first_or_404()
     return render_template("review_individual_reports.html", svg=svg, title="Review Individual Reports",
                            annual_report=annual_report)
 
