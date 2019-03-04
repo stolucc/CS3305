@@ -4,7 +4,7 @@
 }
 
 .nav {
-    background-color:#343A40;
+    background-color:#173D6E;
     float:left;
     width:10%;
     height:100%;
@@ -42,7 +42,6 @@ ul {
 
 .workbench {
     float: left;
-    width:40%;
 }
 
 main {
@@ -345,7 +344,7 @@ select {
     border:.1em #e5e5e5 solid;
     border-radius:.5em;
     width:30%;
-    height:20%;
+    height:25%;
     margin:2em 5em 2em 4em;
     display:inline-block;
   }
@@ -355,7 +354,7 @@ select {
   }
 
   .review-content {
-    margin-top:23%;
+    margin-top:27%;
   }
 
   .review-content a{
@@ -371,7 +370,9 @@ select {
   }
 
   .review-content button:hover {
-    background-color: #e5e5e5;
-    color: #00A79A;
     font-weight: bold;
+}
+
+h1 {
+  color:#173D6E;
 }
