@@ -698,7 +698,7 @@ def view_users():
         return redirect(url_for("index"))
     users = User.query.all()
 
-    return render_template("view_users.html", svg=svg, title="View Users", users=users)
+    return render_template("view_users.html", img=svg, title="View Users", users=users)
 
 @app.route("/view_researchers")
 @login_required
@@ -721,7 +721,7 @@ def review_reports():
     proposals = Proposal.query.filter_by(application_status=False)
     users = User
 
-    return render_template("review_reports.html", proposals=proposals, svg=svg, title="Review Reports", users=users)
+    return render_template("review_reports.html", proposals=proposals, img=svg, title="Review Reports", users=users)
 
 
 @app.route("/annual_report_form/<proposal_id>", methods=["GET", "POST"])
@@ -758,7 +758,7 @@ def annual_report_form(proposal_id):
         return redirect(url_for("index"))
 
 
-    return render_template("annual_report.html", form=form, proposal_id=proposal_id, svg=svg)
+    return render_template("annual_report.html", form=form, proposal_id=proposal_id, img=svg)
 
 @app.route("/review_individual_reports/<id>")
 @login_required
@@ -767,7 +767,7 @@ def review_individual_reports(id):
         flash("Reviewers area only")
         return redirect(url_for("index"))
     annual_report = AnnualReport.query.filter_by(proposal_id=id).first_or_404()
-    return render_template("review_individual_reports.html", svg=svg, title="Review Individual Reports",
+    return render_template("review_individual_reports.html", img=svg, title="Review Individual Reports",
                            annual_report=annual_report)
 
 @app.route("/review_individual_apps/<id>")
@@ -778,7 +778,7 @@ def review_individual_apps(id):
         return redirect(url_for("index"))
     proposal = Proposal.query.filter_by(id=id).first_or_404()
     applications = proposal.applications.all()
-    return render_template("review_individual_apps.html", svg=svg, title="Review Individual Applications",
+    return render_template("review_individual_apps.html", img=svg, title="Review Individual Applications",
                            applications=applications)
 
 @app.route("/review_applications")
@@ -788,7 +788,7 @@ def review_applications():
         flash("Reviewers area only")
         return redirect(url_for("index"))
     proposals = Proposal.query.filter_by(application_status=True)
-    return render_template("review_applications.html", svg=svg, title="Proposals",
+    return render_template("review_applications.html", img=svg, title="Proposals",
                            proposals=proposals)
 
 
@@ -812,7 +812,7 @@ def add_activity(proposal_id):
         flash("Activity Recorded")
         return redirect(url_for("profile", user_id=current_user.id))
 
-    return render_template("add_activity.html", form=form, svg=svg)
+    return render_template("add_activity.html", form=form, img=svg)
 
 
 @app.route("/view_activities/<proposal_id>", methods=["GET", "POST"])
@@ -821,7 +821,7 @@ def view_activities(proposal_id):
     proposal = Proposal.query.filter_by(id=proposal_id).first_or_404()
     activities = proposal.activities.all()
 
-    return render_template("view_activities.html", activities=activities, svg=svg)
+    return render_template("view_activities.html", activities=activities, img=svg)
 
 
 @app.route("/education/<username>")
@@ -832,7 +832,7 @@ def education(username):
         return redirect(url_for("index"))
     user = User.query.filter_by(username=username).first()
     education_info = user.education_info
-    return render_template("education.html", education_info=education_info, svg=svg)
+    return render_template("education.html", education_info=education_info, img=svg)
 
 
 @app.route("/employment/<username>")
@@ -843,7 +843,7 @@ def employment(username):
         return redirect(url_for("index"))
     user = User.query.filter_by(username=username).first()
     employment = user.employment
-    return render_template("employment.html", employment=employment, svg=svg)
+    return render_template("employment.html", employment=employment, img=svg)
 
 
 @app.route("/professional_studies/<username>")
@@ -854,7 +854,7 @@ def professional_studies(username):
         return redirect(url_for("index"))
     user = User.query.filter_by(username=username).first()
     professional_studies = user.professional_studies
-    return render_template("professional_studies.html", professional_studies=professional_studies, svg=svg)
+    return render_template("professional_studies.html", professional_studies=professional_studies, img=svg)
 
 
 @app.route("/distinctions_and_awards/<username>")
@@ -865,7 +865,7 @@ def distinctions_and_awards(username):
         return redirect(url_for("index"))
     user = User.query.filter_by(username=username).first()
     distinctions_and_awards = user.distinctions_and_awards
-    return render_template("distinctions_and_awards.html", distinctions_and_awards=distinctions_and_awards, svg=svg)
+    return render_template("distinctions_and_awards.html", distinctions_and_awards=distinctions_and_awards, img=svg)
 
 
 @app.route("/funding_diversification/<username>")
@@ -876,7 +876,7 @@ def funding_diversification(username):
         return redirect(url_for("index"))
     user = User.query.filter_by(username=username).first()
     funding_diversification = user.funding_diversification
-    return render_template("funding_diversification.html", funding_diversification=funding_diversification, svg=svg)
+    return render_template("funding_diversification.html", funding_diversification=funding_diversification, img=svg)
 
 
 @app.route("/team_members/<username>")
@@ -887,7 +887,7 @@ def team_members(username):
         return redirect(url_for("index"))
     user = User.query.filter_by(username=username).first()
     team_members = user.team_members
-    return render_template("team_members.html", team_members=team_members, svg=svg)
+    return render_template("team_members.html", team_members=team_members, img=svg)
 
 
 @app.before_request
