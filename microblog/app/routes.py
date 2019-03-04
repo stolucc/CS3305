@@ -823,6 +823,72 @@ def view_activities(proposal_id):
     return render_template("view_activities.html", activities=activities, svg=svg)
 
 
+@app.route("/education/<username>")
+@login_required
+def education(username):
+    if not current_user.access == 1:
+        flash("Researcher area only")
+        return redirect(url_for("index"))
+    user = User.query.filter_by(username=username).first()
+    education_info = user.education_info
+    return render_template("employment.html", education_info=education_info, svg=svg)
+
+
+@app.route("/employment/<username>")
+@login_required
+def employment(username):
+    if not current_user.access == 1:
+        flash("Researcher area only")
+        return redirect(url_for("index"))
+    user = User.query.filter_by(username=username).first()
+    employment = user.employment
+    return render_template("education.html", employment=employment, svg=svg)
+
+
+@app.route("/professional_studies/<username>")
+@login_required
+def professional_studies(username):
+    if not current_user.access == 1:
+        flash("Researcher area only")
+        return redirect(url_for("index"))
+    user = User.query.filter_by(username=username).first()
+    professional_studies = user.professional_studies
+    return render_template("professional_studies.html", professional_studies=professional_studies, svg=svg)
+
+
+@app.route("/distinctions_and_awards/<username>")
+@login_required
+def distinctions_and_awards(username):
+    if not current_user.access == 1:
+        flash("Researcher area only")
+        return redirect(url_for("index"))
+    user = User.query.filter_by(username=username).first()
+    distinctions_and_awards = user.distinctions_and_awards
+    return render_template("distinctions_and_awards.html", distinctions_and_awards=distinctions_and_awards, svg=svg)
+
+
+@app.route("/funding_diversification/<username>")
+@login_required
+def funding_diversification(username):
+    if not current_user.access == 1:
+        flash("Researcher area only")
+        return redirect(url_for("index"))
+    user = User.query.filter_by(username=username).first()
+    funding_diversification = user.funding_diversification
+    return render_template("funding_diversification.html", funding_diversification=funding_diversification, svg=svg)
+
+
+@app.route("/team_members/<username>")
+@login_required
+def team_members(username):
+    if not current_user.access == 1:
+        flash("Researcher area only")
+        return redirect(url_for("index"))
+    user = User.query.filter_by(username=username).first()
+    team_members = user.team_members
+    return render_template("team_members.html", team_members=team_members, svg=svg)
+
+
 @app.before_request
 def before_request():
     if current_user.is_authenticated:

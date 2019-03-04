@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{%  block content %}
+<main>
+<table>
+    <tr valign=""top>
+        <td>
+            <h1>Professional Studies Info</h1>
+            {% for prof in professional_studies %}
+                <p>Start Date: {{ prof.start_date }}</p>
+                <p>End Date: {{ prof.end_date }}</p>
+                <p>Society Name: {{ prof.society_name }}</p>
+                <p>Member Type: {{ prof.member_type }}</p>
+                <p>Status: {{ prof.status }}</p>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+</main>
+{% endblock %}

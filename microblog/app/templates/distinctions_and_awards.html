@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{%  block content %}
+<main>
+<table>
+    <tr valign=""top>
+        <td>
+            <h1>Distinctions and Awards Info</h1>
+            {% for dist in distinctions_and_awards %}
+                <p>Year: {{ dist.year }}</p>
+                <p>Awarding Body: {{ dist.awarding_body }}</p>
+                <p>Award Details: {{ dist.award_details }}</p>
+                <p>Member Name: {{ dist.member_name }}</p>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+</main>
+{% endblock %}

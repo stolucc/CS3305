@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{%  block content %}
+<main>
+<table>
+    <tr valign=""top>
+        <td>
+            <h1>Education Info</h1>
+            {% for edu in education_info %}
+                <p>Degree: {{ edu.degree }}</p>
+                <p>Field of Study: {{ edu.field_of_study }}</p>
+                <p>Institution: {{ edu.institution }}</p>
+                <p>Location: {{ edu.location }}</p>
+                <p>Year of Degree: {{ edu.year_of_degree }}</p>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+</main>
+{% endblock %}

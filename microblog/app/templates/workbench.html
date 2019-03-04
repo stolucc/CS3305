@@ -6,12 +6,12 @@
 <div class="workbench">
     <h1>Workbench</h1>
     <div class="box">
-        <a href="{{ url_for('edit_profile') }}"><button class="work-button"><b>Education Info: ({{ edu_len }})</b></button></a>
-        <a href="{{ url_for('edit_profile') }}"><button class="work-button"><b>Employment Info: ({{ emp_len }})</b></button></a>
-        <a href="{{ url_for('edit_profile') }}"><button class="work-button"><b>Professional Studies Info: ({{ prof_len }})</b></button></a>
-        <a href="{{ url_for('edit_profile') }}"><button class="work-button"><b>Distinctions and Awards Info: ({{ dist_len }})</b></button></a>
-        <a href="{{ url_for('edit_profile') }}"><button class="work-button"><b>FundingDiversification Info: ({{ fund_len }})</b></button></a>
-        <a href="{{ url_for('edit_profile') }}"><button class="work-button"><b>Team Members Info: ({{ team_len }})</b></button></a>
+        <a href="{{ url_for('education', username=user.username) }}"><button class="work-button"><b>Education Info: ({{ edu_len }})</b></button></a>
+        <a href="{{ url_for('employment', username=user.username) }}"><button class="work-button"><b>Employment Info: ({{ emp_len }})</b></button></a>
+        <a href="{{ url_for('professional_studies', username=user.username) }}"><button class="work-button"><b>Professional Studies Info: ({{ prof_len }})</b></button></a>
+        <a href="{{ url_for('distinctions_and_awards', username=user.username) }}"><button class="work-button"><b>Distinctions and Awards Info: ({{ dist_len }})</b></button></a>
+        <a href="{{ url_for('funding_diversification', username=user.username) }}"><button class="work-button"><b>FundingDiversification Info: ({{ fund_len }})</b></button></a>
+        <a href="{{ url_for('team_members', username=user.username) }}"><button class="work-button"><b>Team Members Info: ({{ team_len }})</b></button></a>
 </div>
 </div>
 </main>

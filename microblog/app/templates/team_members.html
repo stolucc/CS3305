@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{%  block content %}
+<main>
+<table>
+    <tr valign=""top>
+        <td>
+            <h1>Team Members Info</h1>
+            {% for team in team_members %}
+                <p>Name: {{ team.name }}</p>
+                <p>Position in Team: {{ team.position_in_team }}</p>
+                <p>Other Users: {{ team.other_users }}</p>
+                <p>Start Date: {{ team.start_date }}</p>
+                <p>End Date: {{ team.end_date }}</p>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+</main>
+{% endblock %}

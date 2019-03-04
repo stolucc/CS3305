@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{%  block content %}
+<main>
+<table>
+    <tr valign=""top>
+        <td>
+            <h1>Funding Diversification Info</h1>
+            {% for fund in funding_diversification %}
+                <p>Start Date: {{ fund.start_date }}</p>
+                <p>End Date: {{ fund.end_date }}</p>
+                <p>Funding Amount: {{ fund.funding_amt }}</p>
+                <p>Funding Body: {{ fund.funding_body }}</p>
+                <p>Funding Program: {{ fund.funding_program }}</p>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+</main>
+{% endblock %}

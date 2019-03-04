@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{%  block content %}
+<main>
+<table>
+    <tr valign=""top>
+        <td>
+            <h1><Employment></Employment> Info</h1>
+            {% for emp in employment %}
+                <p>Institution: {{ emp.institution }}</p>
+                <p>Location: {{ emp.location }}</p>
+                <p>Years: {{ emp.years }}</p>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+</main>
+{% endblock %}
