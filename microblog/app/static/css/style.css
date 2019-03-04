@@ -363,12 +363,15 @@ select {
   }
 
   .review-content button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 1em;
+    background-color:#00A79A;
+    color:white;
     text-align: center;
-    text-decoration: none;
-    font-size: 1em;
+    cursor: pointer;
+    padding: 0.5em 0.75em;
   }
 
+  .review-content button:hover {
+    background-color: #e5e5e5;
+    color: #00A79A;
+    font-weight: bold;
+}
