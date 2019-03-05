@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, ValidationError, Email, Length
 import re
 from app.models import User
 
-
+#test
 # Create the fields for every form, with validation methods for the register form.
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
